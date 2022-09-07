@@ -9,7 +9,7 @@ public class InputController : MonoBehaviour
     public float Horizontal = 0;
     public float Vertical = 0;
 
-    public float Jumping = 0;
+    public float JumpSignalActive = 0;
 
     public bool RunSignalActive = false;
 
@@ -22,7 +22,7 @@ public class InputController : MonoBehaviour
     {
         Horizontal = Input.GetAxisRaw("Horizontal");
         Vertical = Input.GetAxisRaw("Vertical");
-        Jumping = Input.GetAxisRaw("Jump");
-        RunSignalActive = Input.GetKeyDown(KeyCode.Tab);
+        JumpSignalActive = Input.GetAxisRaw("Jump");
+        RunSignalActive = Input.GetKey(KeyCode.Tab);
     }
 }
