@@ -9,8 +9,8 @@ public class PlayerJumping : MonoBehaviour
 
 
     [SerializeField] private float PowerUnit = 10;
-    public float JumpPower_01 = 32;
-    public float JumpPower_02 = 20;
+    public float JumpPower_01 = 20;
+    public float JumpPower_02 = 30;
     public bool IsDoubleJump = false;
 
     private void Awake()
