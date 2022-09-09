@@ -2,14 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(PlayerJumping))]
+[RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerAnimationController))]
+[RequireComponent(typeof(PlayerGroundedHandler))]
 public class PlayerController : MonoBehaviour
 {
 
     public static PlayerController Instance;
 
-    public Rigidbody2D rb;
+    public PlayerMovement playerMovement;
+    public PlayerJumping playerJumping;
+    public PlayerAnimationController playerAnimationController;
+    public PlayerGroundedHandler playerGroundedHandler;
+
     public GameObject Knight;
+
+    public Rigidbody2D rb;
 
     public bool IsShieldActive = false;
     public bool IsGrounded;
@@ -23,28 +33,20 @@ public class PlayerController : MonoBehaviour
         Knight = transform.Find("Knight")?.gameObject;
     }
 
-
-
-    public void Jump(float power)
+    private void Start()
     {
-        PlayerAnimationController ac = GetComponent<PlayerAnimationController>();
-        ac.SetAnimationAction(PlayerAnimationController.AnimationActionTypes.Jump);
-        rb.AddForce(new Vector2(0, power), ForceMode2D.Force);
-    }
-
-    private void Update()
-    {
-        if(InputController.Instance.JumpSignalActive > 0)
-        {
-            Jump(8);
-        }
+        playerMovement = GetComponent<PlayerMovement>();
+        playerJumping = GetComponent<PlayerJumping>();
+        playerAnimationController = GetComponent<PlayerAnimationController>();
+        playerGroundedHandler = GetComponent<PlayerGroundedHandler>();
     }
 
     private void FixedUpdate()
     {
-        IsGrounded = rb.velocity.y == 0;
         IsJumping = rb.velocity.y > 0;
         IsFalling = rb.velocity.y < 0;
     }
+
+    
 
 }

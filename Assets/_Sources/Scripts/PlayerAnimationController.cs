@@ -42,6 +42,7 @@ public class PlayerAnimationController : MonoBehaviour
     }
 
     public PlayerController playerController;
+    public PlayerMovement playerMovement;
     public GameObject Knight;
     public KnightControl playerKnightControl;
     public SkeletonAnimation playerKnightSeletonAnimation;
@@ -52,6 +53,7 @@ public class PlayerAnimationController : MonoBehaviour
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
+        playerMovement = GetComponent<PlayerMovement>();
         Knight = playerController.transform.Find("Knight").gameObject;
         playerKnightControl = Knight.GetComponent<KnightControl>();
         playerKnightSeletonAnimation = Knight.GetComponent<SkeletonAnimation>();
@@ -64,7 +66,6 @@ public class PlayerAnimationController : MonoBehaviour
         switch (actionType)
         {
             case AnimationActionTypes.Idle:
-                if (!playerController.IsGrounded) { break; }
                 if (playerKnightControl.idleAnimationName != actionName)
                 {
                     playerKnightControl.idleAnimationName = actionName;
@@ -72,7 +73,6 @@ public class PlayerAnimationController : MonoBehaviour
                 }
                 else if (actionType != runtimeActionType)
                 {
-                    runtimeActionType = actionType;
                     playerKnightControl.idle();
                 }
                 break;
@@ -85,7 +85,6 @@ public class PlayerAnimationController : MonoBehaviour
                 }
                 else if (actionType != runtimeActionType)
                 {
-                    runtimeActionType = actionType;
                     playerKnightControl.walking();
                 }
 
@@ -99,7 +98,6 @@ public class PlayerAnimationController : MonoBehaviour
                 }
                 else if (actionType != runtimeActionType)
                 {
-                    runtimeActionType = actionType;
                     playerKnightControl.running();
                 }
 
@@ -108,7 +106,6 @@ public class PlayerAnimationController : MonoBehaviour
             case AnimationActionTypes.Attack_Sword:
                 if (actionType != runtimeActionType)
                 {
-                    runtimeActionType = actionType;
                     playerKnightControl.attack_1();
                 }
                 break;
@@ -116,7 +113,6 @@ public class PlayerAnimationController : MonoBehaviour
             case AnimationActionTypes.Attack_Shield:
                 if (actionType != runtimeActionType)
                 {
-                    runtimeActionType = actionType;
                     playerKnightControl.attack_2();
                 }
                 break;
@@ -129,7 +125,6 @@ public class PlayerAnimationController : MonoBehaviour
                 }
                 else if (actionType != runtimeActionType)
                 {
-                    runtimeActionType = actionType;
                     playerKnightControl.jump();
                 }
                 break;
@@ -142,7 +137,6 @@ public class PlayerAnimationController : MonoBehaviour
                 }
                 else if (actionType != runtimeActionType)
                 {
-                    runtimeActionType = actionType;
                     playerKnightControl.stun();
                 }
                 break;
@@ -155,7 +149,6 @@ public class PlayerAnimationController : MonoBehaviour
                 }
                 else if (actionType != runtimeActionType)
                 {
-                    runtimeActionType = actionType;
                     playerKnightControl.death();
                 }
                 break;
@@ -168,7 +161,6 @@ public class PlayerAnimationController : MonoBehaviour
                 }
                 else if (actionType != runtimeActionType)
                 {
-                    runtimeActionType = actionType;
                     playerKnightControl.skill_1();
                 }
                 break;
@@ -181,7 +173,6 @@ public class PlayerAnimationController : MonoBehaviour
                 }
                 else if (actionType != runtimeActionType)
                 {
-                    runtimeActionType = actionType;
                     playerKnightControl.skill_2();
                 }
                 break;
@@ -194,7 +185,6 @@ public class PlayerAnimationController : MonoBehaviour
                 }
                 else if (actionType != runtimeActionType)
                 {
-                    runtimeActionType = actionType;
                     playerKnightControl.skill_3();
                 }
 
@@ -202,7 +192,6 @@ public class PlayerAnimationController : MonoBehaviour
 
         }
     
-        
     }
 
     public string GetActionName(AnimationActionTypes actionType)
@@ -225,7 +214,7 @@ public class PlayerAnimationController : MonoBehaviour
                 return AnimationNameTypes.Attack_Shield;
 
             case AnimationActionTypes.Jump:
-                return AnimationNameTypes.Jump;
+                return AnimationNameTypes.Idle_Shield;
 
             case AnimationActionTypes.Stun:
                 return AnimationNameTypes.Stun;
@@ -245,6 +234,24 @@ public class PlayerAnimationController : MonoBehaviour
         }
 
         return AnimationNameTypes.Idle_01;
+    }
+
+    private void Update()
+    {
+        var atype = GetAnimateType();
+        SetAnimationAction(atype);
+        runtimeActionType = atype;
+    }
+
+    public AnimationActionTypes GetAnimateType()
+    {
+        if (!playerController.IsGrounded) return AnimationActionTypes.Jump;
+
+        else if (playerMovement.MoveX == 0) return AnimationActionTypes.Idle;
+
+        else if (playerMovement.IsPowerUp) return AnimationActionTypes.Run;
+
+        else return AnimationActionTypes.Walk;
     }
 
 }

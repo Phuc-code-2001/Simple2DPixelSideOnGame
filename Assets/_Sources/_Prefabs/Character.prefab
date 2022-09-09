@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4485412339991665593}
   - component: {fileID: 4485412339991665543}
   - component: {fileID: 1201911997990390161}
-  - component: {fileID: 8544350017919153492}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -123,23 +122,6 @@ BoxCollider2D:
   m_Size: {x: 2.0581865, y: 3.63555}
   m_EdgeRadius: 0
 --- !u!114 &1201911997990390161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4485412339991665596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c05e69a5e4e7de48af20646f57bafb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
-  Knight: {fileID: 0}
-  playerKnightControl: {fileID: 0}
-  playerKnightSeletonAnimation: {fileID: 0}
-  runtimeActionType: 0
---- !u!114 &8544350017919153492
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
