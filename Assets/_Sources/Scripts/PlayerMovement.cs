@@ -24,11 +24,6 @@ public class PlayerMovement : MonoBehaviour
         playerController = GetComponent<PlayerController>();
     }
 
-    private void Start()
-    {
-        KnightControl knightControl = playerController.Knight.GetComponent<KnightControl>();
-    }
-
     private void Update()
     {
         MoveX = InputController.Instance.Horizontal;
@@ -39,14 +34,12 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
 
-        Move(MoveX);
+        if(MoveX != 0) Move(MoveX);
         if (MoveX != CurrentMoveDirect()) DecreaseSpeed();
         if (IsPowerUp) Accel();
         
         ResetSpeed();
         CheckMaxSpeed();
-
-        PlayAnimation();
         PlayFacing();
     }
 
@@ -60,7 +53,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         float curr = PlayerController.Instance.rb.velocity.x;
-        // Debug.Log($"Vec: {curr}");
         if(curr * LastMoveX < 0) Stop();
     }
 
@@ -72,12 +64,9 @@ public class PlayerMovement : MonoBehaviour
     private void DecreaseSpeed()
     {
         Vector2 velocity = PlayerController.Instance.rb.velocity;
-
         float temp_x = velocity.x + PowerDown * (-CurrentMoveDirect()) * Time.deltaTime;
-
         velocity.x = temp_x;
         PlayerController.Instance.rb.velocity = velocity;
-        
     }
 
     private void CheckMaxSpeed()
@@ -101,7 +90,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Stop()
     {
-        PlayerController.Instance.rb.velocity = Vector2.zero;
+        Vector2 temp_v = PlayerController.Instance.rb.velocity;
+        PlayerController.Instance.rb.velocity = new Vector2(0, temp_v.y);
     }
 
     public void Accel()
@@ -109,31 +99,6 @@ public class PlayerMovement : MonoBehaviour
         PlayerController.Instance.rb.AddForce(new Vector2(PowerUp * CurrentMoveDirect(), 0), ForceMode2D.Force);
         MaxSpeed = 18;
         PowerUp = 12;
-    }
-
-    public void PlayAnimation()
-    {
-        if(IsPowerUp && MoveX != 0)
-        {
-            PlayerAnimationController pac = playerController.GetComponent<PlayerAnimationController>();
-            pac.SetAnimationAction(PlayerAnimationController.AnimationActionTypes.Run);
-            return;
-        }
-
-        if(MoveX != 0)
-        {
-            PlayerAnimationController pac = playerController.GetComponent<PlayerAnimationController>();
-            pac.SetAnimationAction(PlayerAnimationController.AnimationActionTypes.Walk);
-            return;
-        }
-
-        if(LastMoveX == 0)
-        {
-            PlayerAnimationController pac = playerController.GetComponent<PlayerAnimationController>();
-            pac.SetAnimationAction(PlayerAnimationController.AnimationActionTypes.Idle);
-            return;
-        }
-
     }
 
     public void PlayFacing()
