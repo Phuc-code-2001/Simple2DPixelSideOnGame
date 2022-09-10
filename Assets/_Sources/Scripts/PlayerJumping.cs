@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerJumping : MonoBehaviour
 {
-
+    [Header("Controllers")]
     public PlayerController playerController;
 
-
-    [SerializeField] private float PowerUnit = 10;
+    [Header("Properties")]
+    public float PowerUnit = 10;
     public float JumpPower_01 = 20;
     public float JumpPower_02 = 30;
     public bool IsDoubleJump = false;

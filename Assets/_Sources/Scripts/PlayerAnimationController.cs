@@ -35,6 +35,7 @@ public class PlayerAnimationController : MonoBehaviour
         Attack_Shield,
         Jump,
         Stun,
+        Hit,
         Dead,
         Buff_Damage,
         Buff_Health,
@@ -43,9 +44,9 @@ public class PlayerAnimationController : MonoBehaviour
 
     public PlayerController playerController;
     public PlayerMovement playerMovement;
+    public SkeletonAnimation playerKnightSeletonAnimation;
     public GameObject Knight;
     public KnightControl playerKnightControl;
-    public SkeletonAnimation playerKnightSeletonAnimation;
 
     [SerializeField]
     private AnimationActionTypes runtimeActionType = AnimationActionTypes.Idle;
@@ -54,6 +55,10 @@ public class PlayerAnimationController : MonoBehaviour
     {
         playerController = GetComponent<PlayerController>();
         playerMovement = GetComponent<PlayerMovement>();
+    }
+
+    private void Start()
+    {
         Knight = playerController.transform.Find("Knight").gameObject;
         playerKnightControl = Knight.GetComponent<KnightControl>();
         playerKnightSeletonAnimation = Knight.GetComponent<SkeletonAnimation>();
@@ -141,6 +146,18 @@ public class PlayerAnimationController : MonoBehaviour
                 }
                 break;
 
+            case AnimationActionTypes.Hit:
+                if (playerKnightControl.hitAnimationName != actionName)
+                {
+                    playerKnightControl.hitAnimationName = actionName;
+                    playerKnightControl.getHit();
+                }
+                else if (actionType != runtimeActionType)
+                {
+                    playerKnightControl.getHit();
+                }
+                break;
+
             case AnimationActionTypes.Dead:
                 if (playerKnightControl.deathAnimationName != actionName)
                 {
@@ -219,6 +236,9 @@ public class PlayerAnimationController : MonoBehaviour
             case AnimationActionTypes.Stun:
                 return AnimationNameTypes.Stun;
 
+            case AnimationActionTypes.Hit:
+                return AnimationNameTypes.Hit;
+
             case AnimationActionTypes.Dead:
                 return AnimationNameTypes.Dead;
 
@@ -245,7 +265,10 @@ public class PlayerAnimationController : MonoBehaviour
 
     public AnimationActionTypes GetAnimateType()
     {
-        if (!playerController.IsGrounded) return AnimationActionTypes.Jump;
+
+        if (playerController.IsHitting) return AnimationActionTypes.Hit;
+        else if (playerController.IsAttacking) return AnimationActionTypes.Attack_Sword;
+        else if (!playerController.IsGrounded) return AnimationActionTypes.Jump;
 
         else if (playerMovement.MoveX == 0) return AnimationActionTypes.Idle;
 

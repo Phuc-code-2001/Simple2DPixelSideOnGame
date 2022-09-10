@@ -6,38 +6,47 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CameraController : SmoothFollower, IRect
 {
-
+    [Header("Properties")]
     public Vector2 thresold_offset = new Vector2(6, 3.75f);
-    public Vector2 centerBoxOffSet = new Vector2(3, 0);
+    public Vector2 centerBoxOffSet = new Vector2(1, 0);
+    [Header("Components")]
+    [SerializeField] private Camera _camera;
+
+    [Header("Calculated Fields")]
+    [SerializeField] private Rect aspect;
+    [SerializeField] private Vector3 centerOfBox;
     [SerializeField] private Vector2 thresold;
-
-
     [SerializeField] float x_diff;
     [SerializeField] float y_diff;
 
+    private void Awake()
+    {
+        _camera = GetComponent<Camera>();
+    }
+
     private void Start()
     {
-        Follower = transform.gameObject;
+        aspect = _camera.pixelRect;
         TargetObject = PlayerController.Instance.gameObject;
-        Speed = 4;
     }
 
     private void Update()
     {
         thresold = calculateThresold();
-        FollowerOffset = thresold;
-    }
-
-    private void FixedUpdate()
-    {
-        Camera camera = GetComponent<Camera>();
-        Rect aspect = camera.pixelRect;
-        Vector3 centerOfBox = transform.position - new Vector3(centerBoxOffSet.x, centerBoxOffSet.y, 0);
+        centerOfBox = calculateCenterOfBox();
 
         x_diff = Mathf.Abs(TargetObject.transform.position.x - centerOfBox.x);
         y_diff = Mathf.Abs(TargetObject.transform.position.y - centerOfBox.y);
 
-        if (x_diff >= thresold.x || y_diff >= thresold.y) Follow(Time.fixedDeltaTime); 
+        if (x_diff >= thresold.x || y_diff >= thresold.y)
+        {
+            targetFollowerPosition = GetNewPosition();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (transform.position != targetFollowerPosition) Follow(Time.fixedDeltaTime);
     }
 
     public Vector3 calculateThresold()
@@ -48,6 +57,11 @@ public class CameraController : SmoothFollower, IRect
         t.x -= thresold_offset.x;
         t.y -= thresold_offset.y;
         return t;
+    }
+
+    public Vector3 calculateCenterOfBox()
+    {
+        return transform.position - new Vector3(centerBoxOffSet.x, centerBoxOffSet.y, 0);
     }
 
     public float GetWidth()
@@ -67,10 +81,8 @@ public class CameraController : SmoothFollower, IRect
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Vector2 border = thresold;
-        Vector3 centerOfBox = transform.position - new Vector3(centerBoxOffSet.x, centerBoxOffSet.y, 0);
-        Gizmos.DrawWireCube(centerOfBox, new Vector3(border.x * 2, border.y * 2, 1));
-        Gizmos.DrawWireSphere(centerOfBox, 0.25f);
+        Gizmos.DrawWireCube(centerOfBox, new Vector3(thresold.x * 2, thresold.y * 2, 1));
+        Gizmos.DrawWireSphere(centerOfBox, 0.15f);
     }
 
 
