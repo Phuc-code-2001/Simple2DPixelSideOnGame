@@ -11,6 +11,7 @@ public class InputController : MonoBehaviour
 
     public bool JumpSignalActive = false;
     public bool RunSignalActive = false;
+    public bool AttackSignalActive = false;
 
     private void Awake()
     {
@@ -23,5 +24,6 @@ public class InputController : MonoBehaviour
         Vertical = Input.GetAxisRaw("Vertical");
         if (Input.GetKeyDown(KeyCode.UpArrow)) JumpSignalActive = true;
         RunSignalActive = Input.GetKey(KeyCode.Tab);
+        if (Input.GetKeyUp(KeyCode.Space)) AttackSignalActive = true;
     }
 }
