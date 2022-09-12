@@ -13,7 +13,7 @@ public class PlayerAttacker : MonoBehaviour, IAttacker
     public float AttackCoolDown = 2f;
     public float CoolDownTimer;
 
-    public float DelayTimeSendDamage = 0.5f;
+    public float DelayTimeSendDamage = 0.7f;
 
     private void Awake()
     {
@@ -51,19 +51,17 @@ public class PlayerAttacker : MonoBehaviour, IAttacker
 
     public void AttackDone()
     {
-        
-        DisableAttack();
+        inputController.AttackSignalActive = false;
+        playerController.swordDamageSender.Disable();
     }
 
     public void AttackHandler()
     {
-        playerController.swordDamageSender.Active();
+        SwordDamageSender swordDamageSender =
+            GameObject.Instantiate(playerController.swordDamageSender.gameObject, new Vector2(0, 0), Quaternion.identity, playerController.transform)
+            .GetComponent<SwordDamageSender>();
+        swordDamageSender.Active();
     }
 
-    public void DisableAttack()
-    {
-        inputController.AttackSignalActive = false;
-        playerController.swordDamageSender.Disable();
-    }
 
 }

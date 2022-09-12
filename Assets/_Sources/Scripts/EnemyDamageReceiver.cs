@@ -7,41 +7,26 @@ public class EnemyDamageReceiver : MonoBehaviour, IDamageReceiver
 {
 
     public EnemyController enemyController;
-    public Animator animator;
     public Enemy enemy;
 
     private void Awake()
     {
-        enemyController = GetComponentInParent<EnemyController>();
-        animator = GetComponent<Animator>();
+        enemyController = GetComponent<EnemyController>();
         enemy = GetComponent<Enemy>();
     }
 
     public void ReceiveDamage(IDamageSender sender)
     {
         enemy.ReceiveDamage(sender.GetDamage());
-        UseEffect();
+        if (enemy.IsDeath())
+        {
+            enemyController.IsDeath = true;
+        }
+        else UseEffect();
     }
 
     public void UseEffect()
     {
-        if(enemy.IsDeath())
-        {
-            animator.SetTrigger("death");
-            enemyController.IsDeath = true;
-        }
-        else
-        {
-            enemyController.rb.AddForce(new Vector2(0, 5), ForceMode2D.Impulse);
-        }
-    }
 
-    private void FixedUpdate()
-    {
-        if(enemyController.IsDeath)
-        {
-            float delay = animator.GetCurrentAnimatorStateInfo(0).length;
-            enemyController.Death(delay);
-        }
     }
 }

@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private float CurrentMoveDirect()
+    public float CurrentMoveDirect()
     {
         if (LastMoveX > 0) return 1;
         if (LastMoveX < 0) return -1;

@@ -8,6 +8,9 @@ public class SwordDamageSender : MonoBehaviour, IDamageSender
 {
 
     public PlayerController playerController;
+    public Rigidbody2D rb;
+    public float Speed = 5;
+    public float distance;
 
     public bool IsAffect = false;
 
@@ -20,18 +23,21 @@ public class SwordDamageSender : MonoBehaviour, IDamageSender
 
     private void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
         playerController = GetComponentInParent<PlayerController>();
     }
 
     public void Disable()
     {
         IsAffect = false;
-        AffectedList.Clear();
+        rb.velocity = new Vector2 (0, 0);
     }
 
     public void Active()
     {
         IsAffect = true;
+        rb.velocity = new Vector2(Speed * playerController.transform.localScale.normalized.x, 0);
+        AffectedList.Clear();
     }
 
     private void Start()

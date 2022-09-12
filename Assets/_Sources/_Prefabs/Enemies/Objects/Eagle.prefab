@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2793534399400699365
+--- !u!1 &722233155981866247
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,24 +8,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2793534399400699366}
-  - component: {fileID: 2793534399400699368}
-  - component: {fileID: 2793534399400699367}
-  - component: {fileID: 6376016959800091159}
+  - component: {fileID: 722233155981866240}
+  - component: {fileID: 722233155981866241}
+  - component: {fileID: 722233155981866246}
+  - component: {fileID: 4783895768874966548}
   m_Layer: 0
-  m_Name: Opossum
-  m_TagString: Enemy
+  m_Name: Eagle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2793534399400699366
+--- !u!4 &722233155981866240
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2793534399400699365}
+  m_GameObject: {fileID: 722233155981866247}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -34,13 +34,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2793534399400699368
+--- !u!212 &722233155981866241
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2793534399400699365}
+  m_GameObject: {fileID: 722233155981866247}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,28 +75,28 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: baa0c643131554ff99574059ec7da1cc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f240dfd4814d34d55a9b033f3c9d8a60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.75, y: 0.5833333}
+  m_Size: {x: 1.6666666, y: 1.7083334}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &2793534399400699367
+--- !u!95 &722233155981866246
 Animator:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2793534399400699365}
+  m_GameObject: {fileID: 722233155981866247}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a22f7d46ff568ad4890e9de170cd0b3f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6d4921398d3439344af73ca5c63a6da6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -106,18 +106,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6376016959800091159
+--- !u!114 &4783895768874966548
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2793534399400699365}
+  m_GameObject: {fileID: 722233155981866247}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc001b0a809488249ba8d21ce435d62e, type: 3}
+  m_Script: {fileID: 11500000, guid: eb2f0e80a10030a45988c97e1c0afedc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseEnemy: {fileID: 0}
-  OpposumHeathPoint: 200
-  OpposumDamage: 10
+  enemyController: {fileID: 0}
+  EagleHeathPoint: 100
+  EagleDamage: 20
+  Speed: 2

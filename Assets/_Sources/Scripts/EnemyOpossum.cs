@@ -3,17 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyOpossum : Enemy, IEnemy
+public class EnemyOpossum : MonoBehaviour
 {
+    public Enemy BaseEnemy;
+
+    public float OpposumHeathPoint = 200;
+    public float OpposumDamage = 10;
 
     private void Awake()
     {
-        HealthPoint = 100;
-        Damage = 20;
+        BaseEnemy = GetComponentInParent<Enemy>();
     }
 
-    public Enemy GetEnemyObject()
+    private void Start()
     {
-        return this;
+        if(BaseEnemy != null)
+        {
+            BaseEnemy.HealthPoint = OpposumHeathPoint;
+            BaseEnemy.Damage = OpposumDamage;
+        }
     }
+
 }
