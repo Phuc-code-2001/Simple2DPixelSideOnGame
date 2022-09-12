@@ -22,12 +22,13 @@ public class EnemyMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         enemyController = GetComponentInParent<EnemyController>();
-        LeftPoint = enemyController.transform.Find("LeftPoint");
-        RightPoint = enemyController.transform.Find("RightPoint");
+        
     }
 
     private void Start()
     {
+        LeftPoint = enemyController.transform.Find("LeftPoint");
+        RightPoint = enemyController.transform.Find("RightPoint");
         TargetPoint = LeftPoint;
     }
 

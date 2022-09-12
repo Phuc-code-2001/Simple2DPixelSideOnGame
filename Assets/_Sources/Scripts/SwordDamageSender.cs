@@ -50,7 +50,7 @@ public class SwordDamageSender : MonoBehaviour, IDamageSender
                 IDamageReceiver receiver = collider.GetComponent<IDamageReceiver>();
                 if(receiver != null)
                 {
-                    receiver.ReceiveDamage(this);
+                    SendDamage(receiver);
                 }
             }
             AffectedList.Add(Id);

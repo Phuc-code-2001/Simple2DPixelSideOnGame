@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 565918427}
   - component: {fileID: 565918429}
   - component: {fileID: 2010589549206620232}
+  - component: {fileID: 8541158446459727777}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -82,13 +83,18 @@ MonoBehaviour:
   playerAnimationController: {fileID: 0}
   playerGroundedHandler: {fileID: 0}
   playerAttacker: {fileID: 0}
-  Knight: {fileID: 0}
+  playerDamageReceiver: {fileID: 0}
+  swordDamageSender: {fileID: 0}
   rb: {fileID: 0}
+  Knight: {fileID: 0}
   IsShieldActive: 0
   IsGrounded: 0
   IsJumping: 0
   IsFalling: 0
   IsAttacking: 0
+  IsHitting: 0
+  HealthPoint: 1000
+  Damage: 100
 --- !u!114 &4485412339991665593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,8 +108,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
-  MaxSpeed: 6
-  PowerUp: 4
+  BaseMaxSpeed: 5
+  BasePowerUp: 3
+  CurrentMaxSpeed: 0
+  CurrentPowerUp: 0
   PowerDown: 12
   MoveX: 0
   LastMoveX: 0
@@ -148,9 +156,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   playerMovement: {fileID: 0}
+  playerKnightSeletonAnimation: {fileID: 0}
   Knight: {fileID: 0}
   playerKnightControl: {fileID: 0}
-  playerKnightSeletonAnimation: {fileID: 0}
   runtimeActionType: 0
 --- !u!114 &833678999648957140
 MonoBehaviour:
@@ -248,6 +256,20 @@ MonoBehaviour:
   AttackCoolDown: 2
   CoolDownTimer: 0
   DelayTimeSendDamage: 0.7
+--- !u!114 &8541158446459727777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4485412339991665596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825195c6188b0a54b8c2c526a7bec58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
+  EffectTime: 1.133
 --- !u!1 &5510748974364013258
 GameObject:
   m_ObjectHideFlags: 0
