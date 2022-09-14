@@ -78,12 +78,12 @@ public class CameraController : SmoothFollower, IRect
         return camera.orthographicSize;
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(centerOfBox, new Vector3(thresold.x * 2, thresold.y * 2, 1));
-        Gizmos.DrawWireSphere(centerOfBox, 0.15f);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawWireCube(centerOfBox, new Vector3(thresold.x * 2, thresold.y * 2, 1));
+    //    Gizmos.DrawWireSphere(centerOfBox, 0.15f);
+    //}
 
 
 }

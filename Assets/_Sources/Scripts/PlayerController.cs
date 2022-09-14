@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     public PlayerGroundedHandler playerGroundedHandler;
     public PlayerAttacker playerAttacker;
     public PlayerDamageReceiver playerDamageReceiver;
-    public SwordDamageSender swordDamageSender;
     public Rigidbody2D rb;
 
     [Header("Children")]
@@ -47,7 +46,6 @@ public class PlayerController : MonoBehaviour
         playerGroundedHandler = GetComponent<PlayerGroundedHandler>();
         playerAttacker = GetComponent<PlayerAttacker>();
         playerDamageReceiver = GetComponent<PlayerDamageReceiver>();
-        swordDamageSender = GetComponentInChildren<SwordDamageSender>();
     }
 
     private void Start()
@@ -55,10 +53,9 @@ public class PlayerController : MonoBehaviour
         Knight = transform.Find("Knight")?.gameObject;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         IsJumping = rb.velocity.y > 0;
         IsFalling = rb.velocity.y < 0;
-        IsAttacking = InputController.Instance.AttackSignalActive;
     }
 }

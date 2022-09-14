@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Properties")]
     public float BaseMaxSpeed = 5;
-    public float BasePowerUp = 3;
+    public float BasePowerUp = 4;
     [SerializeField] private float MaxSpeedWhenRun => BaseMaxSpeed * 2;
     [SerializeField] private float MaxPowerUpWhenRun => BasePowerUp * 4;
     public float CurrentMaxSpeed;
@@ -85,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckMaxSpeed()
     {
-        if (Mathf.Abs(PlayerController.Instance.rb.velocity.x) > CurrentMaxSpeed)
+        if (Mathf.Abs(PlayerController.Instance.rb.velocity.x) >= CurrentMaxSpeed)
         {
             PlayerController.Instance.rb.velocity = new Vector2
             {
@@ -112,7 +112,6 @@ public class PlayerMovement : MonoBehaviour
     {
         CurrentMaxSpeed = MaxSpeedWhenRun;
         CurrentPowerUp = MaxPowerUpWhenRun;
-        // PlayerController.Instance.rb.AddForce(new Vector2(CurrentPowerUp * CurrentMoveDirect(), 0), ForceMode2D.Force);
     }
 
     public void PlayFacing()

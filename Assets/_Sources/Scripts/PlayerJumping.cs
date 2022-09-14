@@ -9,8 +9,8 @@ public class PlayerJumping : MonoBehaviour
 
     [Header("Properties")]
     public float PowerUnit = 10;
-    public float JumpPower_01 = 20;
-    public float JumpPower_02 = 30;
+    public float JumpPower_01 = 35;
+    public float JumpPower_02 = 40;
     public bool IsDoubleJump = false;
 
     private void Awake()
@@ -21,10 +21,9 @@ public class PlayerJumping : MonoBehaviour
     public void Jump()
     {
         ResetGravity();
+        playerController.playerGroundedHandler.NonGroundedHandle();
         Vector2 force = new Vector2(0, PowerUnit * (IsDoubleJump ? JumpPower_02 : JumpPower_01));
         playerController.rb.AddForce(force, ForceMode2D.Force);
-
-        playerController.playerGroundedHandler.NonGroundedHandle();
     }
 
     private void Update()
@@ -39,9 +38,9 @@ public class PlayerJumping : MonoBehaviour
     {
         if(InputController.Instance.JumpSignalActive && (playerController.IsGrounded || !IsDoubleJump))
         {
+            InputController.Instance.JumpSignalActive = false;
             if (!playerController.IsGrounded) IsDoubleJump = true;
             Jump();
-            InputController.Instance.JumpSignalActive = false;
         }
     }
 
