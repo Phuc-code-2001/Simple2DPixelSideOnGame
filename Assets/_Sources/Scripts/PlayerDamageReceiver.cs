@@ -21,9 +21,6 @@ public class PlayerDamageReceiver : MonoBehaviour, IDamageReceiver
         if(!playerController.IsHitting)
         {
             float dameReceive = sender.GetDamage();
-            
-
-
             UseEffect();
         }
     }

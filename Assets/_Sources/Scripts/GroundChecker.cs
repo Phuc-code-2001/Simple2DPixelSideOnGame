@@ -19,4 +19,13 @@ public class GroundChecker : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Grounded"))
+        {
+            IGroundedHandler groundedHandler = gameObject.GetComponentInParent<IGroundedHandler>();
+            groundedHandler.NonGroundedHandle();
+        }
+    }
+
 }

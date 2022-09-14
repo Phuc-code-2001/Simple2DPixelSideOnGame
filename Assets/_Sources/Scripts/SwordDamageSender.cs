@@ -25,14 +25,12 @@ public class SwordDamageSender : MonoBehaviour, IDamageSender
 
     private void Awake()
     {
-        //Debug.Log("Sword Awake...");
         rb = GetComponent<Rigidbody2D>();
         playerController = GetComponentInParent<PlayerController>();
     }
 
     private void Start()
     {
-        //Debug.Log("Sword Start...");
         startPosition = transform.position;
         rb.velocity = new Vector2(Speed * playerController.transform.localScale.x, 0);
     }
@@ -48,7 +46,6 @@ public class SwordDamageSender : MonoBehaviour, IDamageSender
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        //Debug.Log("Trigger playing...");
         if (AffectedList.Contains(collider.gameObject)) return;
         if (!AffectTags.Contains(collider.tag)) return;
         

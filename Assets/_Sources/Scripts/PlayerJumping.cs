@@ -13,6 +13,10 @@ public class PlayerJumping : MonoBehaviour
     public float JumpPower_02 = 40;
     public bool IsDoubleJump = false;
 
+    [Header("Checker")]
+    public bool CanDoubleJump = false;
+    public bool CanJump = false;
+
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
@@ -28,20 +32,45 @@ public class PlayerJumping : MonoBehaviour
 
     private void Update()
     {
+        
         if (playerController.IsGrounded)
         {
             IsDoubleJump = false;
+            CanDoubleJump = false;
+            CanJump = true;
+        }
+
+        if (CanDoubleJump)
+        {
+            CanJump = true;
+        }
+        else if (playerController.IsFalling)
+        {
+            CanJump = false;
+            playerController.inputController.JumpSignalActive = false;
+            
         }
     }
 
     private void FixedUpdate()
     {
-        if(InputController.Instance.JumpSignalActive && (playerController.IsGrounded || !IsDoubleJump))
+
+        if ((CanJump && playerController.inputController.JumpSignalActive) && (playerController.IsGrounded || CanDoubleJump))
         {
-            InputController.Instance.JumpSignalActive = false;
-            if (!playerController.IsGrounded) IsDoubleJump = true;
+            if (CanDoubleJump)
+            {
+                CanDoubleJump = false;
+                IsDoubleJump = true;
+            }
+            if (playerController.IsGrounded)
+            {
+                CanDoubleJump = true;
+            }
             Jump();
+            CanJump = false;
+            playerController.inputController.JumpSignalActive = false;
         }
+
     }
 
     private void ResetGravity()

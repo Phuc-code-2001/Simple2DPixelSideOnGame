@@ -266,13 +266,13 @@ public class PlayerAnimationController : MonoBehaviour
     public AnimationActionTypes GetAnimateType()
     {
 
-        if (playerController.IsAttacking) return AnimationActionTypes.Attack_Sword;
         if (playerController.IsHitting) return AnimationActionTypes.Hit;
+        if (playerController.IsAttacking) return AnimationActionTypes.Attack_Sword;
         // if (!playerController.IsGrounded) return AnimationActionTypes.Jump;
 
-        if (playerMovement.MoveX == 0) return AnimationActionTypes.Idle;
+        if (!playerController.IsMoveLeft && !playerController.IsMoveRight) return AnimationActionTypes.Idle;
 
-        if (playerMovement.IsPowerUp) return AnimationActionTypes.Run;
+        if (playerController.IsRunning) return AnimationActionTypes.Run;
 
         return AnimationActionTypes.Walk;
     }

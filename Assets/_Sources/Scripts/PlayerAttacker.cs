@@ -7,7 +7,6 @@ public class PlayerAttacker : MonoBehaviour, IAttacker
 {
 
     public PlayerController playerController;
-    public InputController inputController;
 
     public float AttackAnimateTime = 1.2f;
     public float AttackCoolDown = 1.5f;
@@ -24,14 +23,14 @@ public class PlayerAttacker : MonoBehaviour, IAttacker
 
     private void Start()
     {
-        inputController = InputController.Instance;
+        
         CoolDownTimer = AttackCoolDown;
     }
 
     private void Update()
     {
         CoolDownTimer -= Time.deltaTime;
-        if(inputController.AttackSignalActive && !playerController.IsAttacking)
+        if(playerController.inputController.AttackSignalActive && !playerController.IsAttacking)
         {
             if(CoolDownTimer <= 0)
             {
@@ -53,7 +52,7 @@ public class PlayerAttacker : MonoBehaviour, IAttacker
 
     public void AttackDone()
     {
-        inputController.AttackSignalActive = false;
+        playerController.inputController.AttackSignalActive = false;
         playerController.IsAttacking = false;
     }
 
