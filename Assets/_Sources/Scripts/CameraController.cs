@@ -19,6 +19,8 @@ public class CameraController : SmoothFollower, IRect
     [SerializeField] float x_diff;
     [SerializeField] float y_diff;
 
+    [SerializeField] private bool IsFollow = true;
+
     private void Awake()
     {
         _camera = GetComponent<Camera>();
@@ -28,10 +30,14 @@ public class CameraController : SmoothFollower, IRect
     {
         aspect = _camera.pixelRect;
         TargetObject = PlayerController.Instance.gameObject;
+
+        if(TargetObject == null) IsFollow = false;
     }
 
     private void Update()
     {
+        if (!IsFollow) return;
+        
         thresold = calculateThresold();
         centerOfBox = calculateCenterOfBox();
 
@@ -46,6 +52,7 @@ public class CameraController : SmoothFollower, IRect
 
     private void FixedUpdate()
     {
+        if (!IsFollow) return;
         if (transform.position != targetFollowerPosition) Follow(Time.fixedDeltaTime);
     }
 
@@ -78,12 +85,12 @@ public class CameraController : SmoothFollower, IRect
         return camera.orthographicSize;
     }
 
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.yellow;
-    //    Gizmos.DrawWireCube(centerOfBox, new Vector3(thresold.x * 2, thresold.y * 2, 1));
-    //    Gizmos.DrawWireSphere(centerOfBox, 0.15f);
-    //}
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(centerOfBox, new Vector3(thresold.x * 2, thresold.y * 2, 1));
+        Gizmos.DrawWireSphere(centerOfBox, 0.15f);
+    }
 
 
 }

@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Properties")]
     public float HealthPoint = 1000;
-    public float Damage = 100;
+    public float Damage = 50;
 
     private void Awake()
     {

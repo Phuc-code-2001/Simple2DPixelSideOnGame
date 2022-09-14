@@ -5,22 +5,23 @@ using UnityEngine;
 
 public class EnemyOpossum : MonoBehaviour
 {
-    public Enemy BaseEnemy;
+    public EnemyController enemyController;
 
     public float OpposumHeathPoint = 200;
     public float OpposumDamage = 10;
 
     private void Awake()
     {
-        BaseEnemy = GetComponentInParent<Enemy>();
+        enemyController = GetComponentInParent<EnemyController>();
     }
 
     private void Start()
     {
-        if(BaseEnemy != null)
+        if(enemyController != null)
         {
-            BaseEnemy.HealthPoint = OpposumHeathPoint;
-            BaseEnemy.Damage = OpposumDamage;
+            enemyController.enemy.MaxHealthPoint = OpposumHeathPoint;
+            enemyController.enemy.HealthPoint = OpposumHeathPoint;
+            enemyController.enemy.Damage = OpposumDamage;
         }
     }
 

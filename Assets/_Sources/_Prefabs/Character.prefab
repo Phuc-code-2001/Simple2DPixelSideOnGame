@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9939e7d02eb494d924226050126f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputController: {fileID: 0}
   playerMovement: {fileID: 0}
   playerJumping: {fileID: 0}
   playerAnimationController: {fileID: 0}
@@ -89,13 +90,16 @@ MonoBehaviour:
   rb: {fileID: 0}
   Knight: {fileID: 0}
   IsShieldActive: 1
+  IsMoveLeft: 0
+  IsMoveRight: 0
+  IsRunning: 0
   IsGrounded: 0
   IsJumping: 0
   IsFalling: 0
   IsAttacking: 0
   IsHitting: 0
   HealthPoint: 1000
-  Damage: 100
+  Damage: 50
 --- !u!114 &4485412339991665593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,11 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
-  BaseMaxSpeed: 5
-  BasePowerUp: 4
-  CurrentMaxSpeed: 0
-  CurrentPowerUp: 0
-  PowerDown: 12
+  BaseSpeed: 5
+  CurrentSpeed: 0
   MoveX: 0
   LastMoveX: 0
   IsPowerUp: 0
@@ -178,6 +179,8 @@ MonoBehaviour:
   JumpPower_01: 35
   JumpPower_02: 40
   IsDoubleJump: 0
+  CanDoubleJump: 0
+  CanJump: 0
 --- !u!114 &2667521892416478613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +255,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
-  inputController: {fileID: 0}
   AttackAnimateTime: 1.2
   AttackCoolDown: 1.5
   CoolDownTimer: 0

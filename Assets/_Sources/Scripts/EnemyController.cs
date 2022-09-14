@@ -16,7 +16,6 @@ public class EnemyController : MonoBehaviour
     public Enemy enemy;
     public EnemyMovement enemyMovement;
 
-
     [Header("Effects")]
     public GameObject DeathEffect;
 

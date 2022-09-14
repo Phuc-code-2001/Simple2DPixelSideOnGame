@@ -19,6 +19,7 @@ public class EnemyEagle : MonoBehaviour
     {
         if (enemyController != null)
         {
+            enemyController.enemy.MaxHealthPoint = EagleHeathPoint;
             enemyController.enemy.HealthPoint = EagleHeathPoint;
             enemyController.enemy.Damage = EagleDamage;
             enemyController.enemyMovement.velocity = Speed;

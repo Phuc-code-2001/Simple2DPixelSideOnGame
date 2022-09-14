@@ -25,6 +25,7 @@ public class EnemyDamageReceiver : MonoBehaviour, IDamageReceiver
             enemyController.IsDeath = true;
         }
         else UseEffect();
+
     }
 
     public void UseEffect()
