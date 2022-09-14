@@ -9,119 +9,65 @@ public class PlayerMovement : MonoBehaviour
     public PlayerController playerController;
 
     [Header("Properties")]
-    public float BaseMaxSpeed = 5;
-    public float BasePowerUp = 4;
-    [SerializeField] private float MaxSpeedWhenRun => BaseMaxSpeed * 2;
-    [SerializeField] private float MaxPowerUpWhenRun => BasePowerUp * 4;
-    public float CurrentMaxSpeed;
-    public float CurrentPowerUp;
+    public float BaseSpeed = 5;
+    [SerializeField] private float SpeedWhenRun => BaseSpeed * 2;
+    public float CurrentSpeed;
 
-    public float PowerDown = 12f;
+    [Header("Signals")]
     public float MoveX = 0;
     public float LastMoveX = 0;
 
     [Header("Events")]
     public bool IsPowerUp = false;
 
+
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
     }
 
-    private void Start()
-    {
-        ResetAccelEffect();
-    }
-
-    private void ResetAccelEffect()
-    {
-        CurrentMaxSpeed = BaseMaxSpeed;
-        CurrentPowerUp = BasePowerUp;
-    }
-
     private void Update()
     {
-        MoveX = InputController.Instance.Horizontal;
-        IsPowerUp = InputController.Instance.RunSignalActive;
-        LastMoveX = PlayerController.Instance.rb.velocity.x;
+        MoveX = playerController.inputController.Horizontal;
+        IsPowerUp = playerController.inputController.RunSignalActive;
+        LastMoveX = playerController.rb.velocity.x;
+
+        Move();
+        PlayFacing();
     }
 
     private void FixedUpdate()
     {
-
-        if (IsPowerUp) Accel();
-        if(MoveX != 0) Move(MoveX);
-        if (MoveX != CurrentMoveDirect()) DecreaseSpeed();
-        
-        ResetSpeed();
-        CheckMaxSpeed();
-        PlayFacing();
-    }
-
-    private void ResetSpeed()
-    {
-
-        if(!IsPowerUp)
+        if (IsPowerUp)
         {
-            ResetAccelEffect();
+            CurrentSpeed = SpeedWhenRun;
         }
-
-        float curr = PlayerController.Instance.rb.velocity.x;
-        if(curr * LastMoveX < 0) Stop();
-    }
-
-    public void Move(float direction)
-    {
-        PlayerController.Instance.rb.AddForce(new Vector2(CurrentPowerUp * direction, 0), ForceMode2D.Force);
-    }
-
-    private void DecreaseSpeed()
-    {
-        Vector2 velocity = PlayerController.Instance.rb.velocity;
-        float temp_x = velocity.x + PowerDown * (-CurrentMoveDirect()) * Time.deltaTime;
-        velocity.x = temp_x;
-        PlayerController.Instance.rb.velocity = velocity;
-    }
-
-    private void CheckMaxSpeed()
-    {
-        if (Mathf.Abs(PlayerController.Instance.rb.velocity.x) >= CurrentMaxSpeed)
+        else
         {
-            PlayerController.Instance.rb.velocity = new Vector2
-            {
-                x = CurrentMaxSpeed * CurrentMoveDirect(),
-                y = PlayerController.Instance.rb.velocity.y
-            };
+            CurrentSpeed = BaseSpeed;
         }
     }
 
-    public float CurrentMoveDirect()
+    public void Move()
+    {
+        playerController.rb.velocity = new Vector2(CurrentSpeed * MoveX, playerController.rb.velocity.y);
+    }
+
+    public float LastMoveDirect()
     {
         if (LastMoveX > 0) return 1;
         if (LastMoveX < 0) return -1;
         return 0;
     }
 
-    public void Stop()
-    {
-        Vector2 temp_v = PlayerController.Instance.rb.velocity;
-        PlayerController.Instance.rb.velocity = new Vector2(0, temp_v.y);
-    }
-
-    public void Accel()
-    {
-        CurrentMaxSpeed = MaxSpeedWhenRun;
-        CurrentPowerUp = MaxPowerUpWhenRun;
-    }
-
     public void PlayFacing()
     {
-        if(LastMoveX > 0)
+        if(playerController.IsMoveRight)
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-        if (LastMoveX < 0)
+        if (playerController.IsMoveLeft)
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }
