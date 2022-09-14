@@ -1,53 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
     [Header("Components")]
     public EnemyController enemyController;
-    public Rigidbody2D rb;
 
-    [Header("Area")]
-    public Transform LeftPoint;
-    public Transform RightPoint;
 
     [Header("Properties")]
     public float velocity = 1f;
+    [SerializeField] private List<Transform> MovePoints;
+    [SerializeField] private int movePointIndex = 0;
 
     [SerializeField] private Transform TargetPoint;
 
-
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        enemyController = GetComponentInParent<EnemyController>();
-        
+        enemyController = GetComponent<EnemyController>();
     }
 
     private void Start()
     {
-        LeftPoint = enemyController.transform.Find("LeftPoint");
-        RightPoint = enemyController.transform.Find("RightPoint");
-        TargetPoint = LeftPoint;
+        FindMovePoints();
+        TargetPoint = MovePoints.Count == 0 ? transform : MovePoints[movePointIndex];
+    }
+
+    private void FindMovePoints()
+    {
+        Transform points = transform.parent.Find("MovePoints");
+        foreach (Transform point in points) MovePoints.Add(point);
     }
 
     private void Update()
     {
-        if(transform.position.x <= LeftPoint.position.x)
+        float gap = Vector2.Distance(transform.position, TargetPoint.position);
+        if(gap < 0.05)
         {
-            TargetPoint = RightPoint;
-        }
-
-        if(transform.position.x >= RightPoint.position.x)
-        {
-            TargetPoint = LeftPoint;
+            movePointIndex = (movePointIndex + 1) % MovePoints.Count;
+            TargetPoint = MovePoints[movePointIndex];
         }
     }
 
     private void FixedUpdate()
     {
-        if(!enemyController.IsDeath)
+        if (!enemyController.IsDeath)
         {
             transform.position = Vector3.MoveTowards(transform.position, TargetPoint.position, velocity * Time.fixedDeltaTime);
             PlayFacing();
@@ -56,13 +54,14 @@ public class EnemyMovement : MonoBehaviour
 
     private void PlayFacing()
     {
-        if(TargetPoint == LeftPoint)
+        Vector2 direction = TargetPoint.position - transform.position;
+        if(direction.x < 0)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
         else
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(1, 1, 1);
         }
     }
 

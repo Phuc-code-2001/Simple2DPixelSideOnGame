@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EnemyDamageSender : DamageSender, IDamageSender
+public class EnemyDamageSender : MonoBehaviour, IDamageSender
 {
 
     public EnemyController enemyController;
@@ -21,12 +21,7 @@ public class EnemyDamageSender : DamageSender, IDamageSender
 
     private void FixedUpdate()
     {
-        Colliders = _colliders.Values.ToList();
-        foreach (Collider2D collider in Colliders)
-        {
-            IDamageReceiver receiver = collider.GetComponent<IDamageReceiver>();
-            if (receiver != null && Tags.Contains(collider.tag)) SendDamage(receiver);
-        }
+        
     }
 
     public float GetDamage()

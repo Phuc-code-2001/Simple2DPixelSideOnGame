@@ -22,8 +22,13 @@ public class InputController : MonoBehaviour
     {
         Horizontal = Input.GetAxisRaw("Horizontal");
         Vertical = Input.GetAxisRaw("Vertical");
-        if (Input.GetKeyDown(KeyCode.UpArrow)) JumpSignalActive = true;
         RunSignalActive = Input.GetKey(KeyCode.Tab);
-        if (Input.GetKeyUp(KeyCode.Space)) AttackSignalActive = true;
+        if (Input.GetKeyDown(KeyCode.UpArrow)) JumpSignalActive = true;
+        if (Input.GetKeyDown(KeyCode.Space)) AttackSignalActive = true;
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 }

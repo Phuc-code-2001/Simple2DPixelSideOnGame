@@ -8,24 +8,24 @@ public class DamageSender : MonoBehaviour
 {
 
     [Header("Collision")]
-    public Dictionary<int, Collider2D> _colliders = new Dictionary<int, Collider2D>();
+    public Dictionary<int, Collider2D> _collitions = new Dictionary<int, Collider2D>();
     [SerializeField] public List<Collider2D> Colliders;
 
     private void OnTriggerStay2D(Collider2D collider)
     {
         int objId = collider.gameObject.GetInstanceID();
-        if (!_colliders.ContainsKey(objId))
+        if (!_collitions.ContainsKey(objId))
         {
-            _colliders.Add(objId, collider);
+            _collitions.Add(objId, collider);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collider)
     {
         int objId = collider.gameObject.GetInstanceID();
-        if (_colliders.ContainsKey(objId))
+        if (_collitions.ContainsKey(objId))
         {
-            _colliders.Remove(objId);
+            _collitions.Remove(objId);
         }
     }
 
