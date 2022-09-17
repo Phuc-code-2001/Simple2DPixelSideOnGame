@@ -29,7 +29,7 @@ public class CameraController : SmoothFollower, IRect
     private void Start()
     {
         aspect = _camera.pixelRect;
-        TargetObject = PlayerController.Instance.gameObject;
+        TargetObject = PlayerController.Instance?.gameObject;
 
         if(TargetObject == null) IsFollow = false;
     }
@@ -37,7 +37,8 @@ public class CameraController : SmoothFollower, IRect
     private void Update()
     {
         if (!IsFollow) return;
-        
+        if (TargetObject == null) return;
+
         thresold = calculateThresold();
         centerOfBox = calculateCenterOfBox();
 
@@ -53,6 +54,8 @@ public class CameraController : SmoothFollower, IRect
     private void FixedUpdate()
     {
         if (!IsFollow) return;
+        if (TargetObject == null) return;
+
         if (transform.position != targetFollowerPosition) Follow(Time.fixedDeltaTime);
     }
 

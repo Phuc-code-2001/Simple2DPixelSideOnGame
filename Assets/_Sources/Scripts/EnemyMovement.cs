@@ -36,7 +36,7 @@ public class EnemyMovement : MonoBehaviour
     private void Update()
     {
         float gap = Vector2.Distance(transform.position, TargetPoint.position);
-        if(gap < 0.05)
+        if(gap < 0.05f)
         {
             movePointIndex = (movePointIndex + 1) % MovePoints.Count;
             TargetPoint = MovePoints[movePointIndex];
@@ -47,7 +47,8 @@ public class EnemyMovement : MonoBehaviour
     {
         if (!enemyController.IsDeath)
         {
-            transform.position = Vector3.MoveTowards(transform.position, TargetPoint.position, velocity * Time.fixedDeltaTime);
+            // transform.position = Vector3.MoveTowards(transform.position, TargetPoint.position, velocity * Time.fixedDeltaTime);
+            enemyController.rb.MovePosition(Vector3.MoveTowards(transform.position, TargetPoint.position, velocity * Time.fixedDeltaTime));
             PlayFacing();
         }
     }

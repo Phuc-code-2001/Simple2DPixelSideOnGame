@@ -1,6 +1,7 @@
 using Assets._Sources.Scripts.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerGroundedHandler : MonoBehaviour, IGroundedHandler
@@ -21,5 +22,6 @@ public class PlayerGroundedHandler : MonoBehaviour, IGroundedHandler
     public void NonGroundedHandle()
     {
         playerController.IsGrounded = false;
+        
     }
 }

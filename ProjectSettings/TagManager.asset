@@ -6,16 +6,17 @@ TagManager:
   tags:
   - Grounded
   - Enemy
+  - Ceiling
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Ceiling
+  - Ground
+  - Enemy
   - 
   - 
   - 

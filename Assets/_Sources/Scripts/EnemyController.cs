@@ -32,6 +32,11 @@ public class EnemyController : MonoBehaviour
         enemyMovement = GetComponent<EnemyMovement>();
     }
 
+    private void Start()
+    {
+        Physics2D.IgnoreLayerCollision(PlayerController.Instance.gameObject.layer, gameObject.layer);
+    }
+
     private void Update()
     {
         if(IsDeath) Death();

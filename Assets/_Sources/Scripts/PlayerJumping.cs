@@ -55,7 +55,7 @@ public class PlayerJumping : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if ((CanJump && playerController.inputController.JumpSignalActive) && (playerController.IsGrounded || CanDoubleJump))
+        if ((CanJump && playerController.inputController.JumpSignalActive))
         {
             if (CanDoubleJump)
             {

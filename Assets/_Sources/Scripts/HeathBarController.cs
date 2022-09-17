@@ -6,8 +6,7 @@ using UnityEngine.UI;
 
 public class HeathBarController : MonoBehaviour
 {
-    
-    public Vector3 Offset = new Vector3(0.1f, 0.6f, 0);
+    public Vector3 Offset = new Vector3(0.1f, 0.6f);
 
     public Transform Background;
     public Transform FillBar;
@@ -34,7 +33,7 @@ public class HeathBarController : MonoBehaviour
 
     private void Update()
     {
-        Offset = new Vector3(0.1f * target.transform.localScale.x, 0.6f, 0);
+        Offset.x = 0.1f * target.transform.localScale.x;
         Background.position = target.transform.position + Offset;
         transform.localScale = new Vector2(target.transform.localScale.x == -1 ? -1 : 1, 1);
     }
