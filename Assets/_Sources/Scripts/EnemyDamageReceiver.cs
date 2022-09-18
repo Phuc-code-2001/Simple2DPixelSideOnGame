@@ -9,8 +9,6 @@ public class EnemyDamageReceiver : MonoBehaviour, IDamageReceiver
     public EnemyController enemyController;
     public Enemy enemy;
 
-    public GameObject EffectObject;
-
     private void Awake()
     {
         enemyController = GetComponent<EnemyController>();
@@ -24,16 +22,11 @@ public class EnemyDamageReceiver : MonoBehaviour, IDamageReceiver
         {
             enemyController.IsDeath = true;
         }
-        else UseEffect();
-
-    }
-
-    public void UseEffect()
-    {
-        if(EffectObject != null)
+        else
         {
-            GameObject effect = GameObject.Instantiate(EffectObject, transform.position, Quaternion.identity, transform);
-            effect.SetActive(true);
+            enemyController.Hit();
         }
+
     }
+    
 }

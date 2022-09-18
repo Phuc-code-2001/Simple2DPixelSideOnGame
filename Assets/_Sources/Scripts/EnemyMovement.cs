@@ -45,7 +45,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!enemyController.IsDeath)
+        if (!enemyController.IsDeath && !enemyController.IsAttacking)
         {
             // transform.position = Vector3.MoveTowards(transform.position, TargetPoint.position, velocity * Time.fixedDeltaTime);
             enemyController.rb.MovePosition(Vector3.MoveTowards(transform.position, TargetPoint.position, velocity * Time.fixedDeltaTime));

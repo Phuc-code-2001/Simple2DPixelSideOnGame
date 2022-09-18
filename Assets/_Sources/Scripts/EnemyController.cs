@@ -18,11 +18,13 @@ public class EnemyController : MonoBehaviour
 
     [Header("Effects")]
     public GameObject DeathEffect;
+    public GameObject HitEffect;
 
     [Header("Status")]
     public bool IsDeath = false;
     public bool IsJumping = false;
     public bool IsAttacking = false;
+    public bool IsDetectTarget = false;
 
     private void Awake()
     {
@@ -34,7 +36,8 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        Physics2D.IgnoreLayerCollision(PlayerController.Instance.gameObject.layer, gameObject.layer);
+        if(PlayerController.Instance != null) Physics2D.IgnoreLayerCollision(PlayerController.Instance.gameObject.layer, gameObject.layer);
+        Physics2D.IgnoreLayerCollision(gameObject.layer, gameObject.layer);
     }
 
     private void Update()
@@ -42,9 +45,16 @@ public class EnemyController : MonoBehaviour
         if(IsDeath) Death();
     }
 
-    public void Attack(Transform target)
+    public void Hit()
     {
+        if (HitEffect != null) UseHitEffect();
+    }
 
+    public void UseHitEffect()
+    {
+        HitEffect.SetActive(true);
+        GameObject effect = GameObject.Instantiate(HitEffect, transform.position, Quaternion.identity, transform);
+        HitEffect.SetActive(false);
     }
 
     public void Death()
@@ -57,7 +67,9 @@ public class EnemyController : MonoBehaviour
     {
         if(DeathEffect != null)
         {
+            DeathEffect.SetActive(true);
             GameObject effect = GameObject.Instantiate(DeathEffect, transform.position, Quaternion.identity);
+            DeathEffect.SetActive(false);
         }
     }
 }

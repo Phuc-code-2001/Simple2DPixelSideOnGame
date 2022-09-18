@@ -9,17 +9,16 @@ public class SwordDamageSender : MonoBehaviour, IDamageSender, IMoveOfSpawnObjec
 
     public Rigidbody2D rb;
     public float Speed = 15;
-    public float MaxDistance = 5;
+    public float MaxDistance = 6;
 
     [SerializeField] private float CurrentDistance = 0;
     [SerializeField] private Vector2 startPosition;
+    [SerializeField] private int numberOfSlashed = 0;
+    [SerializeField] private float scaleNeftDameOnTarget = 40;
 
-    public List<string> AffectTags = new List<string>()
-    {
-        "Enemy"
-    };
+    public List<string> AffectTags = new List<string>() { "Enemy" };
 
-    public List<GameObject> AffectedList = new List<GameObject>();
+    public List<GameObject> CollapsedObjects = new List<GameObject>();
 
     private void Awake()
     {
@@ -43,21 +42,22 @@ public class SwordDamageSender : MonoBehaviour, IDamageSender, IMoveOfSpawnObjec
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (AffectedList.Contains(collider.gameObject)) return;
+        if (CollapsedObjects.Contains(collider.gameObject)) return;
         if (!AffectTags.Contains(collider.tag)) return;
         
         IDamageReceiver receiver = collider.GetComponent<IDamageReceiver>();
         if(receiver != null)
         {
             SendDamage(receiver);
+            numberOfSlashed++;
         }
-        
-        AffectedList.Add(collider.gameObject);
+
+        CollapsedObjects.Add(collider.gameObject);
     }
 
     public float GetDamage()
     {
-        return PlayerController.Instance.Damage;
+        return PlayerController.Instance.Damage * Mathf.Pow((100f - scaleNeftDameOnTarget) / 100f, numberOfSlashed);
     }
 
     public void SendDamage(IDamageReceiver receiver)

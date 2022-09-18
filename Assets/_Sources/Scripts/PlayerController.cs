@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public PlayerGroundedHandler playerGroundedHandler;
     public PlayerAttacker playerAttacker;
     public PlayerDamageReceiver playerDamageReceiver;
+    public PlayerDeath playerDeath;
     public Rigidbody2D rb;
 
     [Header("Children")]
@@ -35,9 +36,11 @@ public class PlayerController : MonoBehaviour
     public bool IsFalling;
     public bool IsAttacking;
     public bool IsHitting;
+    public bool IsDeath;
 
     [Header("Properties")]
     public float HealthPoint = 1000;
+    public float Mana = 200;
     public float Damage = 50;
 
     private void Awake()
@@ -51,6 +54,7 @@ public class PlayerController : MonoBehaviour
         playerGroundedHandler = GetComponent<PlayerGroundedHandler>();
         playerAttacker = GetComponent<PlayerAttacker>();
         playerDamageReceiver = GetComponent<PlayerDamageReceiver>();
+        playerDeath = GetComponent<PlayerDeath>();
     }
 
     private void Start()
@@ -64,6 +68,18 @@ public class PlayerController : MonoBehaviour
         IsMoveRight = inputController.Horizontal > 0;
         IsRunning = inputController.RunSignalActive;
         IsJumping = rb.velocity.y > 0;
-        IsFalling = rb.velocity.y < 0;
+        IsFalling = rb.velocity.y < -0.25f;
     }
+
+    public void ReceiveDamage(float dameReceive)
+    {
+        HealthPoint -= dameReceive;
+        playerDeath.CheckDead();
+    }
+
+    public void UseMana(float mana)
+    {
+        Mana -= mana;
+    }
+
 }

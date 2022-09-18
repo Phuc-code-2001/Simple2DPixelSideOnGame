@@ -23,7 +23,6 @@ public class PlayerAttacker : MonoBehaviour, IAttacker
 
     private void Start()
     {
-        
         CoolDownTimer = AttackCoolDown;
     }
 
@@ -58,6 +57,12 @@ public class PlayerAttacker : MonoBehaviour, IAttacker
 
     public void AttackHandler()
     {
+        if(playerController.IsHitting)
+        {
+            AttackDone();
+            return;
+        }
+
         if(AttackObject != null)
         {
             AttackObject.SetActive(true);

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 2667521892416478613}
   - component: {fileID: 2010589549206620232}
   - component: {fileID: 8541158446459727777}
+  - component: {fileID: 3502112384740503603}
   m_Layer: 3
   m_Name: Character
   m_TagString: Player
@@ -189,7 +190,9 @@ MonoBehaviour:
   IsFalling: 0
   IsAttacking: 0
   IsHitting: 0
+  IsDeath: 0
   HealthPoint: 1000
+  Mana: 200
   Damage: 50
 --- !u!114 &1201911997990390161
 MonoBehaviour:
@@ -290,7 +293,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
-  EffectTime: 1.1133
+  EffectTime: 0.6
+--- !u!114 &3502112384740503603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4485412339991665596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01979c5defb6c9d4aa4de1708d01f868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4485412340283305115
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -305,6 +320,10 @@ PrefabInstance:
     - target: {fileID: 2593811105694300211, guid: 51591cb55dc36324fb03e3bfd9449a1f, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2593811105694300221, guid: 51591cb55dc36324fb03e3bfd9449a1f, type: 3}
+      propertyPath: loop
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2593811105694300222, guid: 51591cb55dc36324fb03e3bfd9449a1f, type: 3}
       propertyPath: m_RootOrder

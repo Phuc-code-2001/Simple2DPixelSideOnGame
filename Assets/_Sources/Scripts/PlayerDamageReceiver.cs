@@ -9,7 +9,7 @@ public class PlayerDamageReceiver : MonoBehaviour, IDamageReceiver
     public PlayerController playerController;
 
     [Header("Properties")]
-    public float EffectTime = 1.1133f;
+    public float EffectTime = 0.6f;
 
     private void Awake()
     {
@@ -21,6 +21,7 @@ public class PlayerDamageReceiver : MonoBehaviour, IDamageReceiver
         if(!playerController.IsHitting)
         {
             float dameReceive = sender.GetDamage();
+            playerController.ReceiveDamage(dameReceive);
             UseEffect();
         }
     }

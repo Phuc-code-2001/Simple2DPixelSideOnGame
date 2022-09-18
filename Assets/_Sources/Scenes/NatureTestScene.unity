@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 151068085}
   - component: {fileID: 151068084}
   - component: {fileID: 151068086}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Grounded
   m_TagString: Grounded
   m_Icon: {fileID: 0}
@@ -1012,7 +1012,7 @@ TilemapCollider2D:
   m_GameObject: {fileID: 151068082}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 251bea6fe8d99594aa53db220b7b9078, type: 2}
+  m_Material: {fileID: 6200000, guid: f9670465b3b43f242b967560251e8299, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1029,7 +1029,7 @@ GameObject:
   m_Component:
   - component: {fileID: 191211972}
   - component: {fileID: 191211971}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1073,7 +1073,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 509514422}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

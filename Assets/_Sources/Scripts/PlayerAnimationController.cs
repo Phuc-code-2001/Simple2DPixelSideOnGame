@@ -265,7 +265,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     public AnimationActionTypes GetAnimateType()
     {
-
+        if (playerController.IsDeath) return AnimationActionTypes.Dead;
         if (playerController.IsHitting) return AnimationActionTypes.Hit;
         if (playerController.IsAttacking) return AnimationActionTypes.Attack_Sword;
         // if (!playerController.IsGrounded) return AnimationActionTypes.Jump;
