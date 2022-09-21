@@ -9,9 +9,13 @@ public class PlayerJumping : MonoBehaviour
 
     [Header("Properties")]
     public float PowerUnit = 10;
-    public float JumpPower_01 = 20;
-    public float JumpPower_02 = 30;
+    public float JumpPower_01 = 35;
+    public float JumpPower_02 = 40;
     public bool IsDoubleJump = false;
+
+    [Header("Checker")]
+    public bool CanDoubleJump = false;
+    public bool CanJump = false;
 
     private void Awake()
     {
@@ -21,28 +25,52 @@ public class PlayerJumping : MonoBehaviour
     public void Jump()
     {
         ResetGravity();
+        playerController.playerGroundedHandler.NonGroundedHandle();
         Vector2 force = new Vector2(0, PowerUnit * (IsDoubleJump ? JumpPower_02 : JumpPower_01));
         playerController.rb.AddForce(force, ForceMode2D.Force);
-
-        playerController.playerGroundedHandler.NonGroundedHandle();
     }
 
     private void Update()
     {
+        
         if (playerController.IsGrounded)
         {
             IsDoubleJump = false;
+            CanDoubleJump = false;
+            CanJump = true;
+        }
+
+        if (CanDoubleJump)
+        {
+            CanJump = true;
+        }
+        else if (playerController.IsFalling)
+        {
+            CanJump = false;
+            playerController.inputController.JumpSignalActive = false;
+            
         }
     }
 
     private void FixedUpdate()
     {
-        if(InputController.Instance.JumpSignalActive && (playerController.IsGrounded || !IsDoubleJump))
+
+        if ((CanJump && playerController.inputController.JumpSignalActive))
         {
-            if (!playerController.IsGrounded) IsDoubleJump = true;
+            if (CanDoubleJump)
+            {
+                CanDoubleJump = false;
+                IsDoubleJump = true;
+            }
+            if (playerController.IsGrounded)
+            {
+                CanDoubleJump = true;
+            }
             Jump();
-            InputController.Instance.JumpSignalActive = false;
+            CanJump = false;
+            playerController.inputController.JumpSignalActive = false;
         }
+
     }
 
     private void ResetGravity()

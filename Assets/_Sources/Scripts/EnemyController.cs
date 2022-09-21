@@ -4,27 +4,60 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
+[RequireComponent(typeof(Enemy))]
+[RequireComponent(typeof(EnemyMovement))]
 public class EnemyController : MonoBehaviour
 {
 
     [Header("Components")]
     public Rigidbody2D rb;
-    public EnemyDamageSender enemyDamageSender;
-
-    [Header("Children")]
+    public Animator animator;
     public Enemy enemy;
+    public EnemyMovement enemyMovement;
 
+    [Header("Effects")]
+    public GameObject DeathEffect;
+
+    [Header("Status")]
     public bool IsDeath = false;
+    public bool IsJumping = false;
+    public bool IsAttacking = false;
 
     private void Awake()
     {
-        rb = GetComponentInChildren<Rigidbody2D>();
-        enemyDamageSender = GetComponentInChildren<EnemyDamageSender>();
-        enemy = GetComponentInChildren<Enemy>();
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponentInChildren<Animator>();
+        enemy = GetComponent<Enemy>();
+        enemyMovement = GetComponent<EnemyMovement>();
     }
 
-    public void Death(float delay = 0)
+    private void Start()
     {
-        Destroy(gameObject, delay);
+        Physics2D.IgnoreLayerCollision(PlayerController.Instance.gameObject.layer, gameObject.layer);
+    }
+
+    private void Update()
+    {
+        if(IsDeath) Death();
+    }
+
+    public void Attack(Transform target)
+    {
+
+    }
+
+    public void Death()
+    {
+        UseDeathEffect();
+        Destroy(transform.parent.gameObject);
+    }
+
+    private void UseDeathEffect()
+    {
+        if(DeathEffect != null)
+        {
+            GameObject effect = GameObject.Instantiate(DeathEffect, transform.position, Quaternion.identity);
+        }
     }
 }

@@ -5,17 +5,33 @@ using UnityEngine;
 
 public class GroundChecker : MonoBehaviour
 {
+    public string NameOfGroundLayer = "Ground";
+    public int GroundLayerIndex;
+    public GameObject Parent;
 
-    [SerializeField] private GameObject LastGroundedObjectEnter;
+    private void Awake()
+    {
+        GroundLayerIndex = LayerMask.NameToLayer(NameOfGroundLayer);
+        Parent = transform.parent.gameObject;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        if (collision.CompareTag("Grounded"))
+        int layerIndexCollider = collision.transform.gameObject.layer;
+        if(layerIndexCollider == GroundLayerIndex)
         {
-            LastGroundedObjectEnter = collision.gameObject;
-            IGroundedHandler groundedHandler = gameObject.GetComponentInParent<IGroundedHandler>();
-            groundedHandler.GroundedHandle();
+            IGroundedHandler GroundedHandler = Parent.GetComponent<IGroundedHandler>();
+            GroundedHandler.GroundedHandle();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        int layerIndexCollider = collision.transform.gameObject.layer;
+        if (layerIndexCollider == GroundLayerIndex)
+        {
+            IGroundedHandler GroundedHandler = Parent.GetComponent<IGroundedHandler>();
+            GroundedHandler.NonGroundedHandle();
         }
     }
 

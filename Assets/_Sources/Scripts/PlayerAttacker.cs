@@ -7,29 +7,30 @@ public class PlayerAttacker : MonoBehaviour, IAttacker
 {
 
     public PlayerController playerController;
-    public InputController inputController;
 
-    public float AttackAnimateTime = 1.4f;
-    public float AttackCoolDown = 2f;
+    public float AttackAnimateTime = 1.2f;
+    public float AttackCoolDown = 1.5f;
     public float CoolDownTimer;
 
-    public float DelayTimeSendDamage = 0.5f;
+    public float DelayTimeHandle = 0.6f;
+    public GameObject AttackObject;
 
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
+        AttackObject = transform.Find("SwordAttack").gameObject;
     }
 
     private void Start()
     {
-        inputController = InputController.Instance;
+        
         CoolDownTimer = AttackCoolDown;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        CoolDownTimer -= Time.fixedDeltaTime;
-        if(inputController.AttackSignalActive)
+        CoolDownTimer -= Time.deltaTime;
+        if(playerController.inputController.AttackSignalActive && !playerController.IsAttacking)
         {
             if(CoolDownTimer <= 0)
             {
@@ -44,26 +45,28 @@ public class PlayerAttacker : MonoBehaviour, IAttacker
 
     public void Attack()
     {
+        playerController.IsAttacking = true;
         CoolDownTimer = AttackCoolDown;
-        Invoke("AttackHandler", DelayTimeSendDamage);
-           
+        Invoke("AttackHandler", DelayTimeHandle);
     }
 
     public void AttackDone()
     {
-        
-        DisableAttack();
+        playerController.inputController.AttackSignalActive = false;
+        playerController.IsAttacking = false;
     }
 
     public void AttackHandler()
     {
-        playerController.swordDamageSender.Active();
+        if(AttackObject != null)
+        {
+            AttackObject.SetActive(true);
+            GameObject attacker = GameObject.Instantiate(AttackObject, AttackObject.transform.position, Quaternion.identity);
+            AttackObject.SetActive(false);
+            attacker.GetComponent<IMoveOfSpawnObject>().SetMove();
+        }
+        
     }
 
-    public void DisableAttack()
-    {
-        inputController.AttackSignalActive = false;
-        playerController.swordDamageSender.Disable();
-    }
 
 }
