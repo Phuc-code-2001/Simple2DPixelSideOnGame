@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 405018179086020639}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: PointZero
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5570476923382542907}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: MovePoints
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 5570476923605888455}
   - component: {fileID: 5570476923605888454}
   - component: {fileID: 5570476923605888457}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: EnemyController
   m_TagString: Enemy
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -125,6 +125,7 @@ MonoBehaviour:
   IsDeath: 0
   IsJumping: 0
   IsAttacking: 0
+  IsDetectTarget: 0
 --- !u!114 &5570476923605888459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,7 +243,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5570476925220724316}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -323,7 +324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7481756851815624426, guid: a0dd0a3dcd40a3841ad9fcaf7bfa638a, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7481756851815624426, guid: a0dd0a3dcd40a3841ad9fcaf7bfa638a, type: 3}
       propertyPath: m_IsActive
@@ -350,7 +351,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 765930445390718311, guid: bfb03a6e69ca35e4688f60724b6f27ea, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1063760999287359525, guid: bfb03a6e69ca35e4688f60724b6f27ea, type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -446,11 +447,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1063760999287359544, guid: bfb03a6e69ca35e4688f60724b6f27ea, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8079018369469303051, guid: bfb03a6e69ca35e4688f60724b6f27ea, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfb03a6e69ca35e4688f60724b6f27ea, type: 3}
@@ -513,6 +514,10 @@ PrefabInstance:
     - target: {fileID: 2305018643215197010, guid: 8784b05dd54dd1e4d9df679e4bb6f4a4, type: 3}
       propertyPath: m_Name
       value: EnemyDeathEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 2305018643215197010, guid: 8784b05dd54dd1e4d9df679e4bb6f4a4, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2305018643215197010, guid: 8784b05dd54dd1e4d9df679e4bb6f4a4, type: 3}
       propertyPath: m_IsActive

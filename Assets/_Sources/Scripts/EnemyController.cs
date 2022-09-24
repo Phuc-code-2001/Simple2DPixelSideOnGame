@@ -7,7 +7,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Enemy))]
 [RequireComponent(typeof(EnemyMovement))]
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IDeathHandler
 {
 
     [Header("Components")]

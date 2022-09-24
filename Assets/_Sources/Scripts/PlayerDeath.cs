@@ -1,8 +1,9 @@
+using Assets._Sources.Scripts.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDeath : MonoBehaviour
+public class PlayerDeath : MonoBehaviour, IDeathHandler
 {
     public PlayerController playerController;
 
@@ -18,14 +19,18 @@ public class PlayerDeath : MonoBehaviour
         if(playerController.HealthPoint <= 0)
         {
             playerController.IsDeath = true;
-            Invoke("Dead", DeathAnimateTime);
+            Death();
         }
     }
 
-    public void Dead()
+    public void Death()
+    {
+        Invoke("Destruction", DeathAnimateTime);
+    }
+
+    public void Destruction()
     {
         Destroy(gameObject);
-
     }
 
 }

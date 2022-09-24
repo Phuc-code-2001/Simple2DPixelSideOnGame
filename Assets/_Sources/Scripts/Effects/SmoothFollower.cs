@@ -11,7 +11,7 @@ public abstract class SmoothFollower : MonoBehaviour, IFollower
     public GameObject TargetObject;
 
     [Header("Properties")]
-    public Vector2 FollowerOffset = new Vector2(2, 1);
+    public Vector2 FollowerOffset = new Vector2(2, 3);
     public float Speed = 4;
 
     [Header("Calculated Fields")]
@@ -25,7 +25,10 @@ public abstract class SmoothFollower : MonoBehaviour, IFollower
 
     public Vector3 GetNewPosition()
     {
-        Vector3 newPosition = TargetObject.transform.position + new Vector3(FollowerOffset.x, FollowerOffset.y, transform.position.z);
+        float x = TargetObject.transform.position.x + FollowerOffset.x;
+        float y = TargetObject.transform.position.y + FollowerOffset.y;
+        float z = -10;
+        Vector3 newPosition = new Vector3(x, y, z);
 
         if (TopLeft != null && BottomRight != null)
         {
@@ -36,6 +39,7 @@ public abstract class SmoothFollower : MonoBehaviour, IFollower
             newPosition.y = Mathf.Max(newPosition.y, BottomRight.position.y + rect.GetHeight());
             newPosition.y = Mathf.Min(newPosition.y, TopLeft.position.y - rect.GetHeight());
         }
+
         return newPosition;
     }
 

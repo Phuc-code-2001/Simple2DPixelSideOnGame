@@ -7,20 +7,21 @@ TagManager:
   - Grounded
   - Enemy
   - Ceiling
+  - Bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - Enemy
   - Water
   - UI
   - Ceiling
   - Ground
-  - Enemy
+  - EnemyPlugin
   - EnemyBullet
-  - 
-  - 
-  - 
+  - Player
+  - PlayerAttacker
+  - PlayerGroundCheck
   - 
   - 
   - 
