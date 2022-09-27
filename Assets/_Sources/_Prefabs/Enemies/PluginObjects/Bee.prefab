@@ -376,10 +376,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99433f694461a447af96ab0e1f173e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BeeHealthPoint: 100
-  BeeDamage: 50
   enemyController: {fileID: 0}
-  AttackToTag: Player
+  animator: {fileID: 0}
+  BeeHealthPoint: 200
+  BeeDamage: 80
+  BeeSpeed: 2
 --- !u!114 &6555147618505743680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,7 +394,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
+  Bee: {fileID: 0}
   AttackAnimateTime: 0.4
   AttackCoolDown: 2
-  AttackTimer: 0
   AttackObject: {fileID: 6555147617829166599}
+  AttackTo: []
+  DetectedTargetObject: {fileID: 0}
+  CanAttack: 1

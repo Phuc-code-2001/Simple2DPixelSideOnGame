@@ -13,12 +13,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float SpeedWhenRun => BaseSpeed * 2;
     public float CurrentSpeed;
 
+    public float UseMpInSeconds = 5;
+
     [Header("Signals")]
     public float MoveX = 0;
     public float LastMoveX = 0;
 
     [Header("Events")]
-    public bool IsPowerUp = false;
+    public bool IsPowerUp;
+    public bool IsGoDown;
 
 
     private void Awake()
@@ -29,7 +32,9 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         MoveX = playerController.inputController.Horizontal;
-        IsPowerUp = playerController.inputController.RunSignalActive;
+        IsPowerUp = playerController.inputController.RunSignalActive && playerController.playerInfoController.ManaPoint > 0;
+        IsGoDown = playerController.inputController.Vertical < 0;
+
         LastMoveX = playerController.rb.velocity.x;
 
         Move();
@@ -41,16 +46,32 @@ public class PlayerMovement : MonoBehaviour
         if (IsPowerUp)
         {
             CurrentSpeed = SpeedWhenRun;
+            if(LastMoveX != 0) playerController.playerInfoController.UseMP(UseMpInSeconds * Time.fixedDeltaTime);
         }
         else
         {
             CurrentSpeed = BaseSpeed;
         }
+
+        if (IsGoDown) GoDown();
     }
 
     public void Move()
     {
         playerController.rb.velocity = new Vector2(CurrentSpeed * MoveX, playerController.rb.velocity.y);
+    }
+
+    public void GoDown()
+    {
+        GroundChecker checker = playerController.transform.Find("GroundChecker").GetComponent<GroundChecker>();
+        if(checker.OnGround != null)
+        {
+            Platformer platformer = checker.OnGround.GetComponent<Platformer>();
+            if(platformer != null)
+            {
+                platformer.ChangeLayer(platformer.SelfLayer);
+            }
+        }
     }
 
     public float LastMoveDirect()

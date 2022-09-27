@@ -9,6 +9,5 @@ namespace Assets._Sources.Scripts.Interfaces
     public interface IAttacker
     {
         public void Attack();
-        public void AttackDone();
     }
 }

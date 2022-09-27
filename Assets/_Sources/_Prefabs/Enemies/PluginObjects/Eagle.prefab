@@ -119,6 +119,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  EagleHeathPoint: 100
-  EagleDamage: 20
-  Speed: 2
+  EagleHeathPoint: 300
+  EagleDamage: 50
+  Speed: 3

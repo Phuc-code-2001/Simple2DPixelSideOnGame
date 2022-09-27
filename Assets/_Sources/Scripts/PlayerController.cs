@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(PlayerJumping))]
-[RequireComponent(typeof(PlayerMovement))]
-[RequireComponent(typeof(PlayerAnimationController))]
-[RequireComponent(typeof(PlayerGroundedHandler))]
+
 public class PlayerController : MonoBehaviour
 {
 
     public static PlayerController Instance;
 
     [Header("Components")]
+    public Rigidbody2D rb;
     public InputController inputController;
     public PlayerMovement playerMovement;
     public PlayerJumping playerJumping;
@@ -21,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public PlayerAttacker playerAttacker;
     public PlayerDamageReceiver playerDamageReceiver;
     public PlayerDeath playerDeath;
-    public Rigidbody2D rb;
+    public PlayerInfoController playerInfoController;
 
     [Header("Children")]
     public GameObject Knight;
@@ -38,11 +36,6 @@ public class PlayerController : MonoBehaviour
     public bool IsHitting;
     public bool IsDeath;
 
-    [Header("Properties")]
-    public float HealthPoint = 1000;
-    public float Mana = 200;
-    public float Damage = 50;
-
     private void Awake()
     {
         Instance = this;
@@ -55,6 +48,7 @@ public class PlayerController : MonoBehaviour
         playerAttacker = GetComponent<PlayerAttacker>();
         playerDamageReceiver = GetComponent<PlayerDamageReceiver>();
         playerDeath = GetComponent<PlayerDeath>();
+        playerInfoController = GetComponent<PlayerInfoController>();
     }
 
     private void Start()
@@ -67,19 +61,8 @@ public class PlayerController : MonoBehaviour
         IsMoveLeft = inputController.Horizontal < 0;
         IsMoveRight = inputController.Horizontal > 0;
         IsRunning = inputController.RunSignalActive;
-        IsJumping = rb.velocity.y > 0;
-        IsFalling = rb.velocity.y < -0.25f;
-    }
-
-    public void ReceiveDamage(float dameReceive)
-    {
-        HealthPoint -= dameReceive;
-        playerDeath.CheckDead();
-    }
-
-    public void UseMana(float mana)
-    {
-        Mana -= mana;
+        IsFalling = rb.velocity.y < -0.25f && !IsGrounded;
+        IsDeath = playerInfoController.HealthPoint <= 0;
     }
 
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerController))]
 public class PlayerDamageReceiver : MonoBehaviour, IDamageReceiver
 {
     [Header("Controllers")]
@@ -10,6 +11,8 @@ public class PlayerDamageReceiver : MonoBehaviour, IDamageReceiver
 
     [Header("Properties")]
     public float EffectTime = 0.6f;
+
+    public GameObject effectObject;
 
     private void Awake()
     {
@@ -21,7 +24,7 @@ public class PlayerDamageReceiver : MonoBehaviour, IDamageReceiver
         if(!playerController.IsHitting)
         {
             float dameReceive = sender.GetDamage();
-            playerController.ReceiveDamage(dameReceive);
+            playerController.playerInfoController.ReceiveDamage(dameReceive);
             UseEffect();
         }
     }
@@ -30,6 +33,8 @@ public class PlayerDamageReceiver : MonoBehaviour, IDamageReceiver
     {
         playerController.IsHitting = true;
         Invoke("EndEffect", EffectTime);
+
+        if (effectObject != null) SpawnEffect();
     }
 
     public void EndEffect()
@@ -37,5 +42,9 @@ public class PlayerDamageReceiver : MonoBehaviour, IDamageReceiver
         playerController.IsHitting = false;
     }
 
-    
+    private void SpawnEffect()
+    {
+        GameObject effect = GameObject.Instantiate(effectObject, transform.position, transform.rotation);
+        effect.SetActive(true);
+    }
 }

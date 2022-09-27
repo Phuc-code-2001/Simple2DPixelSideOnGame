@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Ceiling
   - Bullet
+  - Platformer
   layers:
   - Default
   - TransparentFX
@@ -15,15 +16,15 @@ TagManager:
   - Enemy
   - Water
   - UI
-  - Ceiling
+  - 
   - Ground
   - EnemyPlugin
   - EnemyBullet
   - Player
   - PlayerAttacker
   - PlayerGroundCheck
-  - 
-  - 
+  - PlatformerChecker
+  - Platformer
   - 
   - 
   - 

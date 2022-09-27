@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosionEffect : MonoBehaviour
+public class ExplosionEffect : Effect
 {
-    public float AnimateTime = 0.5f;
+    [Header("Properties")]
+    public float TimeScale = 0.66f;
 
-    private void Update()
+    private void Start()
     {
-        AnimateTime -= Time.deltaTime;
-        if(AnimateTime <= 0)
-        {
-            Destroy(gameObject);
-        }
+        EffectTimeScale = TimeScale;
+        Invoke("Destruction", EffectTimeScale);
+    }
+
+    private void Destruction()
+    {
+        Destroy(gameObject);
     }
 }

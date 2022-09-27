@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2793534399400699368}
   - component: {fileID: 2793534399400699367}
   - component: {fileID: 6376016959800091159}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Opossum
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc001b0a809488249ba8d21ce435d62e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseEnemy: {fileID: 0}
+  enemyController: {fileID: 0}
   OpposumHeathPoint: 200
   OpposumDamage: 10
+  OpposumSpeed: 1

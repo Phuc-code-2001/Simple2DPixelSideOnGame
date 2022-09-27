@@ -16,9 +16,9 @@ public class SwordDamageSender : MonoBehaviour, IDamageSender, IMoveOfSpawnObjec
     [SerializeField] private int numberOfSlashed = 0;
     [SerializeField] private float scaleNeftDameOnTarget = 40;
 
-    public List<string> AffectTags = new List<string>() { "Enemy" };
+    public string[] AttackToTags = new string[] { "Enemy" };
 
-    public List<GameObject> CollapsedObjects = new List<GameObject>();
+    private List<GameObject> CollapsedObjects = new List<GameObject>();
 
     private void Awake()
     {
@@ -42,9 +42,8 @@ public class SwordDamageSender : MonoBehaviour, IDamageSender, IMoveOfSpawnObjec
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (CollapsedObjects.Contains(collider.gameObject)) return;
-        if (!AffectTags.Contains(collider.tag)) return;
-        
+        if (CollapsedObjects.Contains(collider.gameObject) || !AttackToTags.Contains(collider.tag)) return;
+
         IDamageReceiver receiver = collider.GetComponent<IDamageReceiver>();
         if(receiver != null)
         {
@@ -57,7 +56,7 @@ public class SwordDamageSender : MonoBehaviour, IDamageSender, IMoveOfSpawnObjec
 
     public float GetDamage()
     {
-        return PlayerController.Instance.Damage * Mathf.Pow((100f - scaleNeftDameOnTarget) / 100f, numberOfSlashed);
+        return PlayerController.Instance.playerInfoController.Damage * Mathf.Pow((100f - scaleNeftDameOnTarget) / 100f, numberOfSlashed);
     }
 
     public void SendDamage(IDamageReceiver receiver)

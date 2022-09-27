@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerController))]
 public class PlayerDeath : MonoBehaviour, IDeathHandler
 {
     public PlayerController playerController;
@@ -14,11 +15,10 @@ public class PlayerDeath : MonoBehaviour, IDeathHandler
         playerController = GetComponent<PlayerController>();
     }
 
-    public void CheckDead()
+    private void Update()
     {
-        if(playerController.HealthPoint <= 0)
+        if(playerController.IsDeath)
         {
-            playerController.IsDeath = true;
             Death();
         }
     }
@@ -31,6 +31,7 @@ public class PlayerDeath : MonoBehaviour, IDeathHandler
     public void Destruction()
     {
         Destroy(gameObject);
+        GameManager.Instance.GameOver();
     }
 
 }

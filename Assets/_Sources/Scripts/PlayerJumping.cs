@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerController))]
 public class PlayerJumping : MonoBehaviour
 {
     [Header("Controllers")]
@@ -12,6 +13,8 @@ public class PlayerJumping : MonoBehaviour
     public float JumpPower_01 = 35;
     public float JumpPower_02 = 40;
     public bool IsDoubleJump = false;
+
+    public float DoubleJumpManaUse = 20;
 
     [Header("Checker")]
     public bool CanDoubleJump = false;
@@ -26,6 +29,7 @@ public class PlayerJumping : MonoBehaviour
     {
         ResetGravity();
         playerController.playerGroundedHandler.NonGroundedHandle();
+        playerController.IsJumping = true;
         Vector2 force = new Vector2(0, PowerUnit * (IsDoubleJump ? JumpPower_02 : JumpPower_01));
         playerController.rb.AddForce(force, ForceMode2D.Force);
     }
@@ -61,10 +65,11 @@ public class PlayerJumping : MonoBehaviour
             {
                 CanDoubleJump = false;
                 IsDoubleJump = true;
+                playerController.playerInfoController.UseMP(DoubleJumpManaUse);
             }
             if (playerController.IsGrounded)
             {
-                CanDoubleJump = true;
+                CanDoubleJump = true && playerController.playerInfoController.ManaPoint >= DoubleJumpManaUse;
             }
             Jump();
             CanJump = false;

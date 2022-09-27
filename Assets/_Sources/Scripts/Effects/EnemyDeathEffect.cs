@@ -1,21 +1,22 @@
+using Assets._Sources.Scripts.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDeathEffect : MonoBehaviour
+public class EnemyDeathEffect : Effect
 {
 
     [Header("Properties")]
-    public float animationTime = 0.66f;
+    public float TimeScale = 0.66f;
 
     private void Start()
     {
-        Invoke("EffectDone", animationTime);
+        EffectTimeScale = TimeScale;
+        Invoke("Destruction", EffectTimeScale);
     }
 
-    private void EffectDone()
+    private void Destruction()
     {
         Destroy(gameObject);
     }
-
 }
