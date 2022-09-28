@@ -1,3 +1,4 @@
+using Assets._Sources.Scripts.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,21 +6,21 @@ using UnityEngine;
 public class PlatformerChecker : MonoBehaviour
 {
 
-    
+    public GameObject Parent;
+    public GameObject OnPlatformer;
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void Awake()
     {
-        // Debug.Log("PlatformerChecker trigger enter with: " + collider.name);
+        Parent = transform.parent.gameObject;  
     }
 
     private void OnTriggerExit2D(Collider2D collider)
     {
         // Debug.Log("PlatformerChecker trigger exit with: " + collider.name);
-
         if (collider.CompareTag("Platformer"))
         {
-            Platformer platformer = collider.GetComponent<Platformer>();
-            platformer.ChangeLayer(platformer.SelfLayer);
+            IGroundedHandler GroundedHandler = Parent.GetComponent<IGroundedHandler>();
+            GroundedHandler.NonGroundedHandle();
         }
     }
 }

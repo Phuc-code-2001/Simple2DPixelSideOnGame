@@ -7,8 +7,8 @@ using UnityEngine;
 public class CameraController : SmoothFollower, IRect
 {
     [Header("Properties")]
-    public Vector2 thresold_offset = new Vector2(6, 2.5f);
-    public Vector2 centerBoxOffSet = new Vector2(2, 2f);
+    public Vector2 thresold_offset = new Vector2(6.5f, 1f);
+    public Vector2 centerBoxOffSet = new Vector2(2, 1);
     [Header("Components")]
     [SerializeField] private Camera _camera;
 

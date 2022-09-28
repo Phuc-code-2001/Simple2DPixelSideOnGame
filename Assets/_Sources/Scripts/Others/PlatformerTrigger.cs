@@ -2,24 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platformer : MonoBehaviour
+public class PlatformerTrigger : MonoBehaviour
 {
-
-    public string SelfLayer;
-    public string TransfromLayer = "Ground";
-
-    public string CurrentLayer;
+    public Platformer platformer;
+    public SpriteRenderer sprite;
+    public BoxCollider2D trigger;
 
     private void Start()
     {
-        SelfLayer = "Platformer";
-        ChangeLayer(SelfLayer);
-    }
-
-    public void ChangeLayer(string layerName)
-    {
-        gameObject.layer = LayerMask.NameToLayer(layerName);
-        CurrentLayer = layerName;
+        sprite = platformer.GetComponent<SpriteRenderer>();
+        Vector2 size = trigger.size;
+        size.x = sprite.size.x;
+        trigger.size = size;
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -27,9 +21,9 @@ public class Platformer : MonoBehaviour
         Debug.Log($"Detect ..{collider.name}.. is on platform");
 
         PlatformerChecker platformerChecker = collider.GetComponent<PlatformerChecker>();
-        if(platformerChecker != null)
+        if (platformerChecker != null)
         {
-            ChangeLayer(TransfromLayer);
+            platformer.ChangeLayer(platformer.TransfromLayer);
             platformerChecker.OnPlatformer = gameObject;
         }
 
@@ -42,11 +36,9 @@ public class Platformer : MonoBehaviour
         PlatformerChecker platformerChecker = collider.GetComponent<PlatformerChecker>();
         if (platformerChecker != null)
         {
-            ChangeLayer(SelfLayer);
-            if(platformerChecker.OnPlatformer == gameObject) platformerChecker.OnPlatformer = null;
+            platformer.ChangeLayer(platformer.SelfLayer);
+            if (platformerChecker.OnPlatformer == gameObject) platformerChecker.OnPlatformer = null;
         }
     }
-
-
 
 }

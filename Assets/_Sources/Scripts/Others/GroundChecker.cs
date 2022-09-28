@@ -35,7 +35,6 @@ public class GroundChecker : MonoBehaviour
         {
             IGroundedHandler GroundedHandler = Parent.GetComponent<IGroundedHandler>();
             GroundedHandler.NonGroundedHandle();
-            OnGround = null;
         }
     }
 

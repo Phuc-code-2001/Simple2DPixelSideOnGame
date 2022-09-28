@@ -11,7 +11,7 @@ public abstract class SmoothFollower : MonoBehaviour, IFollower
     public GameObject TargetObject;
 
     [Header("Properties")]
-    public Vector2 FollowerOffset = new Vector2(2, 3);
+    public Vector2 FollowerOffset = new Vector2(2, 1);
     public float Speed = 4;
 
     [Header("Calculated Fields")]

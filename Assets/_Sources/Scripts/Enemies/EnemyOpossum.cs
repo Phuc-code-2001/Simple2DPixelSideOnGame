@@ -18,11 +18,13 @@ public class EnemyOpossum : MonoBehaviour
 
     private void Start()
     {
+        // Configure for enemy
         if(enemyController != null)
         {
             enemyController.enemy.MaxHealthPoint = OpposumHeathPoint;
             enemyController.enemy.HealthPoint = OpposumHeathPoint;
             enemyController.enemy.Damage = OpposumDamage;
+            enemyController.enemy.CanFly = false;
             enemyController.enemyMovement.EnemySpeed = OpposumSpeed;
             enemyController.enemyMovement.DefaultSpeed = OpposumSpeed;
         }

@@ -97,6 +97,11 @@ public class EnemyDefaultAttacker : MonoBehaviour, IAttacker, IDamageSender
     {
         if (AttackTo == collider.gameObject)
         {
+            if(enemyController.enemy.CanFly == false)
+            {
+                float offset_y = transform.position.y - AttackTo.transform.position.y;
+
+            }
             if (DetectedTargetObject == null) DetectedTargetObject = collider.gameObject;
         }
     }
