@@ -24,6 +24,7 @@ public class EnemyDefaultAttacker : MonoBehaviour, IAttacker, IDamageSender
 
     [Header("Debug")]
     public float _Distance;
+    public float Offset_Y;
 
     private void Awake()
     {
@@ -93,14 +94,15 @@ public class EnemyDefaultAttacker : MonoBehaviour, IAttacker, IDamageSender
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerStay2D(Collider2D collider)
     {
         if (AttackTo == collider.gameObject)
         {
             if(enemyController.enemy.CanFly == false)
             {
-                float offset_y = transform.position.y - AttackTo.transform.position.y;
-
+                float offset_y = Mathf.Abs(transform.position.y - AttackTo.transform.position.y);
+                Offset_Y = offset_y;
+                if (offset_y > 0.5f) return;
             }
             if (DetectedTargetObject == null) DetectedTargetObject = collider.gameObject;
         }
