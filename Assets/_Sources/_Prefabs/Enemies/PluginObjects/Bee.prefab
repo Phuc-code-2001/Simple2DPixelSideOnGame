@@ -153,7 +153,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6739c01659ad96d47987f4ddee226b36, type: 3}
+  m_audioClip: {fileID: 8300000, guid: bb962794d4b64304299b6eb46dd9fbee, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -398,6 +398,6 @@ MonoBehaviour:
   AttackAnimateTime: 0.4
   AttackCoolDown: 2
   AttackObject: {fileID: 6555147617829166599}
-  AttackTo: []
+  AttackTo: {fileID: 0}
   DetectedTargetObject: {fileID: 0}
   CanAttack: 1

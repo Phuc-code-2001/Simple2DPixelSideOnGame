@@ -50,7 +50,7 @@ public class CanvasPlayer : MonoBehaviour
 
     public void SetCoin()
     {
-        CoinText.text = playerInfoController.Coin.ToString();
+        if(CoinText != null) CoinText.text = playerInfoController.Coin.ToString();
     }
 
 

@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     public PlayerDeath playerDeath;
     public PlayerInfoController playerInfoController;
 
+    [Header("Children Components")]
+    public PlayerAudioController playerAudioController;
+
     [Header("Children")]
     public GameObject Knight;
 
@@ -49,6 +52,8 @@ public class PlayerController : MonoBehaviour
         playerDamageReceiver = GetComponent<PlayerDamageReceiver>();
         playerDeath = GetComponent<PlayerDeath>();
         playerInfoController = GetComponent<PlayerInfoController>();
+
+        playerAudioController = GetComponentInChildren<PlayerAudioController>();
     }
 
     private void Start()

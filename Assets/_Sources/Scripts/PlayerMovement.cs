@@ -46,11 +46,23 @@ public class PlayerMovement : MonoBehaviour
         if (IsPowerUp)
         {
             CurrentSpeed = SpeedWhenRun;
-            if(LastMoveX != 0) playerController.playerInfoController.UseMP(UseMpInSeconds * Time.fixedDeltaTime);
+            if(LastMoveX != 0)
+            {
+                playerController.playerInfoController.UseMP(UseMpInSeconds * Time.fixedDeltaTime);
+            };
         }
         else
         {
             CurrentSpeed = BaseSpeed;
+        }
+
+        if(LastMoveX != 0)
+        {
+            playerController.playerAudioController.StartMoveSound();
+        }
+        else
+        {
+            playerController.playerAudioController.StopMoveSound();
         }
 
         if (IsGoDown) GoDown();

@@ -26,6 +26,7 @@ public class PlayerDamageReceiver : MonoBehaviour, IDamageReceiver
             float dameReceive = sender.GetDamage();
             playerController.playerInfoController.ReceiveDamage(dameReceive);
             UseEffect();
+            UseSound();
         }
     }
 
@@ -47,4 +48,9 @@ public class PlayerDamageReceiver : MonoBehaviour, IDamageReceiver
         GameObject effect = GameObject.Instantiate(effectObject, transform.position, transform.rotation);
         effect.SetActive(true);
     }
-}
+
+    private void UseSound()
+    {
+        playerController.playerAudioController.PlayHitSound();
+    }
+ }

@@ -101,7 +101,7 @@ MonoBehaviour:
   BottomRight: {fileID: 0}
   TargetObject: {fileID: 0}
   FollowerOffset: {x: 2, y: 1}
-  Speed: 6
+  Speed: 4
   targetFollowerPosition: {x: 0, y: 0, z: 0}
   thresold_offset: {x: 6.5, y: 1}
   centerBoxOffSet: {x: 2, y: 1}

@@ -32,6 +32,18 @@ public class PlayerJumping : MonoBehaviour
         playerController.IsJumping = true;
         Vector2 force = new Vector2(0, PowerUnit * (IsDoubleJump ? JumpPower_02 : JumpPower_01));
         playerController.rb.AddForce(force, ForceMode2D.Force);
+        UseEffect();
+        UseSound();
+    }
+
+    public void UseEffect()
+    {
+        
+    }
+
+    private void UseSound()
+    {
+        if(playerController.playerAudioController != null) playerController.playerAudioController.PlayJumpSound();
     }
 
     private void Update()
