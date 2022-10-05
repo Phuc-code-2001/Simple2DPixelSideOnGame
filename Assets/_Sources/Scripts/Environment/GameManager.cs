@@ -7,25 +7,84 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
-    public enum GameStatus
-    {
-        Pause,
+    public enum GameState {
+        Menu,
+        Loading,
         Playing,
-        EndGame,
-        Winning,
+        Pausing,
+        Ending,
+    }
+
+    public enum GameStartMode
+    {
+        NewGame,
+        ContinueGame,
     }
 
     public static GameManager Instance;
 
-    public bool IsContinueGame = false;
+    public GameState CurrentGameState;
+    public GameStartMode StartMode;
 
-    public GameStatus gameStatus;
+    public int CurrentSceneIndex = 0;
+    [SerializeField] private int NumberOfScenes;
 
-    public string Scene_01 = "Lv_01";
+    [Header("Canvas UI")]
+    public GameObject MenuUI;
+    public GameObject PauseUI;
+    public GameObject SetupUI;
+
+
+    public void LoadScene(int sceneIndex)
+    {
+        var loadSceneProcess = SceneManager.LoadSceneAsync(sceneIndex);
+        // Show Loadding
+
+        CurrentSceneIndex = sceneIndex;
+    }
+
+    public void LoadNextScene()
+    {
+        LoadScene(CurrentSceneIndex + 1);
+    }
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(Instance);
+            NumberOfScenes = SceneManager.sceneCountInBuildSettings;
+        }
+    }
+
+    public void StartGame()
+    {
+        if(NumberOfScenes > 1)
+        {
+
+            // Start a new save record
+
+            LoadScene(1);
+            CurrentGameState = GameState.Playing;
+            StartMode = GameStartMode.NewGame;
+
+            MenuUI.SetActive(false);
+            SetupUI.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("StartGame: Scene not found");
+        }
+    }
+
+    public void Continue()
+    {
+        StartMode = GameStartMode.ContinueGame;
     }
 
     public void SaveGame()
@@ -36,37 +95,41 @@ public class GameManager : MonoBehaviour
     public void LoadMenu()
     {
         SaveGame();
+        LoadScene(0);
+
+        MenuUI.SetActive(true);
+        SetupUI.SetActive(false);
+        PauseUI.SetActive(false);
+
+        ResumeTime();
+    }
+
+
+    public void PauseTime()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void ResumeTime()
+    {
         Time.timeScale = 1;
-        SceneManager.LoadScene(0);
-    }
-
-    public void StartGame()
-    {
-        SceneManager.LoadScene(Scene_01);
-    }
-
-    public void Continue()
-    {
-        IsContinueGame = true;
     }
 
     public void PauseGame()
     {
-        Time.timeScale = 0;
-        Transform CanvasPauseGame = transform.Find("CanvasPauseGame");
-        if (CanvasPauseGame != null) CanvasPauseGame.gameObject.SetActive(true);
+        PauseTime();
+        PauseUI.SetActive(true);
     }
 
     public void ResumeGame()
     {
-        Time.timeScale = 1;
-        Transform CanvasPauseGame = transform.Find("CanvasPauseGame");
-        if (CanvasPauseGame != null) CanvasPauseGame.gameObject.SetActive(false);
+        ResumeTime();
+        PauseUI.SetActive(false);
     }
 
     public void GameOver()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
     }
 
     public void ExitGame()

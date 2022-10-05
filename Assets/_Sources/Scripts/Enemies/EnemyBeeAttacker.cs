@@ -69,7 +69,7 @@ public class EnemyBeeAttacker : MonoBehaviour, IAttacker
     {
         if (AttackTo == collider.gameObject)
         {
-            Debug.Log($"Bee attacker detected target enter '{collider.name}'");
+            // Debug.Log($"Bee attacker detected target enter '{collider.name}'");
             if(DetectedTargetObject == null) DetectedTargetObject = collider.gameObject;
         }
     }
@@ -78,7 +78,7 @@ public class EnemyBeeAttacker : MonoBehaviour, IAttacker
     {
         if(collider.gameObject == DetectedTargetObject)
         {
-            Debug.Log($"Bee attacker detected target exit '{collider.name}'");
+            // Debug.Log($"Bee attacker detected target exit '{collider.name}'");
             DetectedTargetObject = null;
         }
         

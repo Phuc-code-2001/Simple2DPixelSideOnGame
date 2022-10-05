@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2793534399400699366}
   - component: {fileID: 2793534399400699368}
   - component: {fileID: 2793534399400699367}
+  - component: {fileID: 3889512226096437835}
   - component: {fileID: 6376016959800091159}
   - component: {fileID: 5903339692500690249}
-  - component: {fileID: 3889512226096437835}
   m_Layer: 8
   m_Name: Opossum
   m_TagString: Enemy
@@ -108,6 +108,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &3889512226096437835
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2793534399400699365}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 4
 --- !u!114 &6376016959800091159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,19 +159,4 @@ MonoBehaviour:
   AttackTo: {fileID: 0}
   CanAttack: 1
   _Distance: 0
---- !u!58 &3889512226096437835
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2793534399400699365}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 4
+  Offset_Y: 0

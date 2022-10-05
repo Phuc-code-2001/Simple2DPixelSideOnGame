@@ -26,11 +26,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+
         playerController = GetComponent<PlayerController>();
     }
 
     private void Update()
     {
+        
         MoveX = playerController.inputController.Horizontal;
         IsPowerUp = playerController.inputController.RunSignalActive && playerController.playerInfoController.ManaPoint > 0;
         IsGoDown = playerController.inputController.Vertical < 0;
@@ -71,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
     public void Move()
     {
         playerController.rb.velocity = new Vector2(CurrentSpeed * MoveX, playerController.rb.velocity.y);
+           
     }
 
     public void GoDown()
@@ -97,12 +100,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if(playerController.IsMoveRight)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
 
         if (playerController.IsMoveLeft)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
     }
 

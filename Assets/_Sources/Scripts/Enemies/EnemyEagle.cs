@@ -23,7 +23,7 @@ public class EnemyEagle : MonoBehaviour
             enemyController.enemy.HealthPoint = EagleHeathPoint;
             enemyController.enemy.Damage = EagleDamage;
             enemyController.enemy.CanFly = true;
-            enemyController.enemyMovement.EnemySpeed = EagleSpeed;
+            enemyController.enemyMovement.ChangedSpeed = EagleSpeed;
             enemyController.enemyMovement.DefaultSpeed = EagleSpeed;
         }
     }

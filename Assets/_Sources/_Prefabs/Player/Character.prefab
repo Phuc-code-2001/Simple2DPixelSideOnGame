@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 8541158446459727777}
   - component: {fileID: 3502112384740503603}
   - component: {fileID: 1442502852856759842}
+  - component: {fileID: 7912471835254761208}
   m_Layer: 10
   m_Name: Character
   m_TagString: Player
@@ -331,11 +332,24 @@ MonoBehaviour:
   playerController: {fileID: 0}
   HealthPoint: 0
   ManaPoint: 0
-  Damage: 50
+  Damage: 120
   Coin: 0
   ReloadDisplay: 1
   MpRecoveryTime: 5
   MpRecoveryValue: 20
+--- !u!114 &7912471835254761208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4485412339991665596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4ea49800983c7418d941e24c4bac57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
 --- !u!1 &5691501723301982799
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,9 +398,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FSXAudioSource: {fileID: 8203339243416306889}
   DSXAudioSouce: {fileID: 4746341909894014647}
+  DSXPlayingClip: {fileID: 0}
   HitAudioClip: {fileID: 8300000, guid: 0456f60474d93264b8d67b14622b5c41, type: 3}
   JumpAudioClip: {fileID: 8300000, guid: 22c6722d1daca364aa5c52b5ef028ff8, type: 3}
-  MoveAudioClip: {fileID: 8300000, guid: 653ecab8fd5515a4ab0da53bf6b3aaa5, type: 3}
+  MoveAudioClip: {fileID: 8300000, guid: df91008f84701394abcf01393576a93b, type: 3}
 --- !u!82 &8203339243416306889
 AudioSource:
   m_ObjectHideFlags: 0
@@ -762,12 +777,8 @@ PrefabInstance:
       value: SwordAttack
       objectReference: {fileID: 0}
     - target: {fileID: 8936347603310730259, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 8936347603310730259, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
-      propertyPath: m_TagString
-      value: Player
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8936347603310730262, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
       propertyPath: m_RootOrder

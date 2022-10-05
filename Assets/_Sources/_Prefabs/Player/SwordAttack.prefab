@@ -14,13 +14,13 @@ GameObject:
   - component: {fileID: 8936347603310730263}
   - component: {fileID: 8936347603310730261}
   - component: {fileID: 8976166570645449681}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SwordAttack
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8936347603310730262
 Transform:
   m_ObjectHideFlags: 0
@@ -134,17 +134,19 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.20298393, y: 0.44267917}
+    - - {x: -0.17537592, y: 0.4821192}
       - {x: -0.08252529, y: 0.2022497}
       - {x: -0.03450635, y: -0.07426927}
       - {x: -0.037491366, y: -0.29419428}
-      - {x: -0.09815712, y: -0.5790342}
+      - {x: -0.10544798, y: -0.66895485}
+      - {x: 0.38332796, y: -0.6427163}
       - {x: 0.3881885, y: -0.5576562}
       - {x: 0.40063775, y: -0.22666824}
       - {x: 0.33066803, y: 0.1973646}
-      - {x: 0.08071996, y: 0.49572963}
-      - {x: -0.1988863, y: 0.59370804}
-      - {x: -0.39695272, y: 0.6064637}
+      - {x: 0.13593598, y: 0.5430576}
+      - {x: -0.12000632, y: 0.66864395}
+      - {x: -0.3930087, y: 0.69323176}
+      - {x: -0.28652072, y: 0.61435163}
 --- !u!114 &8936347603310730261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +178,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: fe5fee41f91ffc5408b44ee372f34363, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a37f44cbf8c2a7443a3c361efa2f233a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

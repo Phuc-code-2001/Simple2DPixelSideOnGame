@@ -9,6 +9,7 @@ public class AudioController : MonoBehaviour
     public static float volume = 1;
     public AudioSource FSXAudioSource;
 
+    [Header("DSX controller")]
     public AudioSource DSXAudioSouce;
     public AudioClip DSXPlayingClip;
 

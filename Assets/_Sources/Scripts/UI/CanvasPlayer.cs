@@ -34,7 +34,12 @@ public class CanvasPlayer : MonoBehaviour
 
     public void SetHealth()
     {
-        HpText.text = $"Hp: {(int) playerInfoController.HealthPoint}";
+        if (MpText == null)
+        {
+            Debug.LogWarning("CanvasPlayer missing 'HpText'");
+            return;
+        }
+        HpText.text = $"{(int) playerInfoController.HealthPoint}";
         Vector2 amax = HpFill.anchorMax;
         amax.x = playerInfoController.HealthPointRate;
         HpFill.anchorMax = amax;
@@ -42,7 +47,12 @@ public class CanvasPlayer : MonoBehaviour
 
     public void SetManaPoint()
     {
-        MpText.text = $"Mp: {(int) playerInfoController.ManaPoint}";
+        if(MpText == null)
+        {
+            Debug.LogWarning("CanvasPlayer missing 'MpText'");
+            return;
+        }
+        MpText.text = $"{(int) playerInfoController.ManaPoint}";
         Vector2 amax = MpFill.anchorMax;
         amax.x = playerInfoController.ManaPointRate;
         MpFill.anchorMax = amax;

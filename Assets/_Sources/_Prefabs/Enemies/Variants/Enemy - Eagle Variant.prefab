@@ -126,6 +126,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1848348394704505547, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
+      propertyPath: CoinRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1848348394704505547, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
+      propertyPath: MaxNumberOfCoins
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5570476925220724316, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -41,16 +41,11 @@ public class PlayerInfoController : MonoBehaviour
 
     private void Start()
     {
-        if(GameManager.Instance?.IsContinueGame == true)
+        if(GameManager.Instance?.StartMode == GameManager.GameStartMode.ContinueGame)
         {
             LoadProperties();
         }
-        MpRecovery();
-    }
-
-    private void Update()
-    {
-        
+        MpRecoveryHandler();
     }
 
     public void ReceiveDamage(float dame)
@@ -66,15 +61,29 @@ public class PlayerInfoController : MonoBehaviour
         ReloadDisplay = true;
     }
 
-    public void Heal(float point)
+    public void HealHP(float point)
     {
         HealthPoint += point;
+        if (HealthPoint > MaxHealthPoints) HealthPoint = MaxHealthPoints;
         ReloadDisplay = true;
     }
 
-    private void MpRecovery()
+    public void HealMP(float point)
     {
-        Invoke("MpRecovery", MpRecoveryTime);
+        ManaPoint += point;
+        if (ManaPoint > MaxManaPoints) ManaPoint = MaxManaPoints;
+        ReloadDisplay = true;
+    }
+
+    public void AddCoin(float numberOfUnit)
+    {
+        Coin += numberOfUnit;
+        ReloadDisplay = true;
+    }
+
+    private void MpRecoveryHandler()
+    {
+        Invoke("MpRecoveryHandler", MpRecoveryTime);
         if(ManaPoint + MpRecoveryValue < MaxManaPoints) ManaPoint += MpRecoveryValue;
         else ManaPoint = MaxManaPoints;
         ReloadDisplay = true;

@@ -26,7 +26,7 @@ public class EnemyBee : MonoBehaviour
         enemyController.enemy.HealthPoint = BeeHealthPoint;
         enemyController.enemy.Damage = BeeDamage;
         enemyController.enemy.CanFly = true;
-        enemyController.enemyMovement.EnemySpeed = BeeSpeed;
+        enemyController.enemyMovement.ChangedSpeed = BeeSpeed;
         enemyController.enemyMovement.DefaultSpeed = BeeSpeed;
     }
 

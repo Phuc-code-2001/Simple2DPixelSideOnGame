@@ -33,7 +33,7 @@ public class EnemyDefaultAttacker : MonoBehaviour, IAttacker, IDamageSender
 
     private void Start()
     {
-        AttackTo = PlayerController.Instance.gameObject;
+        if(AttackTo == null) AttackTo = PlayerController.Instance.gameObject;
     }
 
     public float GetDamage()
@@ -102,7 +102,7 @@ public class EnemyDefaultAttacker : MonoBehaviour, IAttacker, IDamageSender
             {
                 float offset_y = Mathf.Abs(transform.position.y - AttackTo.transform.position.y);
                 Offset_Y = offset_y;
-                if (offset_y > 0.5f) return;
+                if (offset_y > 0.6f) return;
             }
             if (DetectedTargetObject == null) DetectedTargetObject = collider.gameObject;
         }

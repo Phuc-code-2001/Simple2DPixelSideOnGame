@@ -25,7 +25,7 @@ public class EnemyOpossum : MonoBehaviour
             enemyController.enemy.HealthPoint = OpposumHeathPoint;
             enemyController.enemy.Damage = OpposumDamage;
             enemyController.enemy.CanFly = false;
-            enemyController.enemyMovement.EnemySpeed = OpposumSpeed;
+            enemyController.enemyMovement.ChangedSpeed = OpposumSpeed;
             enemyController.enemyMovement.DefaultSpeed = OpposumSpeed;
         }
     }

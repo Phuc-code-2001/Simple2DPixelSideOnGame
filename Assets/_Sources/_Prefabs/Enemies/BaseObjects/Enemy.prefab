@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 5570476923605888459}
   - component: {fileID: 5570476923605888454}
   - component: {fileID: 2486842764970119137}
+  - component: {fileID: 1848348394704505547}
   m_Layer: 3
   m_Name: EnemyController
   m_TagString: Enemy
@@ -187,6 +188,7 @@ MonoBehaviour:
   MaxHealthPoint: 1
   HealthPoint: 1
   Damage: 1
+  CanFly: 0
 --- !u!114 &5570476923605888454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,11 +219,23 @@ MonoBehaviour:
   rb: {fileID: 3034192595594389388}
   MovePoints: []
   MovePointIndex: 0
-  TargetTransform: {fileID: 0}
-  DefaultSpeed: 2
+  TargetPosition: {x: 0, y: 0}
   CanMove: 0
-  EnemySpeed: 2
+  DefaultSpeed: 2
+  ChangedSpeed: 2
   enemyController: {fileID: 0}
+--- !u!114 &1848348394704505547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5570476923605888460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 632962aef6680664c865e3bb0445cfdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5570476925220724321
 GameObject:
   m_ObjectHideFlags: 0

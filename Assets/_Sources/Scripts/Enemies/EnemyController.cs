@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour, IDeathHandler
     public Animator animator;
     public Enemy enemy;
     public EnemyMovement enemyMovement;
+    public EnemySpawnCollector enemySpawnCollector;
 
     [Header("Effects")]
     public GameObject DeathEffect;
@@ -31,6 +32,7 @@ public class EnemyController : MonoBehaviour, IDeathHandler
         rb = GetComponent<Rigidbody2D>();
         enemy = GetComponent<Enemy>();
         enemyMovement = GetComponent<EnemyMovement>();
+        enemySpawnCollector = GetComponent<EnemySpawnCollector>();
         animator = GetComponentInChildren<Animator>();
     }
 
@@ -60,6 +62,7 @@ public class EnemyController : MonoBehaviour, IDeathHandler
     public void Death()
     {
         UseDeathEffect();
+        enemySpawnCollector.SpawnItems();
         Destroy(transform.parent.gameObject);
     }
 
@@ -67,9 +70,9 @@ public class EnemyController : MonoBehaviour, IDeathHandler
     {
         if(DeathEffect != null)
         {
-            DeathEffect.SetActive(true);
+            // DeathEffect.SetActive(false);
             GameObject effect = GameObject.Instantiate(DeathEffect, transform.position, Quaternion.identity);
-            DeathEffect.SetActive(false);
+            effect.SetActive(true);
         }
     }
 }

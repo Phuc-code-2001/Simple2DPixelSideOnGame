@@ -15,7 +15,7 @@ public class MovingByPoints : MonoBehaviour
     
     public bool CanMove = false;
     public float DefaultSpeed = 2;
-    public float EnemySpeed = 2;
+    public float ChangedSpeed = 2;
 
     protected virtual void Start()
     {
@@ -37,13 +37,18 @@ public class MovingByPoints : MonoBehaviour
 
     public virtual float GetSpeed()
     {
-        return EnemySpeed;
+        return ChangedSpeed;
     }
 
     protected virtual void Move(float deltaTime)
     {
-        Vector2 newPosition = Vector2.MoveTowards(rb.position, TargetPosition, GetSpeed() * deltaTime);
+        Vector2 newPosition = GetNextPosition(deltaTime);
         rb.MovePosition(newPosition);
+    }
+
+    protected virtual Vector2 GetNextPosition(float deltaTime)
+    {
+        return Vector2.MoveTowards(rb.position, TargetPosition, GetSpeed() * deltaTime);
     }
 
     protected virtual void Update()
@@ -72,11 +77,11 @@ public class MovingByPoints : MonoBehaviour
 
     public void InvokeSpeed(float speed)
     {
-        EnemySpeed = speed;
+        ChangedSpeed = speed;
     }
 
     public void ResetSpeed()
     {
-        EnemySpeed = DefaultSpeed;
+        ChangedSpeed = DefaultSpeed;
     }
 }

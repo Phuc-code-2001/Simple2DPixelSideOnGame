@@ -58,6 +58,7 @@ public class PlayerAttacker : MonoBehaviour, IAttacker
         {
             AttackObject.SetActive(true);
             GameObject attacker = GameObject.Instantiate(AttackObject, AttackObject.transform.position, Quaternion.identity);
+            
             AttackObject.SetActive(false);
             attacker.GetComponent<IMoveOfSpawnObject>().SetMove();
         }
