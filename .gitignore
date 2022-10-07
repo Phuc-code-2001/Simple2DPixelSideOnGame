@@ -60,3 +60,5 @@ crashlytics-build.properties
 
 /Assets/Libraries
 /Assets/Libraries.meta
+/API
+/DataLayer
