@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(PlayerJumping))]
-[RequireComponent(typeof(PlayerMovement))]
-[RequireComponent(typeof(PlayerAnimationController))]
-[RequireComponent(typeof(PlayerGroundedHandler))]
+
 public class PlayerController : MonoBehaviour
 {
 
     public static PlayerController Instance;
 
     [Header("Components")]
+    public Rigidbody2D rb;
     public InputController inputController;
     public PlayerMovement playerMovement;
     public PlayerJumping playerJumping;
@@ -20,7 +18,11 @@ public class PlayerController : MonoBehaviour
     public PlayerGroundedHandler playerGroundedHandler;
     public PlayerAttacker playerAttacker;
     public PlayerDamageReceiver playerDamageReceiver;
-    public Rigidbody2D rb;
+    public PlayerDeath playerDeath;
+    public PlayerInfoController playerInfoController;
+
+    [Header("Children Components")]
+    public PlayerAudioController playerAudioController;
 
     [Header("Children")]
     public GameObject Knight;
@@ -35,10 +37,7 @@ public class PlayerController : MonoBehaviour
     public bool IsFalling;
     public bool IsAttacking;
     public bool IsHitting;
-
-    [Header("Properties")]
-    public float HealthPoint = 1000;
-    public float Damage = 50;
+    public bool IsDeath;
 
     private void Awake()
     {
@@ -51,6 +50,10 @@ public class PlayerController : MonoBehaviour
         playerGroundedHandler = GetComponent<PlayerGroundedHandler>();
         playerAttacker = GetComponent<PlayerAttacker>();
         playerDamageReceiver = GetComponent<PlayerDamageReceiver>();
+        playerDeath = GetComponent<PlayerDeath>();
+        playerInfoController = GetComponent<PlayerInfoController>();
+
+        playerAudioController = GetComponentInChildren<PlayerAudioController>();
     }
 
     private void Start()
@@ -63,7 +66,8 @@ public class PlayerController : MonoBehaviour
         IsMoveLeft = inputController.Horizontal < 0;
         IsMoveRight = inputController.Horizontal > 0;
         IsRunning = inputController.RunSignalActive;
-        IsJumping = rb.velocity.y > 0;
-        IsFalling = rb.velocity.y < 0;
+        IsFalling = rb.velocity.y < -0.25f && !IsGrounded;
+        IsDeath = playerInfoController.HealthPoint <= 0;
     }
+
 }

@@ -7,8 +7,8 @@ using UnityEngine;
 public class CameraController : SmoothFollower, IRect
 {
     [Header("Properties")]
-    public Vector2 thresold_offset = new Vector2(6, 3.75f);
-    public Vector2 centerBoxOffSet = new Vector2(1, 0);
+    public Vector2 thresold_offset = new Vector2(6.5f, 1f);
+    public Vector2 centerBoxOffSet = new Vector2(2, 1);
     [Header("Components")]
     [SerializeField] private Camera _camera;
 
@@ -29,16 +29,17 @@ public class CameraController : SmoothFollower, IRect
     private void Start()
     {
         aspect = _camera.pixelRect;
-        TargetObject = PlayerController.Instance?.gameObject;
+        targetFollowerPosition = transform.position;
 
-        if(TargetObject == null) IsFollow = false;
+        TopLeft = GameObject.Find("TopLeft").transform;
+        BottomRight = GameObject.Find("BottomRight").transform;
     }
 
     private void Update()
     {
+        if (TargetObject == null && PlayerController.Instance != null) TargetObject = PlayerController.Instance.gameObject;
+        if (TargetObject == null) IsFollow = false;
         if (!IsFollow) return;
-        if (TargetObject == null) return;
-
         thresold = calculateThresold();
         centerOfBox = calculateCenterOfBox();
 

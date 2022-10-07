@@ -7,23 +7,25 @@ TagManager:
   - Grounded
   - Enemy
   - Ceiling
+  - Bullet
+  - Platformer
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - Enemy
   - Water
   - UI
-  - Ceiling
+  - 
   - Ground
-  - Enemy
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - EnemyPlugin
+  - EnemyBullet
+  - Player
+  - PlayerAttacker
+  - PlayerGroundCheck
+  - PlatformerChecker
+  - Platformer
+  - CollectedItem
   - 
   - 
   - 
@@ -43,4 +45,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 4051900023
+    locked: 0
+  - name: Enemy
+    uniqueID: 4098538891
+    locked: 0
+  - name: Item
+    uniqueID: 178582017
     locked: 0
