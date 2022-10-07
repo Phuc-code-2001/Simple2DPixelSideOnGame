@@ -167,6 +167,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   enemy: {fileID: 0}
   enemyMovement: {fileID: 0}
+  enemySpawnCollector: {fileID: 0}
   DeathEffect: {fileID: 6468897146811372714}
   HitEffect: {fileID: 539838474113738813}
   IsDeath: 0
@@ -236,6 +237,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632962aef6680664c865e3bb0445cfdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxNumberOfCoins: 1
+  CoinDropRate: 0.5
+  NumberOfHpBottle: 1
+  HpBottleDropRate: 0.5
 --- !u!1 &5570476925220724321
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,6 +284,10 @@ PrefabInstance:
     - target: {fileID: 765930445390718311, guid: bfb03a6e69ca35e4688f60724b6f27ea, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1063760999287359524, guid: bfb03a6e69ca35e4688f60724b6f27ea, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -196428405
       objectReference: {fileID: 0}
     - target: {fileID: 1063760999287359525, guid: bfb03a6e69ca35e4688f60724b6f27ea, type: 3}
       propertyPath: m_PresetInfoIsWorld

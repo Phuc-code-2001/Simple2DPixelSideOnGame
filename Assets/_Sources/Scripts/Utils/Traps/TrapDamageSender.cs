@@ -9,22 +9,28 @@ public class TrapDamageSender : MonoBehaviour, IDamageSender
 
     public List<GameObject> Receivers;
 
-    public float DamagePerSeconds = 20;
+    public List<IDamageReceiver> CurrentReceivers = new List<IDamageReceiver>();
 
-    [SerializeField] private bool Detected;
-    [SerializeField] private int ReceiverCount = 0;
+    public float DamagePerSeconds = 20;
 
     private void Start()
     {
         HandlePerOneSecond();
+        if(Receivers.Count == 0 && PlayerController.Instance != null)
+        {
+            Receivers.Add(PlayerController.Instance.gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(Receivers.Contains(collider.gameObject))
         {
-            Detected = true;
-            ReceiverCount++;
+            IDamageReceiver damageReceiver = collider.GetComponent<IDamageReceiver>();
+            if(damageReceiver != null)
+            {
+                CurrentReceivers.Add(damageReceiver);
+            }
         }
     }
 
@@ -32,17 +38,19 @@ public class TrapDamageSender : MonoBehaviour, IDamageSender
     {
         if(Receivers.Contains(collider.gameObject))
         {
-            ReceiverCount--;
-            if(ReceiverCount == 0) Detected = false;
+            IDamageReceiver damageReceiver = collider.GetComponent<IDamageReceiver>();
+            if (damageReceiver != null)
+            {
+                CurrentReceivers.Remove(damageReceiver);
+            }
         }
     }
 
     private void HandlePerOneSecond()
     {
         Invoke("HandlePerOneSecond", 1f);
-        if (ReceiverCount == 0) return;
         var damageReceivers = Receivers.Select(rv => rv.GetComponent<IDamageReceiver>());
-        foreach (IDamageReceiver receiver in damageReceivers)
+        foreach (IDamageReceiver receiver in CurrentReceivers)
         {
             SendDamage(receiver);
         }

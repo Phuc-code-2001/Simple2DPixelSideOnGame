@@ -23,11 +23,16 @@ public class PlayerMovement : MonoBehaviour
     public bool IsPowerUp;
     public bool IsGoDown;
 
+    public GameObject Dashwind;
 
     private void Awake()
     {
-
         playerController = GetComponent<PlayerController>();
+    }
+
+    private void Start()
+    {
+        if (Dashwind == null) Dashwind = transform.Find("Dashwind").gameObject;
     }
 
     private void Update()
@@ -52,10 +57,13 @@ public class PlayerMovement : MonoBehaviour
             {
                 playerController.playerInfoController.UseMP(UseMpInSeconds * Time.fixedDeltaTime);
             };
+
+            if(Dashwind != null && !Dashwind.activeSelf) { Dashwind.SetActive(true); }
         }
         else
         {
             CurrentSpeed = BaseSpeed;
+            if (Dashwind != null && Dashwind.activeSelf) { Dashwind.SetActive(false); }
         }
 
         if(LastMoveX != 0)

@@ -30,6 +30,9 @@ public class CameraController : SmoothFollower, IRect
     {
         aspect = _camera.pixelRect;
         targetFollowerPosition = transform.position;
+
+        TopLeft = GameObject.Find("TopLeft").transform;
+        BottomRight = GameObject.Find("BottomRight").transform;
     }
 
     private void Update()

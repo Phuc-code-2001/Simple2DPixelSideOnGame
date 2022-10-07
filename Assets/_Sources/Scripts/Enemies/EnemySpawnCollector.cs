@@ -24,7 +24,7 @@ public class EnemySpawnCollector : MonoBehaviour
         {
             if (GetLucky(CoinDropRate)) count++;
         }
-        if (count > 0) CoinSpawner.Instance.SpawnCoin(count, transform.position, 1.5f);
+        if (count > 0) CoinSpawner.Instance?.SpawnCoin(count, transform.position, 1.5f);
     }
     
     private void SpawnHpBottle()
@@ -34,7 +34,7 @@ public class EnemySpawnCollector : MonoBehaviour
         {
             if (GetLucky(HpBottleDropRate)) count++;
         }
-        if (count > 0) HPBottleSpawner.Instance.Spawn(count, transform.position, 1.5f);
+        if (count > 0) HPBottleSpawner.Instance?.Spawn(count, transform.position, 1.5f);
     }
 
 

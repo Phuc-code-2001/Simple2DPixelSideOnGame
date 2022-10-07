@@ -86,10 +86,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7461635776163037939, guid: 2fc68d3033cfa2a4f82645547240ff49, type: 3}
-      propertyPath: m_FlipX
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fc68d3033cfa2a4f82645547240ff49, type: 3}
 --- !u!1001 &8493848494727569043
@@ -106,6 +102,10 @@ PrefabInstance:
     - target: {fileID: 1848348394704505547, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
       propertyPath: HpBottleDropRate
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449799102139142885, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
+      propertyPath: m_Icon
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5570476923605888452, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
       propertyPath: m_Size.x
@@ -126,7 +126,7 @@ PrefabInstance:
     - target: {fileID: 5570476923605888456, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
       propertyPath: HitEffect
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8258988254701450926}
     - target: {fileID: 5570476925220724316, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -173,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5570476925220724321, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
       propertyPath: m_Name
-      value: Enemy - Turtle Variant Variant
+      value: Enemy - Turtle Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
@@ -239,3 +239,8 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.55466497, y: 0.34067297}
   m_EdgeRadius: 0
+--- !u!1 &8258988254701450926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 539838474113738813, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
+  m_PrefabInstance: {fileID: 8493848494727569043}
+  m_PrefabAsset: {fileID: 0}

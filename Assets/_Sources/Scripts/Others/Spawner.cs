@@ -24,12 +24,16 @@ public abstract class Spawner : MonoBehaviour
     public void Spawn(int quantity, Vector2 pos, float radius = 1)
     {
         List<GameObject> items = new List<GameObject>();
+
+        // Fix bug center of game object must be bottom
+        Vector2 offset = new Vector2(0, 0.5f);
+
         foreach (GameObject item in readyObjects)
         {
             if (!item.activeInHierarchy)
             {
-                pos.x = pos.x + Random.Range(-radius, radius);
-                item.transform.position = pos;
+                // pos.x = pos.x + Random.Range(-radius, radius); // Add force to make effect
+                item.transform.position = pos + offset;
                 items.Add(item);
                 if (items.Count == quantity) break;
             }
@@ -41,8 +45,8 @@ public abstract class Spawner : MonoBehaviour
             readyObjects.AddRange(items_new);
             foreach (GameObject item in items_new)
             {
-                pos.x = pos.x + Random.Range(-radius, radius);
-                item.transform.position = pos;
+                // pos.x = pos.x + Random.Range(-radius, radius); // Add force to make effect
+                item.transform.position = pos + offset;
                 items.Add(item);
             }
         }
@@ -50,6 +54,11 @@ public abstract class Spawner : MonoBehaviour
         foreach (GameObject item in items)
         {
             item.SetActive(true);
+            
+            
+            // Add some force
+            Rigidbody2D rb = item.GetComponent<Rigidbody2D>();
+            if (rb != null) rb.AddForce(new Vector2(Random.Range(-radius, radius), 1), ForceMode2D.Impulse);
         }
     }
 

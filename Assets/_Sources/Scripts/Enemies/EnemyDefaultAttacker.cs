@@ -17,8 +17,8 @@ public class EnemyDefaultAttacker : MonoBehaviour, IAttacker, IDamageSender
     public float AttackCoolDown = 2f;
 
     public GameObject DetectedTargetObject;
-
     public GameObject AttackTo;
+
 
     public bool CanAttack = true;
 
@@ -33,7 +33,7 @@ public class EnemyDefaultAttacker : MonoBehaviour, IAttacker, IDamageSender
 
     private void Start()
     {
-        if(AttackTo == null) AttackTo = PlayerController.Instance.gameObject;
+        if(AttackTo == null) AttackTo = PlayerController.Instance?.gameObject;
     }
 
     public float GetDamage()
