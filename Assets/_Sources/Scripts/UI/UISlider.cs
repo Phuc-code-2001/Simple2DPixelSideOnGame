@@ -13,6 +13,11 @@ public class UISlider : MonoBehaviour
         slider = GetComponent<Slider>();
     }
 
+    private void Start()
+    {
+        if (OutputText != null) OutputText.text = slider.value.ToString("0");
+    }
+
     public void OnChangeSlideValue(float value)
     {
         if(OutputText != null)

@@ -12,11 +12,11 @@ public class MenuManager : MonoBehaviour
             // Start a new save record
             GameManager.Instance.SelectedRecord = new Record();
 
-            GameManager.Instance.ScenesManager.LoadScene(1);
             GameManager.Instance.CurrentGameState = GameManager.GameState.Playing;
             GameManager.Instance.StartMode = GameManager.GameStartMode.NewGame;
 
             GameManager.Instance.UIManager.OnPlayUI();
+            GameManager.Instance.ScenesManager.LoadScene(1);
         }
         else
         {
@@ -26,9 +26,24 @@ public class MenuManager : MonoBehaviour
 
     public void Continue()
     {
-        GameManager.Instance.StartMode = GameManager.GameStartMode.ContinueGame;
         GameManager.Instance.LoadDatabase();
-        // Show Continue Menu
+
+        if (GameManager.Instance.Records.Count > 0)
+        {
+            // Show Continue Menu
+
+            int SceneIndex = GameManager.Instance.SelectedRecord.SceneIndex;
+            GameManager.Instance.CurrentGameState = GameManager.GameState.Playing;
+            GameManager.Instance.StartMode = GameManager.GameStartMode.ContinueGame;
+
+            GameManager.Instance.UIManager.OnPlayUI();
+            GameManager.Instance.ScenesManager.LoadScene(SceneIndex);
+        }
+        else 
+        { 
+            StartGame();
+        }
+
     }
 
     public void LoadMenu()

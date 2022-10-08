@@ -1,3 +1,4 @@
+using Assets._Sources.Scripts.SaveAndLoadData;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,7 +30,15 @@ public class PlayerInfoController : MonoBehaviour
 
     private void LoadProperties()
     {
+        HealthPoint = GameManager.Instance.SelectedRecord.Player.HeathPoint;
+        ManaPoint = GameManager.Instance.SelectedRecord.Player.ManaPoint;
+        Coin = GameManager.Instance.SelectedRecord.Player.Coin;
+    }
 
+    public void SetProperties()
+    {
+        if (GameManager.Instance.SelectedRecord.Player == null) GameManager.Instance.SelectedRecord.Player = new Player();
+        GameManager.Instance.UpdateRecord();
     }
 
     private void Awake()
@@ -45,7 +54,12 @@ public class PlayerInfoController : MonoBehaviour
         {
             LoadProperties();
         }
-        MpRecoveryHandler();
+        else
+        {
+            SetProperties();
+        }
+
+        Invoke("MpRecoveryHandler", MpRecoveryTime);
     }
 
     public void ReceiveDamage(float dame)

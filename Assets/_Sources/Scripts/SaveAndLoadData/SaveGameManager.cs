@@ -13,12 +13,12 @@ namespace Assets._Sources.Scripts.SaveAndLoadData
     {
         private static HttpClient _client = new HttpClient();
 
-        public static List<Record> GetRecords()
+        public List<Record> GetRecords()
         {
             var records = new List<Record>();
             try
             {
-                string endpoint = "https://localhost:44376/Record/";
+                string endpoint = "https://localhost:44376/api/Record/";
                 var res = _client.GetAsync(endpoint).Result;
                 if(res.IsSuccessStatusCode)
                 {
@@ -34,6 +34,27 @@ namespace Assets._Sources.Scripts.SaveAndLoadData
             return records;
         }
 
-        
+        public Record SaveRecord(Record record, bool isUpdate = false)
+        {
+            try
+            {
+                string endpoint = "https://localhost:44376/api/Record/";
+                StringContent data = new StringContent(JsonConvert.SerializeObject(record), Encoding.UTF8, "application/json");
+            
+                var res = isUpdate ? _client.PutAsync(endpoint, data).Result : _client.PostAsync(endpoint, data).Result;
+                if (res.IsSuccessStatusCode)
+                {
+                    string raw = res.Content.ReadAsStringAsync().Result;
+                    Record result = JsonConvert.DeserializeObject<Record>(raw);
+                    return result;
+                }
+            }
+            catch (Exception)
+            {
+                Debug.Log("Cannot connect to API...");
+            }
+
+            return record;
+        }
     }
 }

@@ -30,6 +30,7 @@ public class TrapDamageSender : MonoBehaviour, IDamageSender
             if(damageReceiver != null)
             {
                 CurrentReceivers.Add(damageReceiver);
+                damageReceiver.ReceiveDamage(this);
             }
         }
     }

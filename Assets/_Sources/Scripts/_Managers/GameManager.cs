@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -60,16 +61,36 @@ public class GameManager : MonoBehaviour
     public void LoadDatabase()
     {
         Records = SaveGameManager.GetRecords();
+        SelectedRecord = Records.FirstOrDefault();
+
+        Debug.Log(JsonConvert.SerializeObject(SelectedRecord));
     }
 
     public void SaveGame()
     {
+        UpdateRecord();
+        SelectedRecord = SaveGameManager.SaveRecord(SelectedRecord, SelectedRecord.Id != 0);
+        Debug.Log(JsonConvert.SerializeObject(SelectedRecord));
+    }
 
+    public void UpdateRecord()
+    {
+        SelectedRecord.SceneIndex = ScenesManager.CurrentSceneIndex;
+
+        SelectedRecord.Player.HeathPoint = PlayerController.Instance.playerInfoController.HealthPoint;
+        SelectedRecord.Player.ManaPoint = PlayerController.Instance.playerInfoController.ManaPoint;
+        SelectedRecord.Player.Coin = PlayerController.Instance.playerInfoController.Coin;
+        
+        SelectedRecord.PositionX = PlayerController.Instance.rb.position.x;
+        SelectedRecord.PositionY = PlayerController.Instance.rb.position.y;
     }
 
     public void GameOver()
     {
-        
+        TimeManager.PauseTime();
+        ScenesManager.LoadScene(ScenesManager.CurrentSceneIndex);
+        UpdateRecord();
+        TimeManager.ResumeTime();
     }
 
     public void ExitGame()

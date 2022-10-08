@@ -19,5 +19,7 @@ namespace Assets._Sources.Scripts.SaveAndLoadData
         public float PositionY { get; set; }
 
         public DateTime SaveTime { get; set; }
+
+        public bool EndGame { get; set; }
     }
 }
