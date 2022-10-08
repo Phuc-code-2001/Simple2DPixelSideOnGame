@@ -33499,14 +33499,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpikeTrap
       objectReference: {fileID: 0}
-    - target: {fileID: 5938800646119066068, guid: faf98c800eeb84e4296ceb6842e379c6, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 15.043874
-      objectReference: {fileID: 0}
-    - target: {fileID: 5938800646119066070, guid: faf98c800eeb84e4296ceb6842e379c6, type: 3}
-      propertyPath: m_Size.x
-      value: 15.043874
-      objectReference: {fileID: 0}
     - target: {fileID: 5938800646119066071, guid: faf98c800eeb84e4296ceb6842e379c6, type: 3}
       propertyPath: m_RootOrder
       value: 0
