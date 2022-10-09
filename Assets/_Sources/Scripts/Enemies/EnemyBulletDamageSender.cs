@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class EnemyBulletDamageSender : MonoBehaviour, IDamageSender, IEnemyBulletMoving
 {
-    public EnemyBee Bee;
     public Rigidbody2D rb;
     public float speed = 5;
+    public float Damage = 0;
 
     public float MaxDistanseSpawn = 10;
     public Vector2 StartPosition;
 
     public GameObject TargetObject;
+    public Vector2 velocity;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class EnemyBulletDamageSender : MonoBehaviour, IDamageSender, IEnemyBulle
     private void Start()
     {
         StartPosition = transform.position;
+        rb.velocity = velocity;
     }
 
     private void Update()
@@ -36,22 +38,14 @@ public class EnemyBulletDamageSender : MonoBehaviour, IDamageSender, IEnemyBulle
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.CompareTag("Player"))
-        {
-            // Debug.Log($"Pem player...{collision.collider.name}");
-            SendDamage(collision.transform.GetComponent<IDamageReceiver>());
-        }
-
+        IDamageReceiver damageReceiver = collision.collider.GetComponent<IDamageReceiver>();
+        if (damageReceiver != null) SendDamage(damageReceiver);
         Destroy(gameObject);
     }
 
     public float GetDamage()
     {
-        if(Bee != null)
-        {
-            return Bee.BeeDamage;
-        }
-        return 0;
+        return Damage;
     }
 
     public void SendDamage(IDamageReceiver receiver)
@@ -69,10 +63,9 @@ public class EnemyBulletDamageSender : MonoBehaviour, IDamageSender, IEnemyBulle
         }
 
         Vector2 dir = TargetObject.transform.position - transform.position;
-        rb.velocity = dir.normalized * speed;
+        velocity = dir.normalized * speed;
         float angle = Mathf.Asin(dir.normalized.x) / Mathf.PI * 180;
-        
-        if(dir.normalized.y > 0)
+        if (dir.normalized.y > 0)
         {
             angle = 180 - angle;
         }

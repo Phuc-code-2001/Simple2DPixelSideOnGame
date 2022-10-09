@@ -28,7 +28,7 @@ public class PlatformerChecker : MonoBehaviour, IMoveWithPlatformer
             MovingPlatform movingPlatform = collider.GetComponentInParent<MovingPlatform>();
             if (movingPlatform != null)
             {
-                Debug.Log("PlatformerChecker detected trigger exit with " + movingPlatform.gameObject.name);
+                // Debug.Log("PlatformerChecker detected trigger exit with " + movingPlatform.gameObject.name);
                 LeaveMovingPlatformer(movingPlatform);
             }
         }
@@ -43,7 +43,7 @@ public class PlatformerChecker : MonoBehaviour, IMoveWithPlatformer
             MovingPlatform movingPlatform = platformer.GetComponentInParent<MovingPlatform>();
             if(movingPlatform != null)
             {
-                Debug.Log("PlatformerChecker detected trigger with " + movingPlatform.gameObject.name);
+                // Debug.Log("PlatformerChecker detected trigger with " + movingPlatform.gameObject.name);
                 InvokeMovingPlatformer(movingPlatform);
             }
 

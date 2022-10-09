@@ -281,18 +281,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5570476923605888461}
     m_Modifications:
-    - target: {fileID: 765930445390718311, guid: bfb03a6e69ca35e4688f60724b6f27ea, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1063760999287359524, guid: bfb03a6e69ca35e4688f60724b6f27ea, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -196428405
-      objectReference: {fileID: 0}
-    - target: {fileID: 1063760999287359525, guid: bfb03a6e69ca35e4688f60724b6f27ea, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1063760999287359527, guid: bfb03a6e69ca35e4688f60724b6f27ea, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -380,14 +368,6 @@ PrefabInstance:
     - target: {fileID: 1063760999287359544, guid: bfb03a6e69ca35e4688f60724b6f27ea, type: 3}
       propertyPath: m_Name
       value: HeathBarCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 1063760999287359544, guid: bfb03a6e69ca35e4688f60724b6f27ea, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8079018369469303051, guid: bfb03a6e69ca35e4688f60724b6f27ea, type: 3}
-      propertyPath: m_Layer
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfb03a6e69ca35e4688f60724b6f27ea, type: 3}

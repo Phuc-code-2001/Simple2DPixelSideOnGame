@@ -27,5 +27,13 @@ public class PlayerCollector : MonoBehaviour, IItemCollector
             bottle.gameObject.SetActive(false);
             playerController.playerInfoController.HealHP(bottle.HealPoint);
         }
+
+        else if(typeof(T) == typeof(Fruit))
+        {
+            Fruit fruit = item as Fruit;
+            fruit.gameObject.SetActive(false);
+            CollectedSpawner.Instance.SpawnCollected(fruit.transform.position);
+            playerController.playerInfoController.HealMP(fruit.value);
+        }
     }
 }

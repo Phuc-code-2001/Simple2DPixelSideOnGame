@@ -21,12 +21,13 @@ public abstract class Spawner : MonoBehaviour
         return result;
     }
 
-    public void Spawn(int quantity, Vector2 pos, float radius = 1)
+
+    public void Spawn(int quantity, Vector2 pos, float radius = 1, float offsetX = 0, float offsetY = 0.5f)
     {
         List<GameObject> items = new List<GameObject>();
 
         // Fix bug center of game object must be bottom
-        Vector2 offset = new Vector2(0, 0.5f);
+        Vector2 offset = new Vector2(offsetX, offsetY);
 
         foreach (GameObject item in readyObjects)
         {

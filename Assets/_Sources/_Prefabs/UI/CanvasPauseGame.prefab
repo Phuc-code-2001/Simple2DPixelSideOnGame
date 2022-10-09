@@ -364,7 +364,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3027886079897511993
 RectTransform:
   m_ObjectHideFlags: 0
@@ -725,6 +725,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9216704861353574315}
   - component: {fileID: 7148158750967777213}
+  - component: {fileID: 1201307961212594144}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -800,12 +801,37 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2889647717360931937}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1201307961212594144}
+        m_TargetAssemblyTypeName: UISlider, Assembly-CSharp
+        m_MethodName: OnChangeSlideValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1201307961212594144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7203367324406151931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e974eabeea70ca4f9b68c56af9938c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OutputText: {fileID: 4160075137961415481}
 --- !u!1 &8570866041165689692
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,6 +995,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4051488781304921303, guid: 136e87b03696427479c032ce9612d5e5, type: 3}
   m_PrefabInstance: {fileID: 108730536028483552}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4160075137961415481 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4051488781304921305, guid: 136e87b03696427479c032ce9612d5e5, type: 3}
+  m_PrefabInstance: {fileID: 108730536028483552}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3027886078441055507
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1217,7 +1254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1003139136924582724, guid: d479c4548b39be74fbe3be2ede36117c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameManager, Assembly-CSharp
+      value: MenuManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1003139136924582724, guid: d479c4548b39be74fbe3be2ede36117c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1456,7 +1493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1003139136924582724, guid: d479c4548b39be74fbe3be2ede36117c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameManager, Assembly-CSharp
+      value: TimeManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1003139136924582724, guid: d479c4548b39be74fbe3be2ede36117c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
