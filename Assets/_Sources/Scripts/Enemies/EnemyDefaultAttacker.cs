@@ -62,9 +62,10 @@ public class EnemyDefaultAttacker : MonoBehaviour, IAttacker, IDamageSender
         Transform enemyTarget = DetectedTargetObject.transform.Find("EnemyTarget");
         Vector2 t_position = new Vector2()
         {
-            x = enemyTarget.position.x,
+            x = enemyTarget?.position.x ?? DetectedTargetObject.transform.position.x,
             y = enemyController.enemy.CanFly ? enemyTarget.position.y : enemyController.rb.position.y
         };
+
         enemyController.enemyMovement.InvokeTargetPosition(t_position);
 
         Invoke("AttackAnimationDone", AttackAnimateTime);

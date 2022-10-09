@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBeeAttacker : MonoBehaviour, IAttacker
+public class EnemyShooter : MonoBehaviour, IAttacker
 {
     public EnemyController enemyController;
-    public EnemyBee Bee;
+    public Animator animator;
 
     public float AttackAnimateTime = 0.4f;
     public float AttackCoolDown = 2f;
 
-    public GameObject AttackObject;
+    public GameObject Bullet;
 
     public GameObject AttackTo;
 
@@ -22,7 +22,7 @@ public class EnemyBeeAttacker : MonoBehaviour, IAttacker
     private void Awake()
     {
         enemyController = GetComponentInParent<EnemyController>();
-        Bee = GetComponent<EnemyBee>();
+        animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -40,14 +40,14 @@ public class EnemyBeeAttacker : MonoBehaviour, IAttacker
         if (DetectedTargetObject == null || enemyController.IsShotting || !CanAttack) return;
         enemyController.IsShotting = true;
         CanAttack = false;
-        Bee.animator.SetTrigger("Attack");
+        animator.SetTrigger("Attack");
         Invoke("AttackAnimationDone", AttackAnimateTime);
         Invoke("AttackDone", AttackCoolDown);
     }
 
     public void AttackAnimationDone()
     {
-        Bee.animator.SetTrigger("Idle");
+        animator.SetTrigger("Idle");
         SpawnAttackObject();
         enemyController.IsShotting = false;
     }
@@ -59,17 +59,28 @@ public class EnemyBeeAttacker : MonoBehaviour, IAttacker
 
     public void SpawnAttackObject()
     {
-        if (AttackObject == null || DetectedTargetObject == null) return;
-        GameObject attacker = GameObject.Instantiate(AttackObject, AttackObject.transform.position, Quaternion.identity);
-        attacker.SetActive(true);
-        attacker.GetComponent<IEnemyBulletMoving>().SetMoveTo(DetectedTargetObject);
+        if (Bullet == null || DetectedTargetObject == null) return;
+
+        GameObject bullet = GameObject.Instantiate(Bullet, Bullet.transform.position, Quaternion.identity);
+        
+        Transform enemyTarget = DetectedTargetObject.transform.Find("EnemyTarget");
+        if(enemyTarget != null)
+        {
+            bullet.GetComponent<IEnemyBulletMoving>().SetMoveTo(enemyTarget.gameObject);
+        }
+        else
+        {
+            bullet.GetComponent<IEnemyBulletMoving>().SetMoveTo(DetectedTargetObject);
+        }
+        EnemyBulletDamageSender enemyBulletDamageSender = bullet.GetComponent<EnemyBulletDamageSender>();
+        if (enemyBulletDamageSender != null) enemyBulletDamageSender.Damage = enemyController.enemy.Damage;
+        bullet.SetActive(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (AttackTo == collider.gameObject)
         {
-            // Debug.Log($"Bee attacker detected target enter '{collider.name}'");
             if(DetectedTargetObject == null) DetectedTargetObject = collider.gameObject;
         }
     }
@@ -78,7 +89,6 @@ public class EnemyBeeAttacker : MonoBehaviour, IAttacker
     {
         if(collider.gameObject == DetectedTargetObject)
         {
-            // Debug.Log($"Bee attacker detected target exit '{collider.name}'");
             DetectedTargetObject = null;
         }
         

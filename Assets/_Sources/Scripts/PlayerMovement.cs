@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         if (Dashwind == null) Dashwind = transform.Find("Dashwind").gameObject;
-        if(GameManager.Instance.StartMode == GameManager.GameStartMode.ContinueGame)
+        if(GameManager.Instance?.StartMode == GameManager.GameStartMode.ContinueGame)
         {
             LoadPosition();
         }

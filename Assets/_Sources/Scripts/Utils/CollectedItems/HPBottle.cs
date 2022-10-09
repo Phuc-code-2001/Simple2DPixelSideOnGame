@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HPBottle : MonoBehaviour
 {
-    public float HealPoint = 200;
+    public float HealPoint = 50;
 
     public GameObject collector;
 
