@@ -60,3 +60,7 @@ crashlytics-build.properties
 
 /Assets/Libraries
 /Assets/Libraries.meta
+/API/bin/Debug/net5.0
+/API/obj
+/DataLayer/bin/Debug/net5.0
+/DataLayer/obj
