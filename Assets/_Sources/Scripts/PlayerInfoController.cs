@@ -56,7 +56,7 @@ public class PlayerInfoController : MonoBehaviour
         }
         else
         {
-            SetProperties();
+            if(GameManager.Instance != null) SetProperties();
         }
 
         Invoke("MpRecoveryHandler", MpRecoveryTime);

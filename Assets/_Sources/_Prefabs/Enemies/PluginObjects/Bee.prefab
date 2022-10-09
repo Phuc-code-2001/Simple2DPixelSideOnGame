@@ -137,12 +137,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 492bcb7736cd4cd458205b858c92440d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bee: {fileID: 6555147618505743708}
   rb: {fileID: 0}
   speed: 5
+  Damage: 0
   MaxDistanseSpawn: 10
   StartPosition: {x: 0, y: 0}
   TargetObject: {fileID: 0}
+  velocity: {x: 0, y: 0}
 --- !u!82 &2533940875561246943
 AudioSource:
   m_ObjectHideFlags: 0
@@ -394,10 +395,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
-  Bee: {fileID: 0}
+  animator: {fileID: 0}
   AttackAnimateTime: 0.4
   AttackCoolDown: 2
-  AttackObject: {fileID: 6555147617829166599}
+  Bullet: {fileID: 6555147617829166599}
   AttackTo: {fileID: 0}
   DetectedTargetObject: {fileID: 0}
   CanAttack: 1

@@ -31,7 +31,7 @@ public class PlayerDeath : MonoBehaviour, IDeathHandler
     public void Destruction()
     {
         gameObject.SetActive(false);
-        GameManager.Instance.GameOver();
+        GameManager.Instance?.GameOver();
     }
 
 }

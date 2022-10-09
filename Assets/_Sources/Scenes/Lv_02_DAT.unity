@@ -3266,6 +3266,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 880520027387217216, guid: de570bfbf1a49ba4c9575930f7db6bae, type: 3}
   m_PrefabInstance: {fileID: 463017075}
   m_PrefabAsset: {fileID: 0}
+--- !u!60 &472911288 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 1073687487, guid: ccfdf1298fe38ec43b3f7576fe2c2b99, type: 3}
+  m_PrefabInstance: {fileID: 1578172918}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &473271044
 GameObject:
   m_ObjectHideFlags: 0
@@ -6857,6 +6862,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4485412339991665596, guid: 8b7dce58da122274c80c5d798dfea34a, type: 3}
   m_PrefabInstance: {fileID: 981122367}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1124340300 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4485412339991665595, guid: 8b7dce58da122274c80c5d798dfea34a, type: 3}
+  m_PrefabInstance: {fileID: 981122367}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1139538883
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7007,6 +7017,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1149717673 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1379344590, guid: 57f08525da6c7184ba2eae945976c8ce, type: 3}
+  m_PrefabInstance: {fileID: 1823162316}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1154970906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9782,6 +9797,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 522776248088317210, guid: ccfdf1298fe38ec43b3f7576fe2c2b99, type: 3}
+      propertyPath: VCam
+      value: 
+      objectReference: {fileID: 1149717673}
     - target: {fileID: 7626031578363010315, guid: ccfdf1298fe38ec43b3f7576fe2c2b99, type: 3}
       propertyPath: m_UseAdjacentEndPoint
       value: 0
@@ -10674,6 +10693,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 484700515, guid: 57f08525da6c7184ba2eae945976c8ce, type: 3}
+      propertyPath: m_CameraDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379344591, guid: 57f08525da6c7184ba2eae945976c8ce, type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 1124340300}
+    - target: {fileID: 1379344593, guid: 57f08525da6c7184ba2eae945976c8ce, type: 3}
+      propertyPath: m_BoundingShape2D
+      value: 
+      objectReference: {fileID: 472911288}
     - target: {fileID: 7139889492126791428, guid: 57f08525da6c7184ba2eae945976c8ce, type: 3}
       propertyPath: TopLeft
       value: 
