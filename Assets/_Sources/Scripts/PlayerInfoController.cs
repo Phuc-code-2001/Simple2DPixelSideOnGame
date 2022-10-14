@@ -48,6 +48,12 @@ public class PlayerInfoController : MonoBehaviour
         ManaPoint = MaxManaPoints;
     }
 
+    public void Reset()
+    {
+        HealthPoint = MaxHealthPoints;
+        ManaPoint = MaxManaPoints;
+    }
+
     private void Start()
     {
         if(GameManager.Instance?.StartMode == GameManager.GameStartMode.ContinueGame)
@@ -64,13 +70,13 @@ public class PlayerInfoController : MonoBehaviour
 
     public void ReceiveDamage(float dame)
     {
-        HealthPoint -= dame;
+        if(HealthPoint > dame) HealthPoint -= dame; else HealthPoint = 0;
         ReloadDisplay = true;
     }
 
     public void UseMP(float mp)
     {
-        ManaPoint -= mp;
+        if(ManaPoint > mp) ManaPoint -= mp; else ManaPoint = 0;
         if(ManaPoint < 0) ManaPoint = 0;
         ReloadDisplay = true;
     }

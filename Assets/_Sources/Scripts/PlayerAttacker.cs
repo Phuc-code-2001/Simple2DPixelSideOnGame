@@ -27,7 +27,7 @@ public class PlayerAttacker : MonoBehaviour, IAttacker
 
     private void Update()
     {
-        if(playerController.inputController.AttackSignalActive && !playerController.IsAttacking)
+        if(playerController.inputController.AttackSignalActive && !playerController.IsAttacking && !playerController.IsDeath)
         {
             Attack();
             Invoke("AttackReset", AttackCoolDown);

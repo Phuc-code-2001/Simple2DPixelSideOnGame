@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (playerController.IsHitting)
         {
-            playerController.rb.velocity = Vector2.zero;
+            playerController.rb.velocity = playerController.rb.velocity * Vector2.up;
             return;
         }
         playerController.rb.velocity = new Vector2(CurrentSpeed * MoveX, playerController.rb.velocity.y);

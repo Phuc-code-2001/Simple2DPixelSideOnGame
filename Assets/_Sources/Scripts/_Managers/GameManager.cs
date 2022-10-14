@@ -87,10 +87,13 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        TimeManager.PauseTime();
-        ScenesManager.LoadScene(ScenesManager.CurrentSceneIndex);
-        UpdateRecord();
-        TimeManager.ResumeTime();
+        //TimeManager.PauseTime();
+        //ScenesManager.LoadScene(ScenesManager.CurrentSceneIndex);
+        //UpdateRecord();
+        //TimeManager.ResumeTime();
+
+        PlayerController.Instance?.Reload();
+
     }
 
     public void ExitGame()

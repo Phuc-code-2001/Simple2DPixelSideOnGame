@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController Instance;
 
+    private Vector2 startPosition;
+
     [Header("Components")]
     public Rigidbody2D rb;
     public InputController inputController;
@@ -42,6 +44,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        startPosition = transform.position;
         inputController = GetComponent<InputController>();
         rb = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovement>();
@@ -68,6 +71,14 @@ public class PlayerController : MonoBehaviour
         IsRunning = inputController.RunSignalActive;
         IsFalling = rb.velocity.y < -0.25f && !IsGrounded;
         IsDeath = playerInfoController.HealthPoint <= 0;
+    }
+
+    public void Reload()
+    {
+        transform.position = startPosition;
+        IsDeath = true;
+        playerInfoController.Reset();
+        gameObject.SetActive(true);
     }
 
 }

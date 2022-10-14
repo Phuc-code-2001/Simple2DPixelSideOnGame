@@ -28,16 +28,16 @@ public class GroundChecker : MonoBehaviour
         }
     }
 
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    int layerIndexCollider = collision.gameObject.layer;
-    //    if(layerIndexCollider == GroundLayerIndex)
-    //    {
-    //        IGroundedHandler GroundedHandler = Parent.GetComponent<IGroundedHandler>();
-    //        GroundedHandler.GroundedHandle();
-    //        OnGround = collision.gameObject;
-    //    }
-    //}
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        int layerIndexCollider = collision.gameObject.layer;
+        if (layerIndexCollider == GroundLayerIndex)
+        {
+            IGroundedHandler GroundedHandler = Parent.GetComponent<IGroundedHandler>();
+            GroundedHandler.GroundedHandle();
+            OnGround = collision.gameObject;
+        }
+    }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
