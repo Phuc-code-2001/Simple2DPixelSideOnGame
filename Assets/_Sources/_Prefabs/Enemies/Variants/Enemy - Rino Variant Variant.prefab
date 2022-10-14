@@ -161,5 +161,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rino
       objectReference: {fileID: 0}
+    - target: {fileID: 7707017020112535825, guid: fea8f5d2257b2e34ba7e322a908bbf7a, type: 3}
+      propertyPath: m_Radius
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fea8f5d2257b2e34ba7e322a908bbf7a, type: 3}

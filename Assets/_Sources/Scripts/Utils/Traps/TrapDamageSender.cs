@@ -11,7 +11,7 @@ public class TrapDamageSender : MonoBehaviour, IDamageSender
 
     public List<IDamageReceiver> CurrentReceivers = new List<IDamageReceiver>();
 
-    public float DamagePerSeconds = 20;
+    public float DamagePerSeconds = 400;
 
     private void Start()
     {

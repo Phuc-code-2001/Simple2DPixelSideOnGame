@@ -138,7 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyController: {fileID: 0}
   TurtleHeathPoint: 200
-  TurtleDamage: 10
+  TurtleDamage: 20
   TurtleSpeed: 0.5
 --- !u!114 &3672632608836761808
 MonoBehaviour:

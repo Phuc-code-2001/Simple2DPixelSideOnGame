@@ -403,7 +403,7 @@ MonoBehaviour:
   DSXPlayingClip: {fileID: 0}
   HitAudioClip: {fileID: 8300000, guid: 0456f60474d93264b8d67b14622b5c41, type: 3}
   JumpAudioClip: {fileID: 8300000, guid: 22c6722d1daca364aa5c52b5ef028ff8, type: 3}
-  MoveAudioClip: {fileID: 8300000, guid: df91008f84701394abcf01393576a93b, type: 3}
+  MoveAudioClip: {fileID: 0}
 --- !u!82 &8203339243416306889
 AudioSource:
   m_ObjectHideFlags: 0
@@ -913,6 +913,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8976166570645449681, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
 --- !u!1 &4830975670238342515 stripped

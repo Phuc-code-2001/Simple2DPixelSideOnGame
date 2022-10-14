@@ -103,6 +103,10 @@ PrefabInstance:
       propertyPath: HpBottleDropRate
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 2631323322792308373, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4449799102139142885, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
       propertyPath: m_Icon
       value: 
@@ -126,7 +130,7 @@ PrefabInstance:
     - target: {fileID: 5570476923605888456, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
       propertyPath: HitEffect
       value: 
-      objectReference: {fileID: 8258988254701450926}
+      objectReference: {fileID: 2728923323546408998}
     - target: {fileID: 5570476925220724316, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -175,8 +179,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy - Turtle Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6468897146811372727, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
+--- !u!1 &2728923323546408998 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5782379452511684277, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
+  m_PrefabInstance: {fileID: 8493848494727569043}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4084335003033611432 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5570476923382542907, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
@@ -212,9 +225,9 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &7855173916483356796
-BoxCollider2D:
+  m_Constraints: 4
+--- !u!58 &8879767462714971163
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -226,21 +239,6 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.008675396, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.55466497, y: 0.34067297}
-  m_EdgeRadius: 0
---- !u!1 &8258988254701450926 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 539838474113738813, guid: b62751c6326876b4c8bd44731e377e04, type: 3}
-  m_PrefabInstance: {fileID: 8493848494727569043}
-  m_PrefabAsset: {fileID: 0}
+  m_Radius: 0.18

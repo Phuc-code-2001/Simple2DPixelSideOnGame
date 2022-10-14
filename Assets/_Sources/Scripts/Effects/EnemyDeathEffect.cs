@@ -3,20 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDeathEffect : Effect
+public class EnemyDeathEffect : MonoBehaviour
 {
 
-    [Header("Properties")]
-    public float TimeScale = 0.66f;
+    private float TimeScale = 0.66f;
+    private float timer;
 
-    private void Start()
+
+    private void OnEnable()
     {
-        EffectTimeScale = TimeScale;
-        Invoke("Destruction", EffectTimeScale);
+        timer = TimeScale;
     }
 
-    private void Destruction()
+    private void FixedUpdate()
     {
-        Destroy(gameObject);
+        if (timer > 0)
+        {
+            timer -= Time.fixedDeltaTime;
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

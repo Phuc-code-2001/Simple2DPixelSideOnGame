@@ -9,6 +9,8 @@ TagManager:
   - Ceiling
   - Bullet
   - Platformer
+  - Chest
+  - Trap
   layers:
   - Default
   - TransparentFX
@@ -26,7 +28,7 @@ TagManager:
   - PlatformerChecker
   - Platformer
   - CollectedItem
-  - 
+  - Trap
   - 
   - 
   - 
@@ -43,8 +45,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Backgound
+    uniqueID: 2683315559
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Trap
+    uniqueID: 3212009239
     locked: 0
   - name: Player
     uniqueID: 4051900023
@@ -54,4 +62,7 @@ TagManager:
     locked: 0
   - name: Item
     uniqueID: 178582017
+    locked: 0
+  - name: Effect
+    uniqueID: 2469479747
     locked: 0

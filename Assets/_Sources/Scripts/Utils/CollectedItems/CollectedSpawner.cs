@@ -6,8 +6,6 @@ public class CollectedSpawner : Spawner
 {
     public static CollectedSpawner Instance;
 
-    public float animate = 0.5f;
-
     private void Awake()
     {
         Instance = this;
