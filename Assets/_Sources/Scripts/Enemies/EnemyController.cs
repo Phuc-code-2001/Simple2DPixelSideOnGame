@@ -42,13 +42,9 @@ public class EnemyController : MonoBehaviour, IDeathHandler
         Physics2D.IgnoreLayerCollision(gameObject.layer, gameObject.layer);
     }
 
-    private void Update()
-    {
-        if(IsDeath) Death();
-    }
-
     public void Hit()
     {
+        if (IsDeath) return;
         if (HitEffect != null) UseHitEffect();
     }
 
@@ -61,8 +57,12 @@ public class EnemyController : MonoBehaviour, IDeathHandler
 
     public void Death()
     {
+        if (IsDeath) return;
+        IsDeath = true;
         UseDeathEffect();
+
         enemySpawnCollector.SpawnItems();
+        StartCoroutine(CalculatePoint());
         Destroy(transform.parent.gameObject);
     }
 
@@ -70,9 +70,17 @@ public class EnemyController : MonoBehaviour, IDeathHandler
     {
         if(DeathEffect != null)
         {
-            // DeathEffect.SetActive(false);
             GameObject effect = GameObject.Instantiate(DeathEffect, transform.position, Quaternion.identity);
             effect.SetActive(true);
         }
+    }
+
+    private IEnumerator CalculatePoint()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.LvManager.EnemyKilled();
+        }
+        yield return null;
     }
 }

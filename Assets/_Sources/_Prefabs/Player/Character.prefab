@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
-  BaseSpeed: 5
+  BaseSpeed: 4
   CurrentSpeed: 0
   UseMpInSeconds: 5
   MoveX: 0
@@ -304,7 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   EffectTime: 0.6
-  effectObject: {fileID: 0}
+  effectObject: {fileID: 2955623459812423943, guid: 3bb158d11d6d6bf4684c1b7c510263b2, type: 3}
 --- !u!114 &3502112384740503603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,7 +367,7 @@ GameObject:
   m_Layer: 10
   m_Name: PlayerAudioController
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -777,7 +777,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2593811105694300220, guid: 51591cb55dc36324fb03e3bfd9449a1f, type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2593811105694300220, guid: 51591cb55dc36324fb03e3bfd9449a1f, type: 3}
       propertyPath: m_SortingLayerID
@@ -853,21 +853,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4485412339991665595}
     m_Modifications:
-    - target: {fileID: 8936347603310730257, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8936347603310730257, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -243067273
-      objectReference: {fileID: 0}
     - target: {fileID: 8936347603310730259, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
       propertyPath: m_Name
       value: SwordAttack
-      objectReference: {fileID: 0}
-    - target: {fileID: 8936347603310730259, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8936347603310730262, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
       propertyPath: m_RootOrder
@@ -913,10 +901,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8976166570645449681, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
 --- !u!1 &4830975670238342515 stripped

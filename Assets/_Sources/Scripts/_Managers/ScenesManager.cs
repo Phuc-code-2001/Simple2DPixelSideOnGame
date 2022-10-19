@@ -15,6 +15,7 @@ public class ScenesManager : MonoBehaviour
 
     public void LoadScene(int sceneIndex)
     {
+        GameManager.Instance.TimeManager.ResumeTime();
         var loadSceneProcess = SceneManager.LoadSceneAsync(sceneIndex);
         // Show Loadding
 
@@ -23,6 +24,6 @@ public class ScenesManager : MonoBehaviour
 
     public void LoadNextScene()
     {
-        LoadScene(CurrentSceneIndex + 1);
+        if(CurrentSceneIndex < NumberOfScenes) LoadScene(CurrentSceneIndex + 1);
     }
 }

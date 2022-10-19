@@ -48,7 +48,7 @@ public class MenuManager : MonoBehaviour
 
     public void LoadMenu()
     {
-        GameManager.Instance.SaveGame();
+        // GameManager.Instance.SaveGame();
         GameManager.Instance.ScenesManager.LoadScene(0);
         GameManager.Instance.UIManager.LoadMenu();
         GameManager.Instance.TimeManager.ResumeTime();

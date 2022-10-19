@@ -16,7 +16,7 @@ public class SwordDamageSender : MonoBehaviour, IDamageSender, IMoveOfSpawnObjec
     [SerializeField] private int numberOfSlashed = 0;
     [SerializeField] private float scaleNeftDameOnTarget = 40;
 
-    public List<string> AttackToTags = new List<string>() { "Enemy", "Chest" };
+    public List<string> AttackToTags = new List<string>() { "Enemy", "Chest", "Boss" };
 
     private List<GameObject> CollapsedObjects = new List<GameObject>();
 

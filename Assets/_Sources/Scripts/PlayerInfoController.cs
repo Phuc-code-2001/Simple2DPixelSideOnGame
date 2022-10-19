@@ -52,6 +52,7 @@ public class PlayerInfoController : MonoBehaviour
     {
         HealthPoint = MaxHealthPoints;
         ManaPoint = MaxManaPoints;
+        ReloadDisplay = true;
     }
 
     private void Start()

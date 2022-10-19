@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         Records = SaveGameManager.GetRecords();
         SelectedRecord = Records.FirstOrDefault();
 
-        Debug.Log(JsonConvert.SerializeObject(SelectedRecord));
+        // Debug.Log(JsonConvert.SerializeObject(SelectedRecord));
     }
 
     public void SaveGame()
@@ -81,19 +81,45 @@ public class GameManager : MonoBehaviour
         SelectedRecord.Player.ManaPoint = PlayerController.Instance.playerInfoController.ManaPoint;
         SelectedRecord.Player.Coin = PlayerController.Instance.playerInfoController.Coin;
         
-        SelectedRecord.PositionX = PlayerController.Instance.rb.position.x;
-        SelectedRecord.PositionY = PlayerController.Instance.rb.position.y;
+        // SelectedRecord.PositionX = PlayerController.Instance.rb.position.x;
+        // SelectedRecord.PositionY = PlayerController.Instance.rb.position.y;
     }
 
     public void GameOver()
     {
-        //TimeManager.PauseTime();
-        //ScenesManager.LoadScene(ScenesManager.CurrentSceneIndex);
-        //UpdateRecord();
-        //TimeManager.ResumeTime();
-
         PlayerController.Instance?.Reload();
+    }
 
+    public void EndLevel()
+    {
+        UIManager.ShowEndLevel();
+        LvManager.Finish();
+        CurrentGameState = GameState.Ending;
+        TimeManager.PauseTime();
+        // SaveGame();
+    }
+
+    public void WinGame()
+    {
+
+    }
+
+    public void Restart()
+    {
+        CurrentGameState = GameState.Playing;
+        TimeManager.ResumeTime();
+        UIManager.OnPlayUI();
+        LvManager.Reset();
+        ScenesManager.LoadScene(ScenesManager.CurrentSceneIndex);
+    }
+
+    public void NextLevel()
+    {
+        CurrentGameState = GameState.Playing;
+        TimeManager.ResumeTime();
+        UIManager.OnPlayUI();
+        LvManager.Reset();
+        ScenesManager.LoadNextScene();
     }
 
     public void ExitGame()

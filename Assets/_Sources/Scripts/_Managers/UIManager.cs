@@ -9,11 +9,15 @@ public class UIManager : MonoBehaviour
     public GameObject PauseUI;
     public GameObject SetupUI;
 
+    public GameObject EndLevelUI;
+
     public void LoadMenu()
     {
         MenuUI.SetActive(true);
         SetupUI.SetActive(false);
         PauseUI.SetActive(false);
+        EndLevelUI.SetActive(false);
+
     }
 
     public void OnPlayUI()
@@ -21,6 +25,15 @@ public class UIManager : MonoBehaviour
         MenuUI.SetActive(false);
         SetupUI.SetActive(true);
         PauseUI.SetActive(false);
+        EndLevelUI.SetActive(false);
 
+    }
+
+    public void ShowEndLevel()
+    {
+        EndLevelUI.SetActive(true);
+        MenuUI.SetActive(false);
+        SetupUI.SetActive(false);
+        PauseUI.SetActive(false);
     }
 }
