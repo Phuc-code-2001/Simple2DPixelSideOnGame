@@ -19,10 +19,9 @@ public class PlayerCollector : MonoBehaviour, IItemCollector
             Coin coin = item as Coin;
             coin.gameObject.SetActive(false);
             playerController.playerInfoController.AddCoin(coin.UnitValue);
-            if(GameManager.Instance != null)
-            {
-                GameManager.Instance.LvManager.CollectedCoin(coin.UnitValue);
-            }
+            
+
+
         }
 
         else if(typeof(T) == typeof(HPBottle))

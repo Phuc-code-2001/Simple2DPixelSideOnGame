@@ -30,24 +30,9 @@ public class PlayerMovement : MonoBehaviour
         playerController = GetComponent<PlayerController>();
     }
 
-    public void LoadPosition()
-    {
-        Vector2 pos = new Vector2()
-        {
-            x = GameManager.Instance.SelectedRecord.PositionX,
-            y = GameManager.Instance.SelectedRecord.PositionY,
-        };
-        playerController.rb.position = pos;
-        Camera.main.transform.position = pos;
-    }
-
     private void Start()
     {
         if (Dashwind == null) Dashwind = transform.Find("Dashwind").gameObject;
-        if(GameManager.Instance?.StartMode == GameManager.GameStartMode.ContinueGame)
-        {
-            LoadPosition();
-        }
     }
 
     private void Update()
@@ -95,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move()
     {
-        if (playerController.IsHitting)
+        if (playerController.IsHitting || playerController.IsDeath)
         {
             playerController.rb.velocity = playerController.rb.velocity * Vector2.up;
             return;

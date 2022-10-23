@@ -62,8 +62,8 @@ public class EnemyController : MonoBehaviour, IDeathHandler
         UseDeathEffect();
 
         enemySpawnCollector.SpawnItems();
-        StartCoroutine(CalculatePoint());
         Destroy(transform.parent.gameObject);
+        StartCoroutine(CalculatePoint());
     }
 
     private void UseDeathEffect()
@@ -77,10 +77,9 @@ public class EnemyController : MonoBehaviour, IDeathHandler
 
     private IEnumerator CalculatePoint()
     {
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.LvManager.EnemyKilled();
-        }
+        // Level Manager + Enemy Count
+        LevelManager levelManager = LevelManager.Instance;
+        levelManager.EnemyKilled();
         yield return null;
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,113 +19,125 @@ public class GameManager : MonoBehaviour
         Ending,
     }
 
-    public enum GameStartMode
-    {
-        NewGame,
-        ContinueGame,
-    }
-
     public static GameManager Instance;
+
     public SaveGameManager SaveGameManager = new SaveGameManager();
     public List<Record> Records;
-    public Record SelectedRecord;
+    public Record SelectedRecord = Record.GetDefault();
 
     public GameState CurrentGameState;
-    public GameStartMode StartMode;
-
-    [Header("SubManager")]
-    public UIManager UIManager;
-    public TimeManager TimeManager;
-    public ScenesManager ScenesManager;
-    public LevelManager LvManager;
-    public SoundManager SoundManager;
 
     private void Awake()
     {
         if (Instance != null)
         {
             Destroy(gameObject);
+            return;
         }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(Instance);
-
-            UIManager = GetComponent<UIManager>();
-            TimeManager = GetComponent<TimeManager>();
-            ScenesManager = GetComponent<ScenesManager>();
-            LvManager = GetComponent<LevelManager>();
-            SoundManager = GetComponentInChildren<SoundManager>();
-        }
+        
+        DontDestroyOnLoad(gameObject);
+        Instance = this;
+        
     }
 
     public void LoadDatabase()
     {
         Records = SaveGameManager.GetRecords();
-        SelectedRecord = Records.FirstOrDefault();
-
-        // Debug.Log(JsonConvert.SerializeObject(SelectedRecord));
     }
 
     public void SaveGame()
     {
         UpdateRecord();
         SelectedRecord = SaveGameManager.SaveRecord(SelectedRecord, SelectedRecord.Id != 0);
-        Debug.Log(JsonConvert.SerializeObject(SelectedRecord));
+        // Debug.Log(JsonConvert.SerializeObject(SelectedRecord));
     }
 
     public void UpdateRecord()
     {
-        SelectedRecord.SceneIndex = ScenesManager.CurrentSceneIndex;
-
-        SelectedRecord.Player.HeathPoint = PlayerController.Instance.playerInfoController.HealthPoint;
-        SelectedRecord.Player.ManaPoint = PlayerController.Instance.playerInfoController.ManaPoint;
-        SelectedRecord.Player.Coin = PlayerController.Instance.playerInfoController.Coin;
-        
-        // SelectedRecord.PositionX = PlayerController.Instance.rb.position.x;
-        // SelectedRecord.PositionY = PlayerController.Instance.rb.position.y;
-    }
-
-    public void GameOver()
-    {
-        PlayerController.Instance?.Reload();
-    }
-
-    public void EndLevel()
-    {
-        UIManager.ShowEndLevel();
-        LvManager.Finish();
-        CurrentGameState = GameState.Ending;
-        TimeManager.PauseTime();
-        // SaveGame();
-    }
-
-    public void WinGame()
-    {
-
+        SelectedRecord.MaxLevelIndex = SceneManager.GetActiveScene().buildIndex - 1;
+        SelectedRecord.Coin = PlayerController.Instance.playerInfoController.Coin;
     }
 
     public void Restart()
     {
-        CurrentGameState = GameState.Playing;
-        TimeManager.ResumeTime();
-        UIManager.OnPlayUI();
-        LvManager.Reset();
-        ScenesManager.LoadScene(ScenesManager.CurrentSceneIndex);
+        // Reload Current Level Scene
+        ResumeGame(() =>
+        {
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            LoadSceneManager.Instance.LoadSceneAsync(currentSceneIndex);
+        });
+
     }
+
+    public void GameOver()
+    {
+        // Show GameOver Panel
+
+        
+    }
+
+    public void EndLevel()
+    {
+        PauseGame();
+
+        GamePanel gamePanel = GamePanel.Instance;
+        if (gamePanel != null)
+        {
+            LevelManager.Instance.SetResult();
+            gamePanel.ShowPanel(GamePanel.PanelTypes.EndLevel);
+        }
+    }
+
+    public void WinGame()
+    {
+        
+        GamePanel gamePanel = GamePanel.Instance;
+        if (gamePanel != null)
+        {
+            gamePanel.ShowPanel(GamePanel.PanelTypes.Win);
+        }
+    }
+
 
     public void NextLevel()
     {
-        CurrentGameState = GameState.Playing;
-        TimeManager.ResumeTime();
-        UIManager.OnPlayUI();
-        LvManager.Reset();
-        ScenesManager.LoadNextScene();
+        int SceneCount = SceneManager.sceneCountInBuildSettings;
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if(currentSceneIndex + 1 >= SceneCount)
+        {
+            WinGame();
+        }
+        else
+        {
+            ResumeGame(() =>
+            {
+                LoadSceneManager.Instance.LoadSceneAsync(currentSceneIndex + 1);
+            });
+        }
     }
 
-    public void ExitGame()
+    private void Start()
     {
-        Application.Quit();
+        
     }
+
+    #region CallBack
+
+    public void PauseGame()
+    {
+        if (CurrentGameState == GameState.Pausing) return;
+        CurrentGameState = GameState.Pausing;
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame(Action callback = null)
+    {
+        Time.timeScale = 1;
+        if(callback != null) callback();
+    }
+
+    #endregion
+
+    
 
 }

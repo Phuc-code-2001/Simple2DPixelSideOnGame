@@ -8,13 +8,24 @@ public class LevelManager : MonoBehaviour
 {
     private Int32 killEnemies = 0;
     private Int32 colectedCoin = 0;
-    private TimeSpan doneLevelTime;
-
-    public bool isFinished = false;
+    private float StartAt;
 
     [SerializeField] private Text EnemyCountText;
     [SerializeField] private Text CoinCountText;
     [SerializeField] private Text TimeCountText;
+
+    public static LevelManager Instance;
+
+    private void Awake()
+    {
+        Debug.Log("Start Level");
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        Reset();
+    }
 
     public void EnemyKilled()
     {
@@ -26,25 +37,25 @@ public class LevelManager : MonoBehaviour
         colectedCoin += (int) value;
     }
 
-    private void FixedUpdate()
-    {
-        if(!isFinished) doneLevelTime += TimeSpan.FromSeconds(Time.fixedDeltaTime);
-    }
-
-    public void Reset()
+    private void Reset()
     {
         killEnemies = 0;
         colectedCoin = 0;
-        doneLevelTime = TimeSpan.Zero;
-        isFinished = false;
+        StartAt = Time.time;
     }
 
-    public void Finish()
+    public void SetResult()
     {
-        isFinished = true;
-
         EnemyCountText.text = killEnemies.ToString();
         CoinCountText.text = colectedCoin.ToString();
+
+        TimeSpan doneLevelTime = CalculateTime();
         TimeCountText.text = $"{doneLevelTime.Minutes}m{doneLevelTime.Seconds}s";
+    }
+
+    private TimeSpan CalculateTime()
+    {
+        TimeSpan deltaTime = TimeSpan.FromSeconds(Time.time - StartAt);
+        return deltaTime;
     }
 }

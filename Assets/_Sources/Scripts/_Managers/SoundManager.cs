@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
 {
 
@@ -20,6 +21,12 @@ public class SoundManager : MonoBehaviour
         source.volume = vol;
     }
 
+    private void Start()
+    {
+        AudioClip BGClip = source.clip;
+        PlaySound(BGClip, true);
+    }
+
     public float GetVolume()
     {
         return source.volume;
@@ -32,6 +39,12 @@ public class SoundManager : MonoBehaviour
         source.loop = loop;
         source.Play();
     }
+
+    public void PlayOneShot(AudioClip clip)
+    {
+        source.PlayOneShot(clip, source.volume);
+    }
+
 
     public void Stop()
     {

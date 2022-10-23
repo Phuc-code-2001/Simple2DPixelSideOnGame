@@ -14,7 +14,7 @@ public class PlayerInfoController : MonoBehaviour
 
     public float HealthPoint;
     public float ManaPoint;
-    public float Damage = 50;
+    public float Damage = 100;
 
     public float HealthPointRate => HealthPoint / MaxHealthPoints;
     public float ManaPointRate => ManaPoint / MaxManaPoints;
@@ -30,43 +30,35 @@ public class PlayerInfoController : MonoBehaviour
 
     private void LoadProperties()
     {
-        HealthPoint = GameManager.Instance.SelectedRecord.Player.HeathPoint;
-        ManaPoint = GameManager.Instance.SelectedRecord.Player.ManaPoint;
-        Coin = GameManager.Instance.SelectedRecord.Player.Coin;
+        if(GameManager.Instance != null)
+        {
+            Coin = GameManager.Instance.SelectedRecord.Coin;
+        }
+        SetDefault();
     }
 
-    public void SetProperties()
+    public void SetDefault()
     {
-        if (GameManager.Instance.SelectedRecord.Player == null) GameManager.Instance.SelectedRecord.Player = new Player();
-        GameManager.Instance.UpdateRecord();
+        HealthPoint = MaxHealthPoints;
+        ManaPoint = MaxManaPoints;
+        Damage = 100;
+    }
+
+    public void Reset()
+    {
+        LoadProperties();
+        ReloadDisplay = true;
     }
 
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
-        HealthPoint = MaxHealthPoints;
-        ManaPoint = MaxManaPoints;
-    }
-
-    public void Reset()
-    {
-        HealthPoint = MaxHealthPoints;
-        ManaPoint = MaxManaPoints;
-        ReloadDisplay = true;
     }
 
     private void Start()
     {
-        if(GameManager.Instance?.StartMode == GameManager.GameStartMode.ContinueGame)
-        {
-            LoadProperties();
-        }
-        else
-        {
-            if(GameManager.Instance != null) SetProperties();
-        }
-
-        Invoke("MpRecoveryHandler", MpRecoveryTime);
+        LoadProperties();
+        StartCoroutine(MpRecoveryHandler());
     }
 
     public void ReceiveDamage(float dame)
@@ -102,12 +94,16 @@ public class PlayerInfoController : MonoBehaviour
         ReloadDisplay = true;
     }
 
-    private void MpRecoveryHandler()
+    float lastTimeHandler;
+    IEnumerator MpRecoveryHandler()
     {
-        Invoke("MpRecoveryHandler", MpRecoveryTime);
-        if(ManaPoint + MpRecoveryValue < MaxManaPoints) ManaPoint += MpRecoveryValue;
-        else ManaPoint = MaxManaPoints;
-        ReloadDisplay = true;
+        while(true)
+        {
+            if (ManaPoint + MpRecoveryValue < MaxManaPoints) ManaPoint += MpRecoveryValue;
+            else ManaPoint = MaxManaPoints;
+            ReloadDisplay = true;
+            yield return new WaitForSeconds(MpRecoveryTime);
+        }
     }
 
 }

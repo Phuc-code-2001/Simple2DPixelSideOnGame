@@ -19,7 +19,7 @@ namespace DataLayer.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DataLayer.DataAccess.Player", b =>
+            modelBuilder.Entity("DataLayer.DataAccess.Record", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -29,79 +29,18 @@ namespace DataLayer.Migrations
                     b.Property<float>("Coin")
                         .HasColumnType("real");
 
-                    b.Property<float>("HeathPoint")
-                        .HasColumnType("real");
-
-                    b.Property<float>("ManaPoint")
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Players");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Coin = 5f,
-                            HeathPoint = 1200f,
-                            ManaPoint = 100f
-                        });
-                });
-
-            modelBuilder.Entity("DataLayer.DataAccess.Record", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<bool>("EndGame")
                         .HasColumnType("bit");
 
-                    b.Property<int>("PlayerId")
+                    b.Property<int>("MaxLevelIndex")
                         .HasColumnType("int");
-
-                    b.Property<float>("PositionX")
-                        .HasColumnType("real");
-
-                    b.Property<float>("PositionY")
-                        .HasColumnType("real");
 
                     b.Property<DateTime>("SaveTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SceneIndex")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PlayerId");
-
                     b.ToTable("Records");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            EndGame = false,
-                            PlayerId = 1,
-                            PositionX = 0f,
-                            PositionY = 0f,
-                            SaveTime = new DateTime(2022, 10, 8, 19, 55, 8, 954, DateTimeKind.Local).AddTicks(943),
-                            SceneIndex = 1
-                        });
-                });
-
-            modelBuilder.Entity("DataLayer.DataAccess.Record", b =>
-                {
-                    b.HasOne("DataLayer.DataAccess.Player", "Player")
-                        .WithMany()
-                        .HasForeignKey("PlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Player");
                 });
 #pragma warning restore 612, 618
         }

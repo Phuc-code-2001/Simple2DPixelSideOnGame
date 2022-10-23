@@ -22,9 +22,8 @@ namespace API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(
-                _context.Records.Include(record => record.Player)
-                .OrderBy(record => record.SaveTime).ToList());
+            var dataset = _context.Records.OrderBy(record => record.SaveTime).ToList();
+            return Ok(dataset);
         }
 
         [HttpPost]

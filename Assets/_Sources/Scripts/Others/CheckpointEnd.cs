@@ -17,17 +17,17 @@ public class CheckpointEnd : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (IsHandled) return;
         PlayerController playerController = collision.GetComponent<PlayerController>();
-        if(playerController != null)
+        if(playerController != null && !IsHandled)
         {
-            if(DoneLevelSound != null)
+            IsHandled = true;
+            if (DoneLevelSound != null)
             {
-                SoundManager.Instance?.PlaySound(DoneLevelSound, false);
+                SoundManager.Instance?.PlayOneShot(DoneLevelSound);
             }
             FlagOut();
-            Invoke("DoneLevel", 1f);
-            IsHandled = true;
+            Invoke("DoneLevel", 1.5f);
+            
         }
     }
 

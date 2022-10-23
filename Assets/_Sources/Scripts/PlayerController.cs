@@ -76,9 +76,9 @@ public class PlayerController : MonoBehaviour
     public void Reload()
     {
         transform.position = startPosition;
-        IsDeath = false;
         playerInfoController.Reset();
         gameObject.SetActive(true);
+        IsDeath = false;
     }
 
 }
