@@ -54,14 +54,14 @@ TagManager:
   - name: Trap
     uniqueID: 3212009239
     locked: 0
-  - name: Player
-    uniqueID: 4051900023
-    locked: 0
   - name: Enemy
     uniqueID: 4098538891
     locked: 0
   - name: Item
     uniqueID: 178582017
+    locked: 0
+  - name: Player
+    uniqueID: 4051900023
     locked: 0
   - name: Effect
     uniqueID: 2469479747

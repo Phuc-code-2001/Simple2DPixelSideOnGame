@@ -22,7 +22,7 @@ public abstract class Spawner : MonoBehaviour
     }
 
 
-    public void Spawn(int quantity, Vector2 pos, float radius = 1, float offsetX = 0, float offsetY = 0.5f)
+    public List<GameObject> Spawn(int quantity, Vector2 pos, float radius = 1, float offsetX = 0, float offsetY = 0.5f)
     {
         List<GameObject> items = new List<GameObject>();
 
@@ -61,6 +61,8 @@ public abstract class Spawner : MonoBehaviour
             Rigidbody2D rb = item.GetComponent<Rigidbody2D>();
             if (rb != null) rb.AddForce(new Vector2(Random.Range(-radius, radius), 1), ForceMode2D.Impulse);
         }
+
+        return items;
     }
 
 }

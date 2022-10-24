@@ -4366,7 +4366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3381179073543022399, guid: d395fdbd039a1614c90d78e4bb8018d3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4132759972692053475, guid: d395fdbd039a1614c90d78e4bb8018d3, type: 3}
       propertyPath: CupObject

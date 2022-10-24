@@ -37,25 +37,40 @@ public class GameManager : MonoBehaviour
         
         DontDestroyOnLoad(gameObject);
         Instance = this;
-        
+
+        LoadDatabase();
+
     }
 
     public void LoadDatabase()
     {
         Records = SaveGameManager.GetRecords();
+        if(Records.Count > 0)
+        {
+            SelectedRecord = Records.FirstOrDefault();
+        }
     }
 
     public void SaveGame()
     {
-        UpdateRecord();
         SelectedRecord = SaveGameManager.SaveRecord(SelectedRecord, SelectedRecord.Id != 0);
-        // Debug.Log(JsonConvert.SerializeObject(SelectedRecord));
     }
 
     public void UpdateRecord()
     {
-        SelectedRecord.MaxLevelIndex = SceneManager.GetActiveScene().buildIndex - 1;
-        SelectedRecord.Coin = PlayerController.Instance.playerInfoController.Coin;
+        int SceneCount = SceneManager.sceneCountInBuildSettings;
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+        if (nextSceneIndex < SceneCount)
+        {
+            if(nextSceneIndex > SelectedRecord.MaxLevelIndex)
+            {
+                SelectedRecord.MaxLevelIndex = nextSceneIndex;
+            }
+        }
+        SelectedRecord.Coin += PlayerController.Instance.playerInfoController.Coin;
+
+        SaveGame();
     }
 
     public void Restart()
@@ -72,7 +87,11 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         // Show GameOver Panel
-
+        GamePanel gamePanel = GamePanel.Instance;
+        if(gamePanel != null)
+        {
+            gamePanel.ShowPanel(GamePanel.PanelTypes.GameOver);
+        }
         
     }
 
@@ -86,6 +105,9 @@ public class GameManager : MonoBehaviour
             LevelManager.Instance.SetResult();
             gamePanel.ShowPanel(GamePanel.PanelTypes.EndLevel);
         }
+
+        UpdateRecord();
+        
     }
 
     public void WinGame()
@@ -114,11 +136,6 @@ public class GameManager : MonoBehaviour
                 LoadSceneManager.Instance.LoadSceneAsync(currentSceneIndex + 1);
             });
         }
-    }
-
-    private void Start()
-    {
-        
     }
 
     #region CallBack

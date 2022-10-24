@@ -252,9 +252,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
-  PowerUnit: 10
-  JumpPower_01: 35
-  JumpPower_02: 40
+  PowerUnit: 1
+  JumpPower_01: 8
+  JumpPower_02: 8
   IsDoubleJump: 0
   DoubleJumpManaUse: 20
   CanDoubleJump: 0
