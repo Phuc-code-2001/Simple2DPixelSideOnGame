@@ -79,6 +79,7 @@ public class EnemyShooter : MonoBehaviour, IAttacker
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
+        
         if (AttackTo == collider.gameObject)
         {
             if(DetectedTargetObject == null) DetectedTargetObject = collider.gameObject;

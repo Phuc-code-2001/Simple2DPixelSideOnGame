@@ -25,32 +25,29 @@ public class PlayerDamageReceiver : MonoBehaviour, IDamageReceiver
         {
             float dameReceive = sender.GetDamage();
             playerController.playerInfoController.ReceiveDamage(dameReceive);
-            UseEffect();
+            StartCoroutine(UseEffect());
             UseSound();
         }
     }
 
-    public void UseEffect()
+    IEnumerator UseEffect()
     {
         playerController.IsHitting = true;
-        Invoke("EndEffect", EffectTime);
-
-        if (effectObject != null) SpawnEffect();
-    }
-
-    public void EndEffect()
-    {
+        SpawnEffect();
+        yield return new WaitForSeconds(EffectTime);
         playerController.IsHitting = false;
-    }
-
-    private void SpawnEffect()
-    {
-        GameObject effect = GameObject.Instantiate(effectObject, transform.position, transform.rotation);
-        effect.SetActive(true);
     }
 
     private void UseSound()
     {
         playerController.playerAudioController.PlayHitSound();
     }
+
+    private void SpawnEffect()
+    {
+        if (effectObject == null) return;
+        GameObject effect = GameObject.Instantiate(effectObject, transform.position, transform.rotation);
+        effect.SetActive(true);
+    }
+
  }

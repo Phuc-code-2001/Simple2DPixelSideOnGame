@@ -20,7 +20,7 @@ public class EnemyDamageReceiver : MonoBehaviour, IDamageReceiver
         enemy.ReceiveDamage(sender.GetDamage());
         if (enemy.IsDeath())
         {
-            enemyController.IsDeath = true;
+            enemyController.Death();
         }
         else
         {

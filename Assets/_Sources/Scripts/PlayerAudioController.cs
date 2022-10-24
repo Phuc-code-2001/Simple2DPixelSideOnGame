@@ -8,11 +8,12 @@ public class PlayerAudioController : AudioController
     [Header("AudioClips")]
     public AudioClip HitAudioClip;
     public AudioClip JumpAudioClip;
+    public AudioClip SwordAttackClip;
     public AudioClip MoveAudioClip;
 
-    private void Awake()
+    private void Start()
     {
-        if (FSXAudioSource == null) FSXAudioSource = GetComponent<AudioSource>();
+        
     }
 
     public void PlayHitSound()
@@ -31,16 +32,27 @@ public class PlayerAudioController : AudioController
         }
     }
 
+    public void PlaySwordAttackSound()
+    {
+        if(SwordAttackClip != null)
+        {
+            PlayOneShot(SwordAttackClip);
+        }
+    }
+
     public void StartMoveSound()
     {
-        DSXStart(MoveAudioClip);
+        if(MoveAudioClip != null)
+        {
+            DSXStart(MoveAudioClip);
+        }
     }
 
     public void StopMoveSound()
     {
-        if(DSXAudioSouce.clip == MoveAudioClip)
+        if(MoveAudioClip != null)
         {
-            DSXStop();
+            DSXStop(MoveAudioClip);
         }
     }
 }

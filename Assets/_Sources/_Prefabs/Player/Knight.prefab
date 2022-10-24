@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2593811105694300220}
   - component: {fileID: 2593811105694300221}
   - component: {fileID: 2593811105694300210}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Knight
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -81,8 +81,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -243067273
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &2593811105694300221
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runAnimationName: run
-  idleAnimationName: idle_1
+  idleAnimationName: idle_2
   walkAnimationName: walk
   atkAnimationName_1: sword_attack
   atkAnimationName_2: shield_attack

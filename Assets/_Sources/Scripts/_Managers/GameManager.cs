@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,87 +19,142 @@ public class GameManager : MonoBehaviour
         Ending,
     }
 
-    public enum GameStartMode
-    {
-        NewGame,
-        ContinueGame,
-    }
-
     public static GameManager Instance;
+
     public SaveGameManager SaveGameManager = new SaveGameManager();
     public List<Record> Records;
-    public Record SelectedRecord;
+    public Record SelectedRecord = Record.GetDefault();
 
     public GameState CurrentGameState;
-    public GameStartMode StartMode;
-
-    [Header("SubManager")]
-    public UIManager UIManager;
-    public TimeManager TimeManager;
-    public ScenesManager ScenesManager;
-    public LevelManager LvManager;
-    public SoundManager SoundManager;
 
     private void Awake()
     {
         if (Instance != null)
         {
             Destroy(gameObject);
+            return;
         }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(Instance);
+        
+        DontDestroyOnLoad(gameObject);
+        Instance = this;
 
-            UIManager = GetComponent<UIManager>();
-            TimeManager = GetComponent<TimeManager>();
-            ScenesManager = GetComponent<ScenesManager>();
-            LvManager = GetComponent<LevelManager>();
-            SoundManager = GetComponentInChildren<SoundManager>();
-        }
+        LoadDatabase();
+
     }
 
     public void LoadDatabase()
     {
         Records = SaveGameManager.GetRecords();
-        SelectedRecord = Records.FirstOrDefault();
-
-        Debug.Log(JsonConvert.SerializeObject(SelectedRecord));
+        if(Records.Count > 0)
+        {
+            SelectedRecord = Records.FirstOrDefault();
+        }
     }
 
     public void SaveGame()
     {
-        UpdateRecord();
         SelectedRecord = SaveGameManager.SaveRecord(SelectedRecord, SelectedRecord.Id != 0);
-        Debug.Log(JsonConvert.SerializeObject(SelectedRecord));
     }
 
     public void UpdateRecord()
     {
-        SelectedRecord.SceneIndex = ScenesManager.CurrentSceneIndex;
+        int SceneCount = SceneManager.sceneCountInBuildSettings;
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+        if (nextSceneIndex < SceneCount)
+        {
+            if(nextSceneIndex > SelectedRecord.MaxLevelIndex)
+            {
+                SelectedRecord.MaxLevelIndex = nextSceneIndex;
+            }
+        }
+        SelectedRecord.Coin += PlayerController.Instance.playerInfoController.Coin;
 
-        SelectedRecord.Player.HeathPoint = PlayerController.Instance.playerInfoController.HealthPoint;
-        SelectedRecord.Player.ManaPoint = PlayerController.Instance.playerInfoController.ManaPoint;
-        SelectedRecord.Player.Coin = PlayerController.Instance.playerInfoController.Coin;
-        
-        SelectedRecord.PositionX = PlayerController.Instance.rb.position.x;
-        SelectedRecord.PositionY = PlayerController.Instance.rb.position.y;
+        SaveGame();
+    }
+
+    public void Restart()
+    {
+        // Reload Current Level Scene
+        ResumeGame(() =>
+        {
+            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            LoadSceneManager.Instance.LoadSceneAsync(currentSceneIndex);
+        });
+
     }
 
     public void GameOver()
     {
-        //TimeManager.PauseTime();
-        //ScenesManager.LoadScene(ScenesManager.CurrentSceneIndex);
-        //UpdateRecord();
-        //TimeManager.ResumeTime();
-
-        PlayerController.Instance?.Reload();
-
+        // Show GameOver Panel
+        GamePanel gamePanel = GamePanel.Instance;
+        if(gamePanel != null)
+        {
+            gamePanel.ShowPanel(GamePanel.PanelTypes.GameOver);
+        }
+        
     }
 
-    public void ExitGame()
+    public void EndLevel()
     {
-        Application.Quit();
+        PauseGame();
+
+        GamePanel gamePanel = GamePanel.Instance;
+        if (gamePanel != null)
+        {
+            LevelManager.Instance.SetResult();
+            gamePanel.ShowPanel(GamePanel.PanelTypes.EndLevel);
+        }
+
+        UpdateRecord();
+        
     }
+
+    public void WinGame()
+    {
+        
+        GamePanel gamePanel = GamePanel.Instance;
+        if (gamePanel != null)
+        {
+            gamePanel.ShowPanel(GamePanel.PanelTypes.Win);
+        }
+    }
+
+
+    public void NextLevel()
+    {
+        int SceneCount = SceneManager.sceneCountInBuildSettings;
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if(currentSceneIndex + 1 >= SceneCount)
+        {
+            WinGame();
+        }
+        else
+        {
+            ResumeGame(() =>
+            {
+                LoadSceneManager.Instance.LoadSceneAsync(currentSceneIndex + 1);
+            });
+        }
+    }
+
+    #region CallBack
+
+    public void PauseGame()
+    {
+        if (CurrentGameState == GameState.Pausing) return;
+        CurrentGameState = GameState.Pausing;
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame(Action callback = null)
+    {
+        Time.timeScale = 1;
+        if(callback != null) callback();
+    }
+
+    #endregion
+
+    
 
 }

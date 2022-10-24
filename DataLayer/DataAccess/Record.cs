@@ -14,16 +14,11 @@ namespace DataLayer.DataAccess
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey("Player")]
-        public int PlayerId { get; set; }
-        public Player Player { get; set; }
+        public float Coin { get; set; }
 
-        public Int32 SceneIndex { get; set; }
-        public float PositionX { get; set; }
-        public float PositionY { get; set; }
+        public Int32 MaxLevelIndex { get; set; }
 
         public DateTime SaveTime { get; set; }
-
         public bool EndGame { get; set; }
     }
 }

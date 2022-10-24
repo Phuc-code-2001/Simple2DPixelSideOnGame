@@ -231,7 +231,7 @@ public class PlayerAnimationController : MonoBehaviour
                 return AnimationNameTypes.Attack_Shield;
 
             case AnimationActionTypes.Jump:
-                return AnimationNameTypes.Buff_Damage;
+                return AnimationNameTypes.Jump;
 
             case AnimationActionTypes.Stun:
                 return AnimationNameTypes.Stun;
@@ -268,7 +268,7 @@ public class PlayerAnimationController : MonoBehaviour
         if (playerController.IsDeath) return AnimationActionTypes.Dead;
         if (playerController.IsHitting) return AnimationActionTypes.Hit;
         if (playerController.IsAttacking) return AnimationActionTypes.Attack_Sword;
-        // if (!playerController.IsGrounded) return AnimationActionTypes.Jump;
+        if (playerController.IsJumping) return AnimationActionTypes.Jump;
 
         if (!playerController.IsMoveLeft && !playerController.IsMoveRight) return AnimationActionTypes.Idle;
 
