@@ -1,8 +1,9 @@
+using Assets._Sources.Scripts.Interfaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnCollector : MonoBehaviour
+public class EnemySpawnCollector : MonoBehaviour, ISpawnCollector
 {
     public int MaxNumberOfCoins = 1;
     public float CoinDropRate = 0.5f;
@@ -38,7 +39,7 @@ public class EnemySpawnCollector : MonoBehaviour
     }
 
 
-    public static bool GetLucky(float rate)
+    public bool GetLucky(float rate)
     {
         int luckyRange_Max = 50 + (int) ((100 * rate) / 2);
         int luckyRange_Min = 50 - (int) ((100 * rate) / 2);

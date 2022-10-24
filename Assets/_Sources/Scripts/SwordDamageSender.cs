@@ -7,36 +7,46 @@ using UnityEngine;
 public class SwordDamageSender : MonoBehaviour, IDamageSender, IMoveOfSpawnObject
 {
 
-    public Rigidbody2D rb;
-    public float Speed = 15;
-    public float MaxDistance = 6;
-
-    [SerializeField] private float CurrentDistance = 0;
-    [SerializeField] private Vector2 startPosition;
+    private Rigidbody2D rb;
+    private Transform parent;
+    [SerializeField] private float Speed = 15;
+    [SerializeField] private float MaxDistance = 6;
     [SerializeField] private int numberOfSlashed = 0;
     [SerializeField] private float scaleNeftDameOnTarget = 40;
 
-    public string[] AttackToTags = new string[] { "Enemy" };
-
+    public List<string> AttackToTags = new List<string>() { "Enemy", "Chest", "Boss" };
     private List<GameObject> CollapsedObjects = new List<GameObject>();
+
+    [Header("Debug")]
+    [SerializeField] private float CurrentDistance = 0;
+    [SerializeField] private Vector2 startLocalAt;
+    [SerializeField] private Vector2 startWorldAt;
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        parent = transform.parent;
+        startLocalAt = transform.localPosition;
+
+        gameObject.SetActive(false);
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        startPosition = transform.position;
-        transform.localScale = PlayerController.Instance.transform.localScale;
+        startWorldAt = transform.position;
+        SetMove();
+        transform.parent = null;
     }
 
     private void FixedUpdate()
     {
-        CurrentDistance = Vector2.Distance(transform.position, startPosition);
+        CurrentDistance = Vector2.Distance(transform.position, startWorldAt);
         if (CurrentDistance > MaxDistance)
         {
             StopMove();
+            Reset();
+            gameObject.SetActive(false);
         }
     }
 
@@ -66,12 +76,20 @@ public class SwordDamageSender : MonoBehaviour, IDamageSender, IMoveOfSpawnObjec
 
     public void SetMove()
     {
-        rb.velocity = new Vector2(Speed * PlayerController.Instance.transform.localScale.x, 0);
+        rb.velocity = new Vector2(Speed * transform.lossyScale.x, 0);
     }
 
     private void StopMove()
     {
         rb.velocity = new Vector2(0, 0);
-        Destroy(gameObject);
+    }
+
+    private void Reset()
+    {
+        transform.parent = parent;
+        transform.localPosition = startLocalAt;
+        transform.localScale = Vector3.one;
+        CollapsedObjects.Clear();
+        numberOfSlashed = 0;
     }
 }

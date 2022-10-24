@@ -11,11 +11,11 @@ public class TrapDamageSender : MonoBehaviour, IDamageSender
 
     public List<IDamageReceiver> CurrentReceivers = new List<IDamageReceiver>();
 
-    public float DamagePerSeconds = 20;
+    public float DamagePerSeconds = 400;
+    public float SendDamageTimer = 0;
 
     private void Start()
     {
-        HandlePerOneSecond();
         if(Receivers.Count == 0 && PlayerController.Instance != null)
         {
             Receivers.Add(PlayerController.Instance.gameObject);
@@ -30,6 +30,7 @@ public class TrapDamageSender : MonoBehaviour, IDamageSender
             if(damageReceiver != null)
             {
                 CurrentReceivers.Add(damageReceiver);
+                damageReceiver.ReceiveDamage(this);
             }
         }
     }
@@ -46,14 +47,21 @@ public class TrapDamageSender : MonoBehaviour, IDamageSender
         }
     }
 
+    private void FixedUpdate()
+    {
+        HandlePerOneSecond();
+        if(SendDamageTimer > 0) SendDamageTimer -= Time.fixedDeltaTime;
+    }
+
     private void HandlePerOneSecond()
     {
-        Invoke("HandlePerOneSecond", 1f);
+        if (SendDamageTimer > 0) return; 
         var damageReceivers = Receivers.Select(rv => rv.GetComponent<IDamageReceiver>());
         foreach (IDamageReceiver receiver in CurrentReceivers)
         {
             SendDamage(receiver);
         }
+        if (Receivers.Count > 0) SendDamageTimer = 1;
     }
 
     public void SendDamage(IDamageReceiver receiver)

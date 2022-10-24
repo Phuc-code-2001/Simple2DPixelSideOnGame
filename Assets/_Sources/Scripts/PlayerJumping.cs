@@ -9,9 +9,9 @@ public class PlayerJumping : MonoBehaviour
     public PlayerController playerController;
 
     [Header("Properties")]
-    public float PowerUnit = 10;
-    public float JumpPower_01 = 35;
-    public float JumpPower_02 = 40;
+    public float PowerUnit = 1;
+    public float JumpPower_01 = 8;
+    public float JumpPower_02 = 8;
     public bool IsDoubleJump = false;
 
     public float DoubleJumpManaUse = 20;
@@ -31,7 +31,7 @@ public class PlayerJumping : MonoBehaviour
         playerController.playerGroundedHandler.NonGroundedHandle();
         playerController.IsJumping = true;
         Vector2 force = new Vector2(0, PowerUnit * (IsDoubleJump ? JumpPower_02 : JumpPower_01));
-        playerController.rb.AddForce(force, ForceMode2D.Force);
+        playerController.rb.AddForce(force, ForceMode2D.Impulse);
         UseEffect();
         UseSound();
     }

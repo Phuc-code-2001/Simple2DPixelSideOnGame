@@ -1,3 +1,4 @@
+using Assets._Sources.Scripts.SaveAndLoadData;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class PlayerInfoController : MonoBehaviour
 
     public float HealthPoint;
     public float ManaPoint;
-    public float Damage = 50;
+    public float Damage = 100;
 
     public float HealthPointRate => HealthPoint / MaxHealthPoints;
     public float ManaPointRate => ManaPoint / MaxManaPoints;
@@ -29,34 +30,46 @@ public class PlayerInfoController : MonoBehaviour
 
     private void LoadProperties()
     {
+        if(GameManager.Instance != null)
+        {
+            Coin = GameManager.Instance.SelectedRecord.Coin;
+        }
+        SetDefault();
+    }
 
+    public void SetDefault()
+    {
+        HealthPoint = MaxHealthPoints;
+        ManaPoint = MaxManaPoints;
+        Damage = 100;
+    }
+
+    public void Reset()
+    {
+        LoadProperties();
+        ReloadDisplay = true;
     }
 
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
-        HealthPoint = MaxHealthPoints;
-        ManaPoint = MaxManaPoints;
     }
 
     private void Start()
     {
-        if(GameManager.Instance?.StartMode == GameManager.GameStartMode.ContinueGame)
-        {
-            LoadProperties();
-        }
-        MpRecoveryHandler();
+        LoadProperties();
+        StartCoroutine(MpRecoveryHandler());
     }
 
     public void ReceiveDamage(float dame)
     {
-        HealthPoint -= dame;
+        if(HealthPoint > dame) HealthPoint -= dame; else HealthPoint = 0;
         ReloadDisplay = true;
     }
 
     public void UseMP(float mp)
     {
-        ManaPoint -= mp;
+        if(ManaPoint > mp) ManaPoint -= mp; else ManaPoint = 0;
         if(ManaPoint < 0) ManaPoint = 0;
         ReloadDisplay = true;
     }
@@ -81,12 +94,16 @@ public class PlayerInfoController : MonoBehaviour
         ReloadDisplay = true;
     }
 
-    private void MpRecoveryHandler()
+    float lastTimeHandler;
+    IEnumerator MpRecoveryHandler()
     {
-        Invoke("MpRecoveryHandler", MpRecoveryTime);
-        if(ManaPoint + MpRecoveryValue < MaxManaPoints) ManaPoint += MpRecoveryValue;
-        else ManaPoint = MaxManaPoints;
-        ReloadDisplay = true;
+        while(true)
+        {
+            if (ManaPoint + MpRecoveryValue < MaxManaPoints) ManaPoint += MpRecoveryValue;
+            else ManaPoint = MaxManaPoints;
+            ReloadDisplay = true;
+            yield return new WaitForSeconds(MpRecoveryTime);
+        }
     }
 
 }

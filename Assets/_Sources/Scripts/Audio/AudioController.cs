@@ -6,32 +6,41 @@ using UnityEngine;
 public class AudioController : MonoBehaviour
 {
     [Header("AudioController")]
-    public static float volume = 1;
-    public AudioSource FSXAudioSource;
+    [Range(0, 1)]
+    [SerializeField]
+    private float baseVolume;
+    [SerializeField] private AudioSource audioSource;
 
-    [Header("DSX controller")]
-    public AudioSource DSXAudioSouce;
-    public AudioClip DSXPlayingClip;
-
-    public void PlayOneShot(AudioClip clip)
+    private void Awake()
     {
-        FSXAudioSource.PlayOneShot(clip);
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
     }
 
-    public void DSXStart(AudioClip clip)
+    public void SetVolume(float value)
     {
-        if (DSXPlayingClip == clip) return;
-        DSXPlayingClip = clip;
-        DSXAudioSouce.clip = clip;
-        DSXAudioSouce.loop = true;
-        DSXAudioSouce.volume = volume;
-        DSXAudioSouce.Play();
+        baseVolume = value;
+        audioSource.volume = baseVolume;
     }
 
-    public void DSXStop()
+    public float GetVolume() => audioSource.volume;
+
+    public void PlayOneShot(AudioClip clip, float subVolume = 1f)
     {
-        DSXAudioSouce.Stop();
-        DSXPlayingClip = null;
+        audioSource.PlayOneShot(clip, baseVolume * subVolume);
+    }
+
+    public void DSXStart(AudioClip clip, float subVolume = 1f)
+    {
+        if (audioSource.clip == clip) return;
+        audioSource.clip = clip;
+        audioSource.loop = true;
+        audioSource.volume = baseVolume * subVolume;
+        audioSource.Play();
+    }
+
+    public void DSXStop(AudioClip clip)
+    {
+        if(clip == audioSource.clip) audioSource.Stop();
     }
 
 }

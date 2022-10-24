@@ -7,68 +7,66 @@ using UnityEngine;
 public class PlayerAttacker : MonoBehaviour, IAttacker
 {
 
-    public PlayerController playerController;
+    private PlayerController playerController;
 
-    public float AttackAnimateTime = 1.0f;
-    public float AttackCoolDown = 1.5f;
+    [SerializeField] private float AttackAnimateTime = .8f;
+    [SerializeField] private float AttackCoolDown = 1.2f;
+    [SerializeField] private bool CanAttack = true;
 
-    public float DelayTimeHandle = 0.6f;
-    public GameObject AttackObject;
+    [SerializeField] private float DelayTimeHandle = 0.6f;
+    [SerializeField] private GameObject AttackObject;
 
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
     }
 
-    private void Start()
-    {
-        AttackObject = transform.Find("SwordAttack").gameObject;
-    }
-
     private void Update()
     {
-        if(playerController.inputController.AttackSignalActive && !playerController.IsAttacking)
+        if(playerController.inputController.AttackSignalActive && CanAttack && !playerController.IsDeath)
         {
             Attack();
-            Invoke("AttackReset", AttackCoolDown);
         }
     }
 
-    public void AttackReset()
-    {
-        playerController.inputController.AttackSignalActive = false;
-        playerController.IsAttacking = false;
-    }
-
+    private float startAttackAt;
     public void Attack()
     {
         playerController.IsAttacking = true;
-        Invoke("AttackHandler", DelayTimeHandle);
+        CanAttack = false;
+        startAttackAt = Time.time;
+        StartCoroutine(AttackHandle());
+        playerController.playerAudioController.PlaySwordAttackSound();
     }
 
-    public void AttackHandler()
+    IEnumerator AttackHandle()
     {
-        if(Interrupted())
-        {
-            AttackReset();
-            return;
-        }
+        yield return new WaitUntil(() => Time.time - startAttackAt >= DelayTimeHandle);
+        SpawnObject();
+        yield return new WaitUntil(() => Time.time - startAttackAt >= AttackAnimateTime);
+        playerController.IsAttacking = false;
+        yield return new WaitUntil(() => Time.time - startAttackAt >= AttackCoolDown);
+        AttackDone();
+    }
 
-        if(AttackObject != null)
+    public void AttackDone()
+    {
+        CanAttack = true;
+        playerController.inputController.AttackSignalActive = false;
+    }
+
+    private void SpawnObject()
+    {
+        if(Interrupted)
+        {
+            AttackDone();
+        }
+        else if (AttackObject != null)
         {
             AttackObject.SetActive(true);
-            GameObject attacker = GameObject.Instantiate(AttackObject, AttackObject.transform.position, Quaternion.identity);
-            
-            AttackObject.SetActive(false);
-            attacker.GetComponent<IMoveOfSpawnObject>().SetMove();
         }
-        
     }
 
-    public bool Interrupted()
-    {
-        return playerController.IsHitting;
-    }
-
+    private bool Interrupted => playerController.IsHitting || playerController.IsDeath;
 
 }

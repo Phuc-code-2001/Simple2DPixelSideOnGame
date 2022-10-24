@@ -9,17 +9,25 @@ public class PlayerDeath : MonoBehaviour, IDeathHandler
     public PlayerController playerController;
 
     public float DeathAnimateTime = 1.5f;
+    private bool IsHandleDeath;
 
     private void Awake()
     {
+        IsHandleDeath = false;
         playerController = GetComponent<PlayerController>();
+    }
+
+    private void OnEnable()
+    {
+        IsHandleDeath = false;
     }
 
     private void Update()
     {
-        if(playerController.IsDeath)
+        if(playerController.IsDeath && !IsHandleDeath)
         {
             Death();
+            IsHandleDeath = true;
         }
     }
 
@@ -30,8 +38,8 @@ public class PlayerDeath : MonoBehaviour, IDeathHandler
 
     public void Destruction()
     {
-        Destroy(gameObject);
-        GameManager.Instance.GameOver();
+        gameObject.SetActive(false);
+        GameManager.Instance?.GameOver();
     }
 
 }

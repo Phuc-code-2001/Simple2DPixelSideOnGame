@@ -9,10 +9,10 @@ public class CanvasPlayer : MonoBehaviour
 
     [Header("Required Objects")]
     public Text HpText;
-    public RectTransform HpFill;
+    public Image HpFill;
 
     public Text MpText;
-    public RectTransform MpFill;
+    public Image MpFill;
 
     public Text CoinText;
 
@@ -40,9 +40,8 @@ public class CanvasPlayer : MonoBehaviour
             return;
         }
         HpText.text = $"{(int) playerInfoController.HealthPoint}";
-        Vector2 amax = HpFill.anchorMax;
-        amax.x = playerInfoController.HealthPointRate;
-        HpFill.anchorMax = amax;
+        
+        HpFill.fillAmount = playerInfoController.HealthPointRate;
     }
 
     public void SetManaPoint()
@@ -53,9 +52,7 @@ public class CanvasPlayer : MonoBehaviour
             return;
         }
         MpText.text = $"{(int) playerInfoController.ManaPoint}";
-        Vector2 amax = MpFill.anchorMax;
-        amax.x = playerInfoController.ManaPointRate;
-        MpFill.anchorMax = amax;
+        MpFill.fillAmount = playerInfoController.ManaPointRate;
     }
 
     public void SetCoin()

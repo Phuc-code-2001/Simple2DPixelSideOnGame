@@ -45,12 +45,12 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2143840654539773093}
-  - {fileID: 202049352431011795}
-  - {fileID: 4830975670238342518}
   - {fileID: 5313158673051037177}
   - {fileID: 1212654049179177015}
   - {fileID: 1871818405755500508}
   - {fileID: 6531751758501773430}
+  - {fileID: 202049352431011795}
+  - {fileID: 4830975670238342518}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -190,7 +190,7 @@ MonoBehaviour:
   playerInfoController: {fileID: 0}
   playerAudioController: {fileID: 0}
   Knight: {fileID: 0}
-  IsShieldActive: 1
+  IsShieldActive: 0
   IsMoveLeft: 0
   IsMoveRight: 0
   IsRunning: 0
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
-  BaseSpeed: 5
+  BaseSpeed: 4
   CurrentSpeed: 0
   UseMpInSeconds: 5
   MoveX: 0
@@ -252,9 +252,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
-  PowerUnit: 10
-  JumpPower_01: 35
-  JumpPower_02: 40
+  PowerUnit: 1
+  JumpPower_01: 8
+  JumpPower_02: 8
   IsDoubleJump: 0
   DoubleJumpManaUse: 20
   CanDoubleJump: 0
@@ -285,9 +285,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23b62291ec2dd947b3ad871a99ebe9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
-  AttackAnimateTime: 1
-  AttackCoolDown: 1.5
+  AttackAnimateTime: 0.8
+  AttackCoolDown: 1.2
+  CanAttack: 1
   DelayTimeHandle: 0.6
   AttackObject: {fileID: 4830975670238342515}
 --- !u!114 &8541158446459727777
@@ -304,7 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
   EffectTime: 0.6
-  effectObject: {fileID: 0}
+  effectObject: {fileID: 2955623459812423943, guid: 3bb158d11d6d6bf4684c1b7c510263b2, type: 3}
 --- !u!114 &3502112384740503603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,9 +332,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
-  HealthPoint: 0
-  ManaPoint: 0
-  Damage: 120
+  HealthPoint: 2000
+  ManaPoint: 200
+  Damage: 100
   Coin: 0
   ReloadDisplay: 1
   MpRecoveryTime: 5
@@ -363,11 +363,10 @@ GameObject:
   - component: {fileID: 6531751758501773430}
   - component: {fileID: 7335395118186299373}
   - component: {fileID: 8203339243416306889}
-  - component: {fileID: 4746341909894014647}
   m_Layer: 10
   m_Name: PlayerAudioController
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -384,7 +383,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4485412339991665595}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7335395118186299373
 MonoBehaviour:
@@ -398,12 +397,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd0b6216ffa70d44e9ce6107a5db8b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FSXAudioSource: {fileID: 8203339243416306889}
-  DSXAudioSouce: {fileID: 4746341909894014647}
-  DSXPlayingClip: {fileID: 0}
+  baseVolume: 0
+  audioSource: {fileID: 0}
   HitAudioClip: {fileID: 8300000, guid: 0456f60474d93264b8d67b14622b5c41, type: 3}
   JumpAudioClip: {fileID: 8300000, guid: 22c6722d1daca364aa5c52b5ef028ff8, type: 3}
-  MoveAudioClip: {fileID: 8300000, guid: df91008f84701394abcf01393576a93b, type: 3}
+  SwordAttackClip: {fileID: 8300000, guid: fe5fee41f91ffc5408b44ee372f34363, type: 3}
+  MoveAudioClip: {fileID: 0}
 --- !u!82 &8203339243416306889
 AudioSource:
   m_ObjectHideFlags: 0
@@ -415,106 +414,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!82 &4746341909894014647
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5691501723301982799}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -620,12 +523,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7011400687005014005}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.051, y: 0.426, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4485412339991665595}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2239762136807481361
 PrefabInstance:
@@ -636,7 +539,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1135203584418525222, guid: b5a222092ed967a4c92cddfe1da1f16c, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1135203584418525222, guid: b5a222092ed967a4c92cddfe1da1f16c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -706,7 +609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4544714884771405645, guid: 350742109e18edd40b145e284a3e218a, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4544714884771405645, guid: 350742109e18edd40b145e284a3e218a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -767,25 +670,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4485412339991665595}
     m_Modifications:
-    - target: {fileID: 2593811105694300210, guid: 51591cb55dc36324fb03e3bfd9449a1f, type: 3}
-      propertyPath: idleAnimationName
-      value: idle_2
-      objectReference: {fileID: 0}
     - target: {fileID: 2593811105694300211, guid: 51591cb55dc36324fb03e3bfd9449a1f, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2593811105694300220, guid: 51591cb55dc36324fb03e3bfd9449a1f, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2593811105694300220, guid: 51591cb55dc36324fb03e3bfd9449a1f, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -243067273
-      objectReference: {fileID: 0}
-    - target: {fileID: 2593811105694300221, guid: 51591cb55dc36324fb03e3bfd9449a1f, type: 3}
-      propertyPath: loop
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2593811105694300222, guid: 51591cb55dc36324fb03e3bfd9449a1f, type: 3}
       propertyPath: m_RootOrder
@@ -835,10 +722,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Knight
       objectReference: {fileID: 0}
-    - target: {fileID: 2593811105694300223, guid: 51591cb55dc36324fb03e3bfd9449a1f, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51591cb55dc36324fb03e3bfd9449a1f, type: 3}
 --- !u!4 &2143840654539773093 stripped
@@ -853,25 +736,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4485412339991665595}
     m_Modifications:
-    - target: {fileID: 8936347603310730257, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8936347603310730257, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -243067273
-      objectReference: {fileID: 0}
     - target: {fileID: 8936347603310730259, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
       propertyPath: m_Name
       value: SwordAttack
       objectReference: {fileID: 0}
     - target: {fileID: 8936347603310730259, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8936347603310730262, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8936347603310730262, guid: 1256a922f4daeba4d9ba2ed326f5608c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -934,7 +809,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 849572678544114283, guid: 2903af05b2d884642a7a6493a7a14c01, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 849572678544114283, guid: 2903af05b2d884642a7a6493a7a14c01, type: 3}
       propertyPath: m_LocalPosition.x

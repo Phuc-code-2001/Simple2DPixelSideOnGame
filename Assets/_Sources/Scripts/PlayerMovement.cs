@@ -80,8 +80,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move()
     {
+        if (playerController.IsHitting || playerController.IsDeath)
+        {
+            playerController.rb.velocity = playerController.rb.velocity * Vector2.up;
+            return;
+        }
         playerController.rb.velocity = new Vector2(CurrentSpeed * MoveX, playerController.rb.velocity.y);
-           
     }
 
     public void GoDown()
